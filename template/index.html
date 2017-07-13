@@ -35,6 +35,7 @@
 						<span class="pull-right backbtn" id="back"><< Back</span>
 					</h2>
 					<hr class="top-hr">
+					<p class="error text-center" id="error">Login Error. Invalid Username/Password</p>
 					<form class="form-signin">
 						<p class="input_title">Username/Email</p>
 						<input type="text" id="inputEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus>
@@ -86,11 +87,12 @@
 	<script type="text/javascript">
 		var maindiv = $("#main"), logindiv = $("#login-cont"), otherdiv = $("#other-cont");
 		var openSignin = $("#openSignin"), openOthers = $("#openOthers");
-		var logo = $("#logo");
+		var logo = $("#logo"), error = $("#error");
 
 		$(document).ready(function() {
 			logindiv.hide();
 			otherdiv.hide();
+			error.hide();
 
 			$(document).on("click", "#openSignin", function() {
 				logo.hide();

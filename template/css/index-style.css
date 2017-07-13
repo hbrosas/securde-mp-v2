@@ -132,3 +132,8 @@ hr {
 .backbtn:hover {
     cursor: pointer;
 }
+
+.error {
+    font-family: 'Lato', sans-serif;
+    color: #ef5350;
+}
