@@ -19,8 +19,6 @@ public class User implements Serializable{
 	public static final String COLUMN_BIRTHMONTH = "birthmonth";
 	public static final String COLUMN_BIRTHYEAR = "birthyear";
 	
-	
-	
 	int userid, roleid, sqid, birthdate, birthmonth, birthyear;
 	String username, password, emailaddress, sqanswer, idnumber;
 	

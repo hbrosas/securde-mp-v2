@@ -187,7 +187,7 @@ CREATE TABLE `review` (
   `reviewId` int(11) NOT NULL AUTO_INCREMENT,
   `catalogId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  `review` varchar(200) NOT NULL,
+  `review` varchar(1000) NOT NULL,
   `dateReviewed` datetime DEFAULT NULL,
   PRIMARY KEY (`reviewId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -201,6 +201,30 @@ LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
 INSERT INTO `review` VALUES (1,1,1,'\"Very nice read\"','2017-07-10 10:00:00'),(2,2,2,'\"Wow\"','2017-07-13 09:00:00'),(3,3,3,'\"Nice Book!\"','2017-07-12 12:00:00');
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `secretquestions`
+--
+
+DROP TABLE IF EXISTS `secretquestions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `secretquestions` (
+  `sqid` int(11) NOT NULL AUTO_INCREMENT,
+  `squestion` varchar(45) NOT NULL,
+  PRIMARY KEY (`sqid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `secretquestions`
+--
+
+LOCK TABLES `secretquestions` WRITE;
+/*!40000 ALTER TABLE `secretquestions` DISABLE KEYS */;
+INSERT INTO `secretquestions` VALUES (1,'What is your favorite animal?'),(2,'What is your favorite food?');
+/*!40000 ALTER TABLE `secretquestions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -298,4 +322,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-15  0:00:37
+-- Dump completed on 2017-07-15 18:16:32
