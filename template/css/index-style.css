@@ -52,12 +52,12 @@ hr {
 }
 
 .login_title{
-    font-family: "Lato",sans-serif;
+    font-family: "Helvetica Neue",sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 100;
-    color: #ffffff;
-    letter-spacing: 5px;
+    color: #424242;
+    letter-spacing: 3px;
 }
 
 .card-container.card {
@@ -66,7 +66,7 @@ hr {
 }
 
 .card {
-    background-color: none;
+    background-color: #fefefe;
     /* just in case there no content*/
     padding: 1px 25px 25px;
     /* shadows and rounded borders */
@@ -80,13 +80,14 @@ hr {
 }
 
 #inputEmail,
-#inputPassword {
+#inputPassword,
+#secanswer, #newpw, #confirmpw {
     direction: ltr;
     height: 30px;
     font-size: 12px;
     font-family: 'Lato', sans-serif;
     padding-left: 10px;
-     width: 100%;
+    width: 100%;
     display: block;
     color: #424242;
 }
@@ -99,13 +100,14 @@ hr {
 }
 
 .input_title{
-    color: #fefefe;
+    color: #424242;
     font-family: 'Lato', sans-serif;
     padding-left:3px;
     margin-bottom: 2px;
 }
 
 .remember, .forgot {
+    color: #424242;
     font-family: 'Lato', sans-serif;
     font-weight: 100;
 }
@@ -116,7 +118,7 @@ hr {
 
 .forgot:hover {
     text-decoration: none;
-    color: #fffff;
+    color: #424242;
 }
 
 .submitbtn {

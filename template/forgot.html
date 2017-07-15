@@ -11,7 +11,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 
 	<!-- Stylesheets -->
-	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/index-style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -45,10 +44,10 @@
 							<span class="input_title">Security Question</span>
 							<br>
 							<label class="input_title"> Question </label>
-							<br>
+							<br><br>
 							<p class="input_title">Security Answer</p>
 							<input type="text" id="secanswer" class="login_box" placeholder="Security Answer" required autofocus>
-							<br> <br>
+							<br>
 							<button class="btn btn-small btn-success btn-block submitbtn" id="submit" type="submit">SUBMIT</button>							
 						</form><!-- /form -->
 					</div>
@@ -59,15 +58,13 @@
 							<span class="pull-right backbtn" id="back2"><< Back</span>	
 						</h2>
 						<hr class="top-hr">
-						<form class="form-signin">
+						<form class="form-forgot">
 							<p class="input_title">Change Password</p>
-							<input type="text" id="changepw" class="login_box" placeholder="*********" required autofocus>
-							<br> <br>
+							<input type="password" id="newpw" class="login_box" placeholder="*********" required autofocus>
+							<br>
 							<p class="input_title">Confirm Password</p>
-							<input type="text" id="confirmpw" class="login_box" placeholder="*********" required autofocus>
-							<br> <br>
-							<div class="inline-form">
-							</div>
+							<input type="password" id="confirmpw" class="login_box" placeholder="*********" required>
+							<br>
 							<button class="btn btn-small btn-success btn-block submitbtn" id="submitpassword" type="submit">Submit</button>	
 						</form><!-- /form -->
 					</div>
@@ -78,12 +75,9 @@
 							<span class="pull-right backbtn" id="back3"><< Back</span>	
 						</h2>
 						<hr class="top-hr">
-						<form class="form-signin">
-							<span class="input_title">Password has been successfully changed!</p>
-							<div class="inline-form">
-							</div>
-							<button class="btn btn-small btn-success btn-block submitbtn" id="continue" type="submit">CONTINUE</button>
-						</form><!-- /form -->
+						<span class="input_title">Password has been successfully changed!</p>
+						<button class="btn btn-small btn-success btn-block submitbtn" id="continue" type="button">
+						CONTINUE</button>
 					</div>
 		        </div><!-- /card-container -->
 			</div>
@@ -101,9 +95,7 @@
 
 	<!-- Main Script -->
 	<script type="text/javascript">
-		var maindiv = $("#main"), logindiv = $("#login-cont"), otherdiv = $("#other-cont");
-		var openSignin = $("#openSignin"), openOthers = $("#openOthers");
-		var logo = $("#logo"), error = $("#error");
+		var otherdiv = $("#other-cont"), error = $("#error");
 		var user = $("#inputuser"), sqanswer = $("#answersq"), changepw = $("#changepw"), pwchange = $("#pwchange");
 
 		$(document).ready(function() {
@@ -114,21 +106,18 @@
 			error.hide();
 
 			$(document).on("click", "#back1", function() {
-				logo.show();
 				user.show(500);
 				sqanswer.hide();
 			});
 
 			$(document).on("click", "#back2", function() {
-				logo.show();
 				changepw.hide();
 				sqanswer.show(500);
 			});
 
 			$(document).on("click", "#back3", function() {
-				logo.show();
-				pwchange.show(500);
-				changepw.hide();
+				pwchange.hide();
+				changepw.show(500);
 			});			
 
 			$(document).on("click", "#changenow", function(){
@@ -148,9 +137,7 @@
 
 			$(document).on("click", "#confirm", function(){
 
-			});		
-
-
+			});	
 		});
 	</script>
 
