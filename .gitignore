@@ -1,0 +1,19 @@
+
+*.xml
+DlsuLib/.settings/org.eclipse.wst.common.project.facet.core.xml
+Servers/Tomcat v7.0 Server at localhost-config/context.xml
+Servers/Tomcat v7.0 Server at localhost-config/server.xml
+Servers/Tomcat v7.0 Server at localhost-config/tomcat-users.xml
+Servers/Tomcat v7.0 Server at localhost-config/web.xml
+apache-tomcat-7.0.47-windows-x64/apache-tomcat-7.0.47/webapps/ROOT/WEB-INF/web.xml
+apache-tomcat-7.0.47-windows-x64/apache-tomcat-7.0.47/webapps/ROOT/build.xml
+.metadata/.plugins/org.eclipse.core.resources/.projects/DlsuLib/.indexes/e4/b6/af/da/history.index
+.metadata/.plugins/org.eclipse.core.resources/.projects/DlsuLib/.markers
+.metadata/.plugins/org.eclipse.core.resources/.projects/DlsuLib/.markers.snap
+*.snap
+*.snap
+*.snap
+.metadata/.plugins/org.eclipse.core.resources/.projects/DlsuLib/.markers.snap
+*.snap
+.metadata/.plugins/org.eclipse.core.resources/.projects/DlsuLib/org.eclipse.jdt.core/state.dat
+.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.markers.snap
