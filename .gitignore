@@ -55,3 +55,8 @@ Servers/.settings/org.eclipse.wst.server.core.prefs
 .metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.mylyn.tasks.ui.prefs
 .metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.mylyn.tasks.ui.prefs
 .metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.launching.prefs
+*.ini
+*.index
+*.index
+.metadata/version.ini
+.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/900562025.index

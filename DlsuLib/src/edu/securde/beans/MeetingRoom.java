@@ -4,19 +4,17 @@ import java.io.Serializable;
 
 public class MeetingRoom implements Serializable {
 	public static final String TABLE_NAME = "meetingroom";
-	public static final String COLUMN_ROOMID = "roomid";
-	public static final String COLUMN_STATUSID = "statusid";
-	public static final String COLUMN_ROOMTYPEID = "roomtypeid";
-	public static final String COLUMN_STARTTIMESLOT = "starttimeslot";
-	public static final String COLUMN_ENDTIMESLOT = "endtimeslot";
+	public static final String COLUMN_ROOMID = "roomId";
+	public static final String COLUMN_STATUSID = "statusId";
+	public static final String COLUMN_ROOMTYPEID = "roomTypeId";
+	public static final String COLUMN_STARTTIMESLOT = "startTimeslot";
+	public static final String COLUMN_ENDTIMESLOT = "endTimeslot";
 	
 
 	int roomid, statusid, roomtypeid;
 	String starttimeslot, endtimeslot;
 	
-	public MeetingRoom() {
-		
-	}
+	public MeetingRoom() {}
 	
 	public MeetingRoom(int roomid, int statusid, int roomtypeid, String starttimeslot, String endtimeslot) {
 		super();

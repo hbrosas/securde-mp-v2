@@ -6,21 +6,25 @@ public class User implements Serializable{
 	public static final String TABLE_NAME = "user";
 	public static final String COLUMN_USERID = "userId";
 	public static final String COLUMN_USERNAME = "username";
-	public static final String COLUMN_ROLEID = "roleId";
+	public static final String COLUMN_PASSWORD = "password";
+	public static final String COLUMN_EMAILADDRESS = "email";
 	public static final String COLUMN_FIRSTNAME = "firstname";
 	public static final String COLUMN_MIDDLENAME = "middlename";
-	public static final String COLUMN_LASTNAME = "lastname";	
-	public static final String COLUMN_PASSWORD = "password";
-	public static final String COLUMN_EMAILADDRESS = "emailAddress";
-	public static final String COLUMN_IDNUMBER = "idNumber";
-	public static final String COLUMN_SQID = "SQId";
-	public static final String COLUMN_SQANSWER = "SQAnswer";
+	public static final String COLUMN_LASTNAME = "lastname";
+	public static final String COLUMN_ROLEID = "role";
+	public static final String COLUMN_LASTLOGGEDIN = "lastloggedin";
+	public static final String COLUMN_STATUS = "status";
 	public static final String COLUMN_BIRTHDATE = "birthdate";
 	public static final String COLUMN_BIRTHMONTH = "birthmonth";
 	public static final String COLUMN_BIRTHYEAR = "birthyear";
+	public static final String COLUMN_IDNUMBER = "idNumber";
+	public static final String COLUMN_SQID = "SQID";
+	public static final String COLUMN_SQANSWER = "SQAnswer";
 	
-	int userid, roleid, sqid, birthdate, birthmonth, birthyear;
-	String username, password, emailaddress, sqanswer, idnumber;
+	
+	int userid, roleid, sqid, birthdate, birthmonth, birthyear, status;
+	String username, password, emailaddress, sqanswer, idnumber, lastloggedin;
+	String firstname, middlename, lastname;
 	
 	public User() {
 		
@@ -42,6 +46,32 @@ public class User implements Serializable{
 		this.idnumber = idnumber;
 	}
 	
+	
+	
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getMiddlename() {
+		return middlename;
+	}
+
+	public void setMiddlename(String middlename) {
+		this.middlename = middlename;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
 	public int getUserid() {
 		return userid;
 	}
@@ -130,7 +160,20 @@ public class User implements Serializable{
 		this.idnumber = idnumber;
 	}
 	
-	
-	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getLastloggedin() {
+		return lastloggedin;
+	}
+
+	public void setLastloggedin(String lastloggedin) {
+		this.lastloggedin = lastloggedin;
+	}
 	
 }

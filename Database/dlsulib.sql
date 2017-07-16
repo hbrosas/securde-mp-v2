@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `dlsulib` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `dlsulib`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: dlsulibdb
+-- Host: localhost    Database: dlsulib
 -- ------------------------------------------------------
--- Server version	5.7.16-log
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -204,27 +206,27 @@ INSERT INTO `review` VALUES (1,1,1,'\"Very nice read\"','2017-07-10 10:00:00'),(
 UNLOCK TABLES;
 
 --
--- Table structure for table `secretquestions`
+-- Table structure for table `secretquestion`
 --
 
-DROP TABLE IF EXISTS `secretquestions`;
+DROP TABLE IF EXISTS `secretquestion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `secretquestions` (
-  `sqid` int(11) NOT NULL AUTO_INCREMENT,
-  `squestion` varchar(45) NOT NULL,
-  PRIMARY KEY (`sqid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+CREATE TABLE `secretquestion` (
+  `questionid` int(11) NOT NULL AUTO_INCREMENT,
+  `question` varchar(200) NOT NULL,
+  PRIMARY KEY (`questionid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `secretquestions`
+-- Dumping data for table `secretquestion`
 --
 
-LOCK TABLES `secretquestions` WRITE;
-/*!40000 ALTER TABLE `secretquestions` DISABLE KEYS */;
-INSERT INTO `secretquestions` VALUES (1,'What is your favorite animal?'),(2,'What is your favorite food?');
-/*!40000 ALTER TABLE `secretquestions` ENABLE KEYS */;
+LOCK TABLES `secretquestion` WRITE;
+/*!40000 ALTER TABLE `secretquestion` DISABLE KEYS */;
+INSERT INTO `secretquestion` VALUES (1,'What is your mother\'s maiden name?'),(2,'What is the name of your first pet?'),(3,'What is the name of your first love?');
+/*!40000 ALTER TABLE `secretquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -274,7 +276,7 @@ CREATE TABLE `user` (
   `birthyear` int(11) NOT NULL,
   `idNumber` int(25) NOT NULL,
   `SQID` int(11) NOT NULL,
-  `SQAnser` varchar(250) NOT NULL,
+  `SQAnswer` varchar(250) NOT NULL,
   PRIMARY KEY (`userId`,`firstname`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -322,4 +324,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-15 18:16:32
+-- Dump completed on 2017-07-16 10:04:05

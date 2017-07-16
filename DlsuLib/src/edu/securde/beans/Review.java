@@ -2,11 +2,11 @@ package edu.securde.beans;
 
 public class Review {
 	public static final String TABLE_NAME = "review";
-	public static final String COLUMN_REVIEWID = "reviewid";
-	public static final String COLUMN_CATALOGID = "catalogid";
-	public static final String COLUMN_USERID = "userid";
+	public static final String COLUMN_REVIEWID = "reviewId";
+	public static final String COLUMN_CATALOGID = "catalogId";
+	public static final String COLUMN_USERID = "userId";
 	public static final String COLUMN_REVIEW = "review";
-	public static final String COLUMN_DATEREVIEWED = "datereviewed";
+	public static final String COLUMN_DATEREVIEWED = "dateReviewed";
 	
 	int reviewid, catalogid, userid;
 	String review, datereviewed;

@@ -4,19 +4,17 @@ import java.io.Serializable;
 
 public class Borrow implements Serializable {
 	public static final String TABLE_NAME = "borrow";
-	public static final String COLUMN_BORROWID = "borrowid";
-	public static final String COLUMN_USERID = "userid";
-	public static final String COLUMN_CATALOGID = "catalogid";
-	public static final String COLUMN_DATEBORROWED = "dateborrowed";
-	public static final String COLUMN_DATEEXPECTRETURN = "dateexpectreturn";
-	public static final String COLUMN_STATUSID = "statusid";
+	public static final String COLUMN_BORROWID = "borrowId";
+	public static final String COLUMN_USERID = "userId";
+	public static final String COLUMN_CATALOGID = "catalogId";
+	public static final String COLUMN_DATEBORROWED = "DateBorrowed";
+	public static final String COLUMN_DATEEXPECTRETURN = "dateExpectReturn";
+	public static final String COLUMN_STATUSID = "statusId";
 	
 	int borrowid, userid, catalogid, statusid;
 	String dateborrowed, dateexpectreturn;
 	
-	public Borrow() {
-		
-	}
+	public Borrow() {}
 	
 	public Borrow(int borrowid, int userid, int catalogid, int statusid, String dateborrowed, String dateexpectreturn) {
 		super();
@@ -31,7 +29,7 @@ public class Borrow implements Serializable {
 	public int getBorrowid() {
 		return borrowid;
 	}
-
+	
 	public void setBorrowid(int borrowid) {
 		this.borrowid = borrowid;
 	}

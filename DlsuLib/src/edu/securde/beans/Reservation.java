@@ -4,18 +4,16 @@ import java.io.Serializable;
 
 public class Reservation implements Serializable {
 	public static final String TABLE_NAME = "reservation";
-	public static final String COLUMN_RESERVEID = "reserveid";
-	public static final String COLUMN_ROOMTIMESLOTID = "roomtimeslotid";
-	public static final String COLUMN_USERID = "userid";
-	public static final String COLUMN_DATERESERVED = "datereserved";
-	public static final String COLUMN_STATUSID = "statusid";
+	public static final String COLUMN_RESERVEID = "reserveId";
+	public static final String COLUMN_ROOMTIMESLOTID = "roomtimeslotId";
+	public static final String COLUMN_USERID = "userId";
+	public static final String COLUMN_DATERESERVED = "dateReserved";
+	public static final String COLUMN_STATUSID = "statusId";
 	
 	int reserveid, roomtimeslotid, statusid;
 	String datereserved;
 	
-	public Reservation() {
-		
-	}
+	public Reservation() {}
 	
 	public Reservation(int reserveid, int roomtimeslotid, int statusid, String datereserved) {
 		super();
