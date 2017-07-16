@@ -61,7 +61,7 @@
         	<div class="row">
         		<div class="col-sm-6 col-md-4 col-lg-3 mt-4"> <!-- start catalog -->
 	                <div class="card" id="catalog">
-	                    <img class="card-img-top" src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif">
+	                    <img class="card-img-top" src="images/book.png">
 	                    <div class="card-block">
 	                    	<span class="label label-success">Available</span>
 	                        <h4 class="card-title" id="card-title">Catalog Title</h4>
@@ -151,6 +151,53 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="signInModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-guest-title">You are not yet signed in?</h3> <!-- if Guest -->
+					<h3 class="modal-temp-title">Your Account is still temporary</h3> <!-- if temporary -->
+				</div>
+				<div class="modal-body">
+					<!-- Guest -->
+					<div class="row modal-body" id="guest_modal_body">
+						<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
+						<form class="form-signin">
+							<p class="input_title">Username/Email</p>
+							<input type="text" id="inputEmail" class="form-control" placeholder="user@dlsu.edu.ph" required autofocus>
+							<br>
+							<p class="input_title">Password</p>
+							<input type="password" id="inputPassword" class="form-control" placeholder="******" required>
+							<br>
+							<div class="inline-form">
+								<div class="form-group">
+									<label class="checkbox-inline remember" for="checkRememberMe">
+										<input type="checkbox" id="checkRememberMe" value="remember">
+										Remember Me
+									</label>
+									<a class="pull-right forgot" href="#">Forgot password?</a>
+								</div>
+							</div>
+						</form><!-- /form -->
+					</div>
+					<!-- End Guest -->
+					<!-- Temp -->
+					<div class="row modal-body" id="temp_modal_body">
+						<div class="alert alert-info" id="error" role="alert">Since your account is still temporary, you are now allowed to borrow catalogs. Please wait for the administrator to confirm your account or call <i>214-0678.</i></div>
+					</div>
+					<!-- End Temp -->
+				</div>
+				<div class="modal-footer">
+					<!-- Guest -->
+					<button type="button" class="btn btn-success" id="reserveButton">Sign In</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Scripts -->
 	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
@@ -169,7 +216,8 @@
 		var reviewList = $("#review-list");
 
 		$('#reserveButton').click(function(){
-		  swal("How to be badass", "has been successfully borrowed", "success")
+		  // swal("How to be badass", "has been successfully borrowed", "success")
+		  $("#signInModal").modal('show');
 		});
 
 		$(document).on("click", "#catalog", function() {
