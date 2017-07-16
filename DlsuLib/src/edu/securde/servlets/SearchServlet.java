@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.securde.beans.User;
-import edu.securde.manager.UserManager;
-
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class SearchServlet
  */
-@WebServlet({ "/LoginServlet", "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet({ "/SearchServlet", "/search" })
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public SearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,26 +35,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String user = request.getParameter(User.COLUMN_USERNAME);
-		String password = request.getParameter(User.COLUMN_PASSWORD);		
-		int accountId = UserManager.checkCredentialsbyEmail(user, password);
-		if(accountId == -1) {
-			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write("error");
-		} else {			
-			System.out.println("Login Successful");
-//			String userid = accountId+"";
-//			
-//			Cookie usernameCookie = new Cookie("userid", userid);
-//			usernameCookie.setMaxAge(60*60*24);
-//			usernameCookie.setHttpOnly(true); 
-//			response.addCookie(usernameCookie);
-//			
-//			// SESSIONS
-//			HttpSession session = request.getSession();
-//			session.setAttribute("imsuchacutie0029", userid);
-//			request.getRequestDispatcher("HomeServlet").forward(request, response);
-		}
+		System.out.println("search");
 	}
 
 }

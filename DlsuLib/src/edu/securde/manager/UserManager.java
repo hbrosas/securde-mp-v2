@@ -57,7 +57,7 @@ public class UserManager {
 	}
 	
 	// Get User Role
-	public int getRole(int userid) {
+	public static int getRole(int userid) {
 		String sql = "SELECT "+ User.COLUMN_ROLEID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERID +" =? ;";
 		Connection conn = DBPool.getInstance().getConnection();
@@ -91,7 +91,7 @@ public class UserManager {
 	}
 	
 	// Check Credentials by email
-	public int checkCredentialsbyEmail(String email, String password) {
+	public static int checkCredentialsbyEmail(String email, String password) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_EMAILADDRESS +" =? AND "+ User.COLUMN_PASSWORD +" =? ;";
 		Connection conn = DBPool.getInstance().getConnection();
@@ -126,7 +126,7 @@ public class UserManager {
 	}
 	
 	// Check Credentials by username
-	public int checkCredentialsbyUsername(String username, String password) {
+	public static int checkCredentialsbyUsername(String username, String password) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERNAME +" =? AND "+ User.COLUMN_PASSWORD +" =? ;";
 		Connection conn = DBPool.getInstance().getConnection();
@@ -161,7 +161,7 @@ public class UserManager {
 	}
 	
 	// Get user
-	public User getUser(int userid) {
+	public static User getUser(int userid) {
 		String sql = "SELECT * FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERID +" =?;";
 		Connection conn = DBPool.getInstance().getConnection();
@@ -206,7 +206,7 @@ public class UserManager {
 	}
 	
 	// Check if email is unique (returns -1)/exists (returns userid)
-	public int checkEmailUnique(String email) {
+	public static int checkEmailUnique(String email) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_EMAILADDRESS +" =?;";
 		Connection conn = DBPool.getInstance().getConnection();
@@ -238,7 +238,7 @@ public class UserManager {
 	}
 	
 	// Check if username is unique
-	public boolean checkUsernameUnique(String username) {
+	public static boolean checkUsernameUnique(String username) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERNAME +" =?;";
 		Connection conn = DBPool.getInstance().getConnection();
@@ -271,7 +271,7 @@ public class UserManager {
 	}
 	
 	// Forgot Password - Get SQAnswer
-	public String forgotPassword(int userid) {
+	public static String forgotPassword(int userid) {
 		String sql = "SELECT "+ User.COLUMN_SQANSWER +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERID +" =?;";
 		Connection conn = DBPool.getInstance().getConnection();

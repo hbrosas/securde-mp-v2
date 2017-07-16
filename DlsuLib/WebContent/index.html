@@ -1,9 +1,3 @@
-<%@ page import="model.Account" %>
-<%@ page import="org.owasp.encoder.*" %>
-<%   if ((session.getAttribute("user_account") != null) ){ %>
-<%		if(((Account)session.getAttribute("user_account")).getPrivilegeLevel().equals("3")){ %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +35,7 @@
 					</h2>
 					<hr class="top-hr">
 					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
-					<form class="form-signin">
+					<form class="form-signin" id="signin" action="/login" method="POST">
 						<p class="input_title">Username/Email</p>
 						<input type="text" id="inputEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus>
 						<br>
@@ -51,13 +45,13 @@
 						<div class="inline-form">
 							<div class="form-group">
 								<label class="checkbox-inline remember" for="checkRememberMe">
-									<input type="checkbox" id="checkRememberMe" value="remember">
+									<input type="checkbox" id="checkRememberMe" name="remember" value="remember">
 									Remember Me
 								</label>
 								<a class="pull-right forgot" href="#">Forgot password?</a>
 							</div>
 						</div>
-						<button class="btn btn-small btn-success btn-block submitbtn" type="submit">SIGN IN</button>
+						<button class="btn btn-small btn-success btn-block submitbtn" type="button">SIGN IN</button>
 					</form><!-- /form -->
 		        </div><!-- /card-container -->
 			</div>
@@ -70,7 +64,7 @@
 					<hr class="top-hr">
 					<form class="form-request-acct">
 						<p class="input_title">Email Address</p>
-						<input type="email" id="inputEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus><br>
+						<input type="email" id="inputEmailRequest" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus><br>
 						<button class="btn btn-small btn-success btn-block submitbtn" type="submit">REQUEST AN ACCOUNT</button>
 					</form><!-- /form -->
 					<hr>
@@ -87,40 +81,7 @@
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/typed.min.js"></script>
-
-	<!-- Main Script -->
-	<script type="text/javascript">
-		var maindiv = $("#main"), logindiv = $("#login-cont"), otherdiv = $("#other-cont");
-		var openSignin = $("#openSignin"), openOthers = $("#openOthers");
-		var logo = $("#logo"), error = $("#error");
-
-		$(document).ready(function() {
-			logindiv.hide();
-			otherdiv.hide();
-			error.hide();
-
-			$(document).on("click", "#openSignin", function() {
-				logo.hide();
-				maindiv.hide();
-				logindiv.show(500);
-			});
-
-			$(document).on("click", "#back", function() {
-				logo.show();
-				maindiv.show();
-				logindiv.hide();
-				otherdiv.hide();
-			});
-
-			$(document).on("click", "#openOthers", function() {
-				logo.hide();
-				maindiv.hide();
-				otherdiv.show(500);
-			});
-		});
-	</script>
-
+	<script type="text/javascript" src="js/index.js"></script>
 </body>
 
 </html>
-<% }} else { %> <jsp:include page="forbidden.jsp" /> <% } %>
