@@ -42,22 +42,22 @@
 						<div class="row">
 							<div class="col-md-4">
 								<p class="input_title">First Name</p>
-								<input type="text" id="inputFirstName" class="login_box" placeholder="John" required>
+								<input type="text" id="inputFirstName" class="login_box" placeholder="John" onkeyup = "Validate(this)" required >
 							</div>
 							<div class="col-md-4">
 								<p class="input_title">Middle Name</p>
-								<input type="text" id="inputMiddleName" class="login_box" placeholder="Middle" required>
+								<input type="text" id="inputMiddleName" class="login_box" placeholder="Middle" onkeyup = "Validate(this)"  required>
 							</div>
 							<div class="col-md-4">
 								<p class="input_title">Last Name</p>
-								<input type="text" id="inputLastName" class="login_box" placeholder="Doe" required>
+								<input type="text" id="inputLastName" class="login_box" placeholder="Doe" onkeyup = "Validate(this)" required>
 							</div>
 						</div>
 						<br>
 						<div class="row">
 							<div class="col-md-4">
 								<p class="input_title">ID Number</p>
-								<input type="text" id="inputIDnumber" class="login_box" placeholder="ID Number" required>
+								<input type="text" id="inputIDnumber" class="login_box" placeholder="ID Number" onkeyup="validatephone(this);" required>
 							</div>
 							<div class="col-md-8">
 								<p class="input_title">Birthday</p>
@@ -135,6 +135,7 @@
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/typed.min.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>
 
 	<!-- Main Script -->
 	<script type="text/javascript">
