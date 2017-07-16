@@ -1,39 +1,31 @@
 package edu.securde.manager;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 
 public class Hash {
-	Map<String, String> DB = new HashMap<String, String>();
-	public static final String SALT = "PROTECT-";
-
-	public String hash(String value) {
-		String saltedPassword = SALT + value;
-		String hashedPassword = generateHash(saltedPassword);
-		System.out.println("HASH: " + hashedPassword);
-		return hashedPassword;
+	private String hashSalt, hashString;
+	
+	public Hash(String value) {
+		hash(value);
 	}
 	
-	public static String generateHash(String input) {
-		StringBuilder hash = new StringBuilder();
+	public String getHashSalt() {
+		return hashSalt;
+	}
 
-		try {
-			MessageDigest sha = MessageDigest.getInstance("SHA-1");
-			byte[] hashedBytes = sha.digest(input.getBytes());
-			char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-					'a', 'b', 'c', 'd', 'e', 'f' };
-			for (int idx = 0; idx < hashedBytes.length; ++idx) {
-				byte b = hashedBytes[idx];
-				hash.append(digits[(b & 0xf0) >> 4]);
-				hash.append(digits[b & 0x0f]);
-			}
-		} catch (NoSuchAlgorithmException e) {
-			// handle error here.
-		}
+	public String getHashString() {
+		return hashString;
+	}
 
-		return hash.toString();
+	public void hash(String value) {
+		RandomNumberGenerator rng = new SecureRandomNumberGenerator();
+		String salt = rng.nextBytes().toString();
+		String hashedPasswordBase64 = new Sha256Hash(value, salt, 1024).toBase64();
+		
+		System.out.println("This is the hash salt : " + salt.toString());
+		System.out.println("This is the hashed password : " + hashedPasswordBase64);
 	}
 
 }

@@ -47,7 +47,6 @@ public class User implements Serializable{
 	}
 	
 	
-	
 	public String getFirstname() {
 		return firstname;
 	}
