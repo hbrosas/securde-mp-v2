@@ -31,7 +31,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<p class="input_title">Username</p>
-								<input type="text" id="inputUser" class="login_box" placeholder="user1234" required autofocus>
+								<input type="text" id="inputUser" class="login_box" onkeyup="validatespecial(this)" placeholder="user1234" required autofocus>
 							</div>
 							<div class="col-md-6">
 								<p class="input_title">Temporary Password</p>
@@ -109,7 +109,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<p class="input_title">Security Question</p>
-								<select type="text" id="inputSQ" class="login_box" required>
+								<select type="text" id="inputSQ" class="login_box" onkeyup = "Validate(this)" required>
 									<option selected disabled="true">Choose a security question</option>
 									<option value="animal"> What is favorite animal? </option>
 									<option value="food"> What is your favorite food? </option>
@@ -117,7 +117,7 @@
 							</div>
 							<div class="col-md-6">
 								<p class="input_title">Security Answer</p>
-								<input type="text" id="inputSQAnswer" class="login_box" placeholder="Answer" required>
+								<input type="text" id="inputSQAnswer" class="login_box" onkeyup = "Validate(this)" placeholder="Answer" required>
 							</div>
 						</div>
 						<br>								

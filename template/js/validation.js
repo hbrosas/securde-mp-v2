@@ -40,18 +40,20 @@ function validatephone(phone)
 {
     var maintainplus = '';
     var numval = phone.value
-    if ( numval.charAt(0)=='+' )
-    {
-        var maintainplus = '';
-    }
-    curphonevar = numval.replace(/[\\A-Za-z!"£$%^&\,*_={};:'@#~,.Š\/<>?|`¬\]\[]/g,'');
+    curphonevar = numval.replace(/[\\A-Za-z!"£$%^&\,*_={};:+'@#~,.Š\/<>?|`¬\]\[]/g,'');
     phone.value = maintainplus + curphonevar;
     phone.focus;
 }
 // validates text only
 function Validate(txt) {
-    txt.value = txt.value.replace(/[^a-zA-Z-'\n\r.]+/g, '');
+    txt.value = txt.value.replace(/[^a-zA-Z-'!!*\n\r.]+/g, '');
 }
+
+function validatespecial(txt){
+    txt.value = txt.value.replace(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\"():<>\?]/,'');
+}
+
+
 // validate email
 function email_validate(email)
 {
