@@ -16,11 +16,11 @@ public class CatalogManager {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Catalog> catalogs = new ArrayList<>();
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()) {
 				Catalog catalog = new Catalog();
 				catalog.setCatalogid(rs.getInt(Catalog.COLUMN_CATALOGID));
@@ -33,7 +33,7 @@ public class CatalogManager {
 				catalog.setTags(rs.getString(Catalog.COLUMN_TAGS));
 				catalogs.add(catalog);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,10 +47,10 @@ public class CatalogManager {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return catalogs;
 	}
-	
+
 	public static Catalog getCatalog(String title) {
 		String sql = "SELECT * FROM " + Catalog.TABLE_NAME + " WHERE " + Catalog.COLUMN_TITLE + " LIKE " + title  +  ";";
 		Connection conn = DBPool.getInstance().getConnection();
@@ -60,7 +60,7 @@ public class CatalogManager {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 				catalog.setCatalogid(rs.getInt(Catalog.COLUMN_CATALOGID));
 				catalog.setTitle(rs.getString(Catalog.COLUMN_TITLE));
 				catalog.setAuthor(rs.getString(Catalog.COLUMN_AUTHOR));
@@ -69,7 +69,7 @@ public class CatalogManager {
 				catalog.setCatalogtype(rs.getInt(Catalog.COLUMN_CATALOGTYPE));
 				catalog.setStatus(rs.getInt(Catalog.COLUMN_STATUS));
 				catalog.setTags(rs.getString(Catalog.COLUMN_TAGS));
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,9 +83,71 @@ public class CatalogManager {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return catalog;
 	}
-	
-	
+
+
+	public static void ChangeStatus(int catalogID, int statusID, int borrower) {
+		String sql = "UPDATE " + Catalog.TABLE_NAME + " SET "
+			    + Catalog.COLUMN_STATUSID + "=?, " + Catalog.COLUMN_CURRENTBORROWID
+				+ "=? WHERE "+ Catalog.COLUMN_CATALOGID +" =?;";
+
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ReserveHistory reservehistory = new ReserveHistory();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(3, catalogID);
+			pstmt.setInt(1, statusID);
+			pstmt.setInt(2, borrower);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static boolean DeleteCatalog(int catalogid) {
+	String sql = "DELETE " + "FROM" + Catalog.TABLE_NAME
+			 + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + "?" + ";";
+
+	Connection conn = DBPool.getInstance().getConnection();
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, catalogid);
+		pstmt.executeUpdate();
+
+
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		try {
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	return true;
+}
+
 }
