@@ -47,5 +47,5 @@ public class BorrowManager {
 		}
 		return -1;
 	}
-	
+
 }
