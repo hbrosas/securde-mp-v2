@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import edu.securde.DbPool.DBPool;
+import edu.securde.db.*;
+import edu.securde.beans.Borrow;
 import edu.securde.beans.Catalog;
 
 public class CatalogManager {
@@ -89,14 +90,13 @@ public class CatalogManager {
 
 
 	public static void ChangeStatus(int catalogID, int statusID, int borrower) {
-		String sql = "UPDATE " + Catalog.TABLE_NAME + " SET "
-			    + Catalog.COLUMN_STATUSID + "=?, " + Catalog.COLUMN_CURRENTBORROWID
-				+ "=? WHERE "+ Catalog.COLUMN_CATALOGID +" =?;";
+		String sql = "UPDATE " + Borrow.TABLE_NAME + " SET "
+			    + Borrow.COLUMN_STATUSID + "=?, " + Borrow.COLUMN_BORROWID
+				+ "=? WHERE "+ Borrow.COLUMN_CATALOGID +" =?;";
 
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ReserveHistory reservehistory = new ReserveHistory();
 
 		try {
 			pstmt = conn.prepareStatement(sql);

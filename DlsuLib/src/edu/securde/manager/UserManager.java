@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import edu.securde.DbPool.DBPool;
+import edu.securde.db.*;
 import edu.securde.beans.User;
 
 public class UserManager {

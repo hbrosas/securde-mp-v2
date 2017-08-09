@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import edu.securde.DbPool.DBPool;
+import edu.securde.db.*;
 import edu.securde.beans.Catalog;
+import edu.securde.beans.Review;
 import edu.securde.beans.Catalog;
 
 public class ReviewManager {
