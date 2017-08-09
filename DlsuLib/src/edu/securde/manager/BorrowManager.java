@@ -5,10 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import edu.securde.db.*;
 import com.mysql.jdbc.Statement;
-
-import edu.securde.DbPool.DBPool;
 import edu.securde.beans.Borrow;
 public class BorrowManager {
   public static int Borrow(Borrow brwhistory) {

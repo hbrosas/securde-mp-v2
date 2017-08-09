@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import edu.securde.DbPool.DbPool;
+import edu.securde.db.*;
 import edu.securde.beans.Catalog;
 import edu.securde.beans.Review;
 import edu.securde.beans.Catalog;
@@ -16,7 +16,7 @@ public class ReviewManager {
 		String sql = "INSERT INTO " + Review.TABLE_NAME  + " ( " + Review.COLUMN_CATALOGID + ", " + Review.COLUMN_REVIEW
 				 + ", " + Review.COLUMN_DATEREVIEWED + ") " + " VALUES (?, ?, NOW()) " + ";";
 
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -48,7 +48,7 @@ public class ReviewManager {
 		String sql = "SELECT " + "*" + " FROM " + Review.TABLE_NAME
 				 + ";";
 
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Review> reviews = new ArrayList<>();

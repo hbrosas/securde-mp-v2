@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import edu.securde.DbPool.DbPool;
+import edu.securde.db.*;
 import edu.securde.beans.User;
 
 public class UserManager {
@@ -13,7 +13,7 @@ public class UserManager {
 	// Get all accounts (without password, sqid and role)
 	public static ArrayList<User> GetAllAccount() {
 		String sql = "SELECT * FROM " + User.TABLE_NAME + ";";
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<User> users = new ArrayList<>();
@@ -60,7 +60,7 @@ public class UserManager {
 	public static int getRole(int userid) {
 		String sql = "SELECT "+ User.COLUMN_ROLEID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERID +" =? ;";
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int roleid = -1;
@@ -94,7 +94,7 @@ public class UserManager {
 	public static int checkCredentialsbyEmail(String email, String password) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_EMAILADDRESS +" =? AND "+ User.COLUMN_PASSWORD +" =? ;";
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int userid = -1;
@@ -129,7 +129,7 @@ public class UserManager {
 	public static int checkCredentialsbyUsername(String username, String password) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERNAME +" =? AND "+ User.COLUMN_PASSWORD +" =? ;";
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int userid = -1;
@@ -164,7 +164,7 @@ public class UserManager {
 	public static User getUser(int userid) {
 		String sql = "SELECT * FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERID +" =?;";
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		User user = new User();
@@ -209,7 +209,7 @@ public class UserManager {
 	public static int checkEmailUnique(String email) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_EMAILADDRESS +" =?;";
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int isUnique = -1;
@@ -241,7 +241,7 @@ public class UserManager {
 	public static boolean checkUsernameUnique(String username) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERNAME +" =?;";
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean isUnique = true;
@@ -274,7 +274,7 @@ public class UserManager {
 	public static String forgotPassword(int userid) {
 		String sql = "SELECT "+ User.COLUMN_SQANSWER +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERID +" =?;";
-		Connection conn = DbPool.getInstance().getConnection();
+		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sqAnswer = "";

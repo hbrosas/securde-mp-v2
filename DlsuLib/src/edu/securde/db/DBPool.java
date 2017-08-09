@@ -1,11 +1,11 @@
-package edu.securde.DbPool;
+package edu.securde.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
-public class DbPool{
+public class DBPool{
 	public static final String schema = "dlsulibdb";
 	public static final String username = "root";
 	public static final String password = "p@ssword";
@@ -13,12 +13,12 @@ public class DbPool{
 	public static final String driver = "com.mysql.jdbc.Driver";
 	
 	// an instance of itself
-	private static DbPool singleton = null;
+	private static DBPool singleton = null;
 	
 	private static BasicDataSource basicDataSource;
 	
 	// private constructor
-	private DbPool() {
+	private DBPool() {
 		// TODO: initialize DB connection
 		basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName(driver);
@@ -28,9 +28,9 @@ public class DbPool{
 	}
 	
 	// getInstance
-	public static DbPool getInstance() {
+	public static DBPool getInstance() {
 		if (singleton == null) {
-			singleton = new DbPool();
+			singleton = new DBPool();
 		}
 		
 		return singleton;
@@ -47,4 +47,5 @@ public class DbPool{
 		return null;
 	}
 }
+
 
