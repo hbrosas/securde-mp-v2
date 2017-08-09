@@ -1,5 +1,11 @@
 package edu.securde.manager;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
 public class MeetingRoomManager {
     public static ReserveHistory Reserve(ReserveHistory rsvhistory) {
   		String sql = "INSERT INTO " + ReserveHistory.TABLE_NAME + " ( "
@@ -7,7 +13,7 @@ public class MeetingRoomManager {
   				+ ", " + ReserveHistory.COLUMN_ACCOUNTID + ", " + ReserveHistory.COLUMN_DATERESERVED
   				+ " ) " + " VALUES(?,?,?);";
 
-  		Connection conn = DBPool.getInstance().getConnection();
+  		Connection conn = DbPool.getInstance().getConnection();
   		PreparedStatement pstmt = null;
   		ResultSet rs = null;
   		ReserveHistory reservehistory = new ReserveHistory();
@@ -44,7 +50,7 @@ public class MeetingRoomManager {
   			    + ReserveHistory.COLUMN_ROOMID + " LIKE ?"
   				+ " AND " + " AND " + MeetingRoom.COLUMN_STATUSID + " LIKE ?;";
 
-  		Connection conn = DBPool.getInstance().getConnection();
+  		Connection conn = DbPool.getInstance().getConnection();
   		PreparedStatement pstmt = null;
   		ResultSet rs = null;
 
@@ -79,7 +85,7 @@ public class MeetingRoomManager {
           + " AND " + ReserveHistory.COLUMN_ACCOUNTID + " LIKE ? " + " AND " + ReserveHistory.COLUMN_DATERESERVED
           + " LIKE ?;";
 
-      Connection conn = DBPool.getInstance().getConnection();
+      Connection conn = DbPool.getInstance().getConnection();
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       ArrayList<ReserveHistory> reservehistory = new ArrayList<>();

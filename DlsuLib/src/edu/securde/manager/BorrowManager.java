@@ -1,13 +1,23 @@
 package edu.securde.manager;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.mysql.jdbc.Statement;
+
+import edu.securde.DbPool.DBPool;
+import edu.securde.beans.Borrow;
 public class BorrowManager {
-  public static int Borrow(BorrowHistory brwhistory) {
-		String sql = "INSERT INTO " + BorrowHistory.TABLE_NAME
-				+ " (" + BorrowHistory.COLUMN_CATALOGID + ", "
-			   + BorrowHistory.COLUMN_STATUSID + ", "
-			   + BorrowHistory.COLUMN_ACCOUNTID + ", "
-			   + BorrowHistory.COLUMN_DATEBORROWED + ", "
-			   + BorrowHistory.COLUMN_DATEEXPECTRETURN
+  public static int Borrow(Borrow brwhistory) {
+		String sql = "INSERT INTO " + Borrow.TABLE_NAME
+				+ " (" + Borrow.COLUMN_CATALOGID + ", "
+			   + Borrow.COLUMN_STATUSID + ", "
+			   + Borrow.COLUMN_DATEBORROWED + ", "
+			   + Borrow.COLUMN_DATEEXPECTRETURN + ", "
+			   + Borrow.COLUMN_STATUSID + " "
 			   + ") VALUES (?, ?, ?, ?, ?);";
 
 		Connection conn = DBPool.getInstance().getConnection();
@@ -15,11 +25,11 @@ public class BorrowManager {
 		int borrowID = 0;
 		try {
 			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, brwhistory.getCatalogId());
-			pstmt.setInt(2, brwhistory.getStatusId());
-			pstmt.setInt(3, brwhistory.getAccountId());
-			pstmt.setString(4, brwhistory.getDateBorrowed());
-			pstmt.setString(5, brwhistory.getDateExpectReturn());
+			pstmt.setInt(1, brwhistory.getCatalogid());
+			pstmt.setInt(2, brwhistory.getStatusid());
+			pstmt.setString(3, brwhistory.getDateborrowed());
+			pstmt.setString(4, brwhistory.getDateexpectreturn());
+			pstmt.setInt(5, brwhistory.getStatusid());
 			pstmt.executeUpdate();
 
 			try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {

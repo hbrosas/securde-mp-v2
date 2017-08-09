@@ -36,6 +36,12 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("search");
+		String ref = request.getParameter("Reference");
+		String by = request.getParameter("By");
+		String name = request.getParameter("search_name");
+
+		System.out.println(ref + by + name);
+		
 	}
 
 }

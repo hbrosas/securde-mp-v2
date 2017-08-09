@@ -46,7 +46,7 @@
 							<label class="input_title"> Question </label>
 							<br><br>
 							<p class="input_title">Security Answer</p>
-							<input type="text" id="secanswer" class="login_box" placeholder="Security Answer" required autofocus>
+							<input type="text" id="secanswer" class="login_box" onkeyup="validatespecial(this) placeholder="Security Answer" required autofocus>
 							<br>
 							<button class="btn btn-small btn-success btn-block submitbtn" id="submit" type="submit">SUBMIT</button>							
 						</form><!-- /form -->
@@ -92,6 +92,8 @@
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/typed.min.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>
+
 
 	<!-- Main Script -->
 	<script type="text/javascript">

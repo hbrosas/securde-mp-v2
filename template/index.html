@@ -13,6 +13,7 @@
 	<!-- Stylesheets -->
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/index-style.css" rel="stylesheet" type="text/css" />
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body class="the-body">
@@ -35,14 +36,14 @@
 					</h2>
 					<hr class="top-hr">
 					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
-					<form class="form-signin">	
+					<form class="form-signin" name="username">	
 						<p class="input_title">Username/Email</p>
 						<input type="text" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
 						<br>
 						<p class="input_title">Password</p>
 						<input type="password" id="inputPassword" class="login_box" placeholder="******" required>
 						<br>
-						<div class="inline-form">
+						<div class="inline-form" name="password">
 							<div class="form-group">
 								<label class="checkbox-inline remember" for="checkRememberMe">
 									<input type="checkbox" id="checkRememberMe" value="remember">
