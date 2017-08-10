@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SearchServlet
  */
-@WebServlet({ "/SearchServlet", "/search" })
+@WebServlet({ "/SearchServlet" })
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,7 +27,7 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("search");
 	}
 
 	/**
@@ -35,12 +35,6 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("search");
-		String ref = request.getParameter("Reference");
-		String by = request.getParameter("By");
-		String name = request.getParameter("search_name");
-
-		System.out.println(ref + by + name);
 		
 	}
 

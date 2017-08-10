@@ -30,7 +30,7 @@
 					</h2>
 					<hr class="top-hr">
 					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
-					<form class="form-signin" name="username" action="/search">	
+					<form class="form-signin" id="formsignin" name="username" action="SearchServlet" method="GET">	
 						<p class="input_title">Username/Email</p>
 						<input type="text" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
 						<br>
