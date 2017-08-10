@@ -209,7 +209,7 @@
 				</div>
 				<div class="modal-footer">
 					<!-- Guest -->
-					<button type="button" class="btn btn-success" id="reserveButton">Sign In</button>
+					<button type="button" class="btn btn-success" id="guessButton">Sign In</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -233,8 +233,33 @@
 		var reviewList = $("#review-list");
 
 		$('#reserveButton').click(function(){
-		  // swal("How to be badass", "has been successfully borrowed", "success")
-		  $("#signInModal").modal('show');
+		   
+		  //$("#signInModal").modal('show');
+		  var catalogId = $(this).data('id')
+		   $.ajax({
+				url: "BorrowServlet",
+				type: "POST",
+				 data: { 'catalogId': catalogId },
+				success: function(status) {
+					if(status == "error") {
+						swal($(this).data("title"), "there was an error in your request", "error")
+					} else {
+						swal({title:$(this).data("title"), 
+							 text:"has been successfully borrowed", 
+							 type: "success",
+							 confirmButtonText: "Okay"
+							 showCancelButton:false,
+							 showConfirmButton:true},
+							 function(isConfirm){
+								 if(isConfirm){
+									 location.reload();
+								 }
+							 })
+						
+						console.log("Submit");
+					}
+				}
+			});
 		});
 
 		$(document).on("click", ".open-catalog", function() {
@@ -245,6 +270,7 @@
 			$("#card-year").text($(this).data('year'));
 			$("#card-location").text($(this).data('location'));
 			$("#catalogModal").modal('show');
+			$("#reserveButton").data('title',$(this).data('title'));
 		});
 
 		$(document).on("click", "#addReviewBtn", function() {
