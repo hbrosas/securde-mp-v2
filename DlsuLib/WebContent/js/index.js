@@ -31,6 +31,10 @@ $(document).ready(function() {
 		openend = 2;
 	});
 	
+	$(document).on("click", "#guestBtn", function() {
+		$("#guestLoginForm").submit();
+	});
+	
 	$(document).on("click", "#signin", function() {
 		var username = $("#inputEmail").val();
 		var password = $("#inputPassword").val();

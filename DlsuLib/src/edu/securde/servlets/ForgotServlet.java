@@ -38,19 +38,51 @@ public class ForgotServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String email = request.getParameter("email");
-		if(UserManager.checkEmailExists(email)) {
-			int sqid = UserManager.getSQid(email);
-			String sq = SecurityQuestionManager.getSQ(sqid);
-			System.out.println(sq);
-			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write(sq);
-		} else {
-			System.out.println("error");
-			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write("error");
-		}
+		int type = Integer.parseInt(request.getParameter("type"));
+		if(type == 1) {
+			String email = request.getParameter("email");
+			if(UserManager.checkEmailExists(email)) {
+				int sqid = UserManager.getSQid(email);
+				String sq = SecurityQuestionManager.getSQ(sqid);
+				System.out.println(sq);
+				response.setContentType("text/html;charset=UTF-8");
+		        response.getWriter().write(sq);
+			} else {
+				System.out.println("else error");
+				response.setContentType("text/html;charset=UTF-8");
+		        response.getWriter().write("error");
+			}
+		} else if (type == 2) {
+			String email = request.getParameter("email");
+			System.out.println("hotdog"+UserManager.getSQAns(email));
+	        String sqans = request.getParameter("sqans");
+	        System.out.println(sqans);
+				if(UserManager.getSQAns(email).equals(sqans)) {
+					System.out.println("CHECK");
+					response.setContentType("text/html;charset=UTF-8");
+					response.getWriter().write("correct");
+				}
+			}
+			else if (type == 3) {
+				boolean confirm = false;
+				String email = request.getParameter("email");
+				String newpw = request.getParameter("newpw");
+				String confirmpw = request.getParameter("confirmpw");
+		        System.out.println(newpw);
+		        System.out.println(confirmpw);
+					if(newpw.equals(confirmpw)) {
+						System.out.println("CHECK");
+						response.setContentType("text/html;charset=UTF-8");
+						response.getWriter().write("correct");
+						UserManager.setNewPass(email, newpw);
+					}
+			}
+				else {
+					System.out.println("else error");
+					response.setContentType("text/html;charset=UTF-8");
+			        response.getWriter().write("error");
+				}
 		
+			
 	}
-
 }

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DLSU Lib App | Admin</title>
+    <title>DLSU Lib App | </title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -24,9 +24,6 @@
 
     <!-- Dashboard Style -->
     <link rel="stylesheet" href="css/dashboard.css">
-
-    <!-- Date-Time Picker -->
-    <link rel="stylesheet" href="vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
 </head>
 
 <body class="nav-md">
@@ -35,25 +32,16 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>Admin Page</span></a>
+                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>DLSU Lib App</span></a>
                     </div>
 
                     <div class="clearfix"></div>
 
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
-                      <!-- menu profile quick info -->
-                    <div class="profile clearfix">
                         <div class="profile_pic">
                             <img src="images/gandalf.jpg" alt="..." class="img-circle profile_img">
                         </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>Gandalf the Grey</h2>
-                        </div>
-                    </div>
-                    <!-- /menu profile quick info -->
-
                         <div class="profile_info">
                             <span>Welcome,</span>
                             <h2>Gandalf the Grey</h2>
@@ -68,28 +56,41 @@
                         <div class="menu_section">
                             <h3>Navigation</h3>
                             <ul class="nav side-menu">
-                                <li><a href="admin_home.html"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
-                                     <ul class="nav child_menu">
-                                        <li><a href="register.html"> Create New Account</a></li>
-                                        <li><a href="register.html"> Manage Accounts</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="libstaff_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_catalog.html">Add Catalog</a></li>
-                                        <li><a href="view_catalog.html">Manage Catalogs</a></li>
+                                        <li><a data-toggle="modal" data-target="#addBook">Add Book</a></li>
+                                        <li><a href="edit_books.html">Edit/Delete Book</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_reservation.html">Manage Reservations</a></li>
+                                        <li><a href="edit_reservation.html">Edit Room Reservation</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
+
+
                     </div>
                     <!-- /sidebar menu -->
+
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
                 </div>
             </div>
 
@@ -104,7 +105,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/user.png" alt="">John Doe
+                                    <img src="images/gandalf.jpg" alt="">John Doe
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -123,51 +124,38 @@
                 <h1>Welcome Back, Gandalf</h1>
                 <br><br><br><br>
                 <div class="row">
-                  <a href="register.html">
-                      <div class="col-xs-12 col-md-2 col-md-offset-1 ">
-                          <div class="row">
-                              <div class="col-xs-12">
-                                  <div class="fa fa-pencil-square-o" style="font-size: 10em;"></div>
-                              </div>
-                              <div class="col-xs-12">
-                                  <h2>Register</h2>
-                              </div>
-                          </div>
-                      </div>
-                  </a>
-                    <a href="view_catalog.html">
+                    <a href="" data-toggle="modal" data-target="#addBook">
+                        <div class="col-xs-12 col-md-2 col-md-offset-2 ">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="fa fa-book" style="font-size: 10em;"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <h2>&nbsp;&nbsp;Add Book</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="edit_books.html">
                         <div class="col-xs-12 col-md-2 col-md-offset-1 ">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="fa fa-book" style="font-size: 10em;"></div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <h2>View Library Catalog</h2>
+                                    <h2>Edit/Delete Book</h2>
                                 </div>
                             </div>
                         </div>
-                    </a>
-                    <a href="view_reservation.html">
-                        <div class="col-xs-12 col-md-2 col-md-offset-1 ">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="fa fa-lightbulb-o" style="font-size: 10em;"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <h2>View all <br>rooms</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <a id="upload">
+                        <a href="edit_reservation.html">
                             <div class="col-xs-12 col-md-2 col-md-offset-1 ">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="fa fa-file-excel-o" style="font-size: 10em;"></div>
+                                        <div class="fa fa-lightbulb-o" style="font-size: 10em;"></div>
                                     </div>
                                     <div class="col-xs-12">
-                                        <h2>Export XML<br>/Excel</h2>
+                                        <h2>Edit Room<br>Reservation</h2>
                                     </div>
-                                    <input id="file-input" type="file" name="name" style="display: none;" />
                                 </div>
                             </div>
                         </a>
@@ -178,7 +166,7 @@
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    De La Salle University SHS Online Library
+                    DLSU Lib Application
                 </div>
                 <div class="clearfix"></div>
             </footer>
@@ -201,10 +189,27 @@
                             <label for="title">Book title:</label>
                             <input type="text" class="form-control" id="title">
                         </div>
-                        <div class="form-group">
-                            <label for="author">Book Author:</label>
-                            <input type="text" class="form-control" id="author">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="author">Book Author:</label>
+                                    <input type="text" class="form-control" id="author">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="publisher">Publisher:</label>
+                                    <input type="text" class="form-control" id="publisher">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="year">Year:</label>
+                                    <input type="text" class="form-control" id="year">
+                                </div>
+                            </div>
                         </div>
+
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
@@ -228,9 +233,19 @@
                         </div>
 
 
-                        <div class="form-group">
-                            <label for="overview">Book Overview:</label>
-                            <textarea name="overview" rows="5" style="width:100%"></textarea>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="author">Location:</label>
+                                    <input type="text" class="form-control" id="location">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="author">Tags:</label>
+                                    <input type="text" class="form-control" id="tags">
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -242,7 +257,8 @@
 
         </div>
     </div>
-   <!-- jQuery -->
+
+    <!-- jQuery -->
     <script src="js/jquery-1.12.4.min.js"></script>
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
@@ -251,15 +267,17 @@
     <!-- iCheck -->
     <script src="vendors/iCheck/icheck.min.js"></script>
     <!-- Swal -->
-    <script type="text/javascript" src="js/sweetalert.min.js"></script>
-    <!-- Data Table -->
-    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js">
+
+    </script>
+
     <!-- Custom Theme Scripts -->
     <script src="js/gentelella.min.js"></script>
 
     <!-- Dashboard Script -->
     <script type="text/javascript" src="js/dashboard.js">
 
+    </script>
 </body>
 
 </html>

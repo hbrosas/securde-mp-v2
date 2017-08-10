@@ -18,8 +18,6 @@
     <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Swal -->
     <link rel="stylesheet" href="css/sweetalert.css">
-    <!-- Data Tables -->
-    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
 
     <!-- Custom Theme Style -->
     <link href="css/gentelella.min.css" rel="stylesheet">
@@ -34,7 +32,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>Admin Page</span></a>
+                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>DLSU Lib App</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -51,35 +49,48 @@
                     </div>
                     <!-- /menu profile quick info -->
 
-                    <br/>
+                    <br />
 
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <h3>Navigation</h3>
                             <ul class="nav side-menu">
-                                <li><a href="admin_home.html"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
-                                     <ul class="nav child_menu">
-                                        <li><a href="register.html"> Create New Account</a></li>
-                                        <li><a href="register.html"> Manage Accounts</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="libstaff_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_catalog.html">Add Catalog</a></li>
-                                        <li><a href="view_catalog.html">Manage Catalogs</a></li>
+                                        <li><a data-toggle="modal" data-target="#addBook">Add Book</a></li>
+                                        <li><a href="edit_books.html">Edit/Delete Book</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_reservation.html">Manage Reservations</a></li>
+                                        <li><a href="edit_reservation.html">Edit Room Reservation</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
+
+
                     </div>
                     <!-- /sidebar menu -->
+
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
                 </div>
             </div>
 
@@ -94,7 +105,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/user.png" alt="">John Doe
+                                    <img src="images/gandalf.jpg" alt="">John Doe
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -110,66 +121,104 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-              <div class="main-container container">
-                <table id="availabilityTable" class="display" cellspacing="0" width="100%">
-                  <thead>
-                      <tr>
-                          <th>Room Name</th>
-                          <th>Status</th>
-                          <th></th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>Leonardo</th>
-                      <th><span class="label label-success">In Service</span></th>
-                      <th>
-                        <select name="leonardoAvailability" id="">
-                          <option value="1">In Service</option>
-                          <option value="0">Out of Service</option>
-                        </select>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th>Donatello</th>
-                      <th><span class="label label-success">In Service</span></th>
-                      <th>
-                        <select name="donatelloAvailability" id="">
-                          <option value="1">In Service</option>
-                          <option value="0">Out of Service</option>
-                        </select>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th>Michaelangelo</th>
-                      <th><span class="label label-success">In Service</span></th>
-                      <th>
-                        <select name="michaelangeloAvailability" id="">
-                          <option value="1">In Service</option>
-                          <option value="0">Out of Service</option>
-                        </select>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th>Raphael</th>
-                      <th><span class="label label-danger">Out of Service</span></th>
-                      <th>
-                        <select name="raphelAvailability" id="">
-                          <option value="1">In Service</option>
-                          <option value="0">Out of Service</option>
-                        </select>
-                      </th>
-                    </tr>
-                  </tbody>
+              <div class="panel panel-default">
+          			<div class="panel-heading" style="font-size:2em;">Room Reservation</div>
+          			<div class="panel-body">
+          				<div class="row">
 
-                </table>
-                <br><br>
-                <div class="row">
-                  <div class="col-md-2 col-md-offset-8">
-                    <button class="btn btn-block btn-success" id="availabilitySave">Save</button>
-                  </div>
-                </div>
-              </div>
+          					<div class="col-md-4">
+          						<label for="accountRole"	><h4>Select Room</h4></label>
+          						<select class="form-control" id="accountRole">
+          							<option value="1">Michaelangelo</option>
+          							<option value="2">Leonardo</option>
+          							<option value="3">Donatello</option>
+          							<option value="4">Raphael</option>
+          						</select>
+                      <br>
+                      <div class="form-group">
+          							<div class='input-group date' id='datetimepicker1'>
+          								<input type='text' class="form-control" />
+          								<span class="input-group-addon">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+          								</span>
+          							</div>
+          						</div>
+          						<img src="images/room.jpg" alt="" class="img-thumbnail">
+          					</div>
+          					<div class="col-md-8">
+          							<h4>Select Time Slots</h4>
+          							<div class="wrapper">
+          								<table class="table table-timeslot">
+          									<thead>
+          										<tr>
+          											<th>7:00-7:30</th>
+          											<th>7:30-8:00</th>
+          											<th>8:00-8:30</th>
+          											<th>8:30-9:00</th>
+          											<th>9:00-9:30</th>
+          											<th>9:30-10:00</th>
+          											<th>10:00-10:30</th>
+          											<th>10:30-11:00</th>
+          											<th>11:00-11:30</th>
+          											<th>11:30-12:00</th>
+          											<th>12:00-12:30</th>
+          											<th>12:30-13:00</th>
+          											<th>13:00-13:30</th>
+          											<th>13:30-14:00</th>
+          											<th>14:00-14:30</th>
+          											<th>14:30-15:00</th>
+          											<th>15:00-15:30</th>
+          											<th>15:30-16:00</th>
+          											<th>16:00-16:30</th>
+          											<th>16:30-17:00</th>
+          											<th>17:00-17:30</th>
+          											<th>17:30-18:00</th>
+          											<th>18:00-18:30</th>
+          											<th>18:30-19:00</th>
+          											<th>19:00-19:30</th>
+          											<th>19:30-20:00</th>
+          										</tr>
+          										<tr>
+          											<td><input id="700-730" type="checkbox" checked></td>
+          											<td><input id="700-730" type="checkbox" checked></td>
+          											<td><input id="700-730" type="checkbox" checked></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          											<td><input id="700-730" type="checkbox"></td>
+          										</tr>
+          									</thead>
+          								</table>
+          							</div>
+          							<br><br><br><br>
+          							<button type="submit" href="" class="btn btn btn-primary btn-block register-input" style="background-color: #1b5e20; border-color: #1b5e20;">Apply Changes</button>
+          					</div>
+          				</div>
+
+
+
+          			</div>
+          			<!-- end of panel body -->
+          		</div>
             </div>
             <!-- /page content -->
 
@@ -183,7 +232,6 @@
             <!-- /footer content -->
         </div>
     </div>
-
     <!-- Modal -->
     <div id="addBook" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -269,7 +317,6 @@
         </div>
     </div>
 
-
     <!-- jQuery -->
     <script src="js/jquery-1.12.4.min.js"></script>
     <!-- Bootstrap -->
@@ -279,16 +326,24 @@
     <!-- iCheck -->
     <script src="vendors/iCheck/icheck.min.js"></script>
     <!-- Swal -->
-    <script type="text/javascript" src="js/sweetalert.min.js"></script>
-    <!-- Data Table -->
-    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js">
+
+    </script>
+
     <!-- Custom Theme Scripts -->
     <script src="js/gentelella.min.js"></script>
 
     <!-- Dashboard Script -->
-    <script type="text/javascript" src="js/dashboard.js">
+    <script type="text/javascript" src="js/dashboard.js"></script>
+    <!-- Date-Time Picker -->
+  	<script type="text/javascript" src="vendors/moment/min/moment.min.js"></script>
+  	<script type="text/javascript" src="vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
-    </script>
+    <script type="text/javascript">
+  		$("#datetimepicker1").datetimepicker({
+  			format: 'YYYY-MM-DD'
+  		});
+  	</script>
 </body>
 
 </html>

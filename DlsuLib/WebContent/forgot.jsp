@@ -46,9 +46,9 @@
 							<label class="input_title" id="securityQuestion"> Question </label>
 							<br><br>
 							<p class="input_title">Security Answer</p>
-							<input type="text" id="secanswer" class="login_box" placeholder="Security Answer" required autofocus>
+							<input type="text" id="secanswer" class="sqans login_box" placeholder="Security Answer" required autofocus>
 							<br>
-							<button class="btn btn-small btn-success btn-block submitbtn" id="submit" type="submit">SUBMIT</button>							
+							<button class="btn btn-small btn-success btn-block submitbtn" id="submitanswer" type="button">SUBMIT</button>							
 						</form><!-- /form -->
 					</div>
 
@@ -65,7 +65,7 @@
 							<p class="input_title">Confirm Password</p>
 							<input type="password" id="confirmpw" class="login_box" placeholder="*********" required>
 							<br>
-							<button class="btn btn-small btn-success btn-block submitbtn" id="submitpassword" type="submit">Submit</button>	
+							<button class="btn btn-small btn-success btn-block submitbtn" id="submitpassword" type="button">Submit</button>	
 						</form><!-- /form -->
 					</div>
 
@@ -76,7 +76,7 @@
 						</h2>
 						<hr class="top-hr">
 						<span class="input_title">Password has been successfully changed!</p>
-						<button class="btn btn-small btn-success btn-block submitbtn" id="continue" type="button">
+						<button class="btn btn-small btn-success btn-block submitbtn" id="confirm" href="AllCatalogsServlet" type="button">
 						CONTINUE</button>
 					</div>
 		        </div><!-- /card-container -->
@@ -125,25 +125,25 @@
 				sqanswer.show(500);
 			});*/
 
-			$(document).on("click", "#submit", function(){
+			/* $(document).on("click", "#submit", function(){
 				sqanswer.hide();
 				changepw.show(500);
-			});
+			}); */
 
-			$(document).on("click", "#submitpassword", function(){
+			/*$(document).on("click", "#submitpassword", function(){
 				changepw.hide();
 				pwchange.show(500);
-			});		
+			});*/		
 
 			$(document).on("click", "#confirm", function(){
-
+				
 			});	
 		});
 
 		$(document).on("click", "#changenow", function(){
 		var email = $(".forgotEmail").val();
 
-		var data = {email:email}
+		var data = {email:email, type:"1"}
 		$.ajax({
 			url: "ForgotServlet",
 			type: "POST",
@@ -161,6 +161,57 @@
 			}
 		});
 	});
+		
+		$(document).on("click", "#submitanswer", function(){
+			var sqans = $("#secanswer").val();
+			var email = $(".forgotEmail").val();
+
+			var data = {sqans:sqans, type:"2", email:email}
+			$.ajax({
+				url: "ForgotServlet",
+				type: "POST",
+				data: data,
+				success: function(status) {
+					console.log(status);
+					if(status == "error") {
+						error.show();
+					} else {
+						console.log("pass");
+						error.hide();
+						user.hide();
+						sqanswer.hide();
+						changepw.show(500);
+					}
+				}
+			});
+			
+			$(document).on("click", "#submitpassword", function(){
+				var sqans = $("#secanswer").val();
+				var email = $(".forgotEmail").val();
+				var newpw = $("#newpw").val();
+				var confirmpw = $("#confirmpw").val();
+
+				var data = {newpw:newpw, confirmpw:confirmpw, sqans:sqans, type:"3", email:email,}
+				$.ajax({
+					url: "ForgotServlet",
+					type: "POST",
+					data: data,
+					success: function(status) {
+						console.log(status);
+						if(status == "error") {
+							error.show();
+						} else {
+							console.log("pass");
+							error.hide();
+							user.hide();
+							sqanswer.hide();
+							changepw.hide();
+							pwchange.show(500);
+						}
+					}
+				});
+			});
+		});
 	</script>
 
 </body>

@@ -32,7 +32,7 @@ CREATE TABLE `borrow` (
   `dateExpectReturn` datetime NOT NULL,
   `statusId` int(11) NOT NULL,
   PRIMARY KEY (`borrowId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `catalog` (
 
 LOCK TABLES `catalog` WRITE;
 /*!40000 ALTER TABLE `catalog` DISABLE KEYS */;
-INSERT INTO `catalog` VALUES (1,'Challengers of the Unknown','Ron Goulart',1977,'	Dell','ABCD.1234.1977','2','4','Gangster'),(2,'A Life in the Streets','Eugene Lim',2017,'Ted Publishing House','EGFD.1451.2017','2 ','4','Blood, Sweat, Tears'),(3,'Buhay ng Gangsta','Smugglaz',2016,'187 Mobstaz','ABGE.2031.2016','1','4','Streets'),(4,'Blithe Spirit','	Noël Coward',1941,'Noel','P112.BPC3.1941','2','4','Spirit'),(5,'The Lord of The Rings','J. R. R. Tolkien',1955,'Allen & Unwin','AZJP.12BP.1955','1','4','Rings, Lord'),(6,'Kingdom Come','Elliot S. Maggin, with Mark Waid, Alex Ross',1998,'Warner Books','POG1.0986.1998','1','4','Kingdom'),(7,'Three Little Bears','Yemear ',2017,'Ming Publishing House','IUP1.1023.2017','1','4','Bears, Ming, Ling, Mong, Long'),(8,'The Adventures of Superman','George Lowther',1979,'Kassel Books ','YTIZ.1B31.1979','1','4','Superman'),(9,'Batman & Robin','Michael Jan Friedman',1997,'Warner Books','QWER.4321.1997','1','4','Batman, Robin, Bat'),(10,'Steel','Dean Wesley Smith',1997,'Tor Books','POI6.1409.1997','1','4','Man of Steel, Steel'),(17,'Secure Internet of Things','	Dr.	Thiemo	Voigt',2017,'SICS Swedish Lab','POZS.1095.2017','3','4','Internet of Things, Internet');
+INSERT INTO `catalog` VALUES (1,'Challengers of the Unknown','Ron Goulart',1977,'	Dell','ABCD.1234.1977','2','4','Gangster'),(2,'A Life in the Streets','Eugene Lim',2017,'Ted Publishing House','EGFD.1451.2017','2 ','4','Blood, Sweat, Tears'),(3,'Buhay ng Gangsta','Smugglaz',2016,'187 Mobstaz','ABGE.2031.2016','1','4','Streets'),(4,'Blithe Spirit','	Noël Coward',1941,'Noel','P112.BPC3.1941','2','3','Spirit'),(5,'The Lord of The Rings','J. R. R. Tolkien',1955,'Allen & Unwin','AZJP.12BP.1955','1','4','Rings, Lord'),(6,'Kingdom Come','Elliot S. Maggin, with Mark Waid, Alex Ross',1998,'Warner Books','POG1.0986.1998','1','4','Kingdom'),(7,'Three Little Bears','Yemear ',2017,'Ming Publishing House','IUP1.1023.2017','1','4','Bears, Ming, Ling, Mong, Long'),(8,'The Adventures of Superman','George Lowther',1979,'Kassel Books ','YTIZ.1B31.1979','1','2','Superman'),(9,'Batman & Robin','Michael Jan Friedman',1997,'Warner Books','QWER.4321.1997','1','4','Batman, Robin, Bat'),(10,'Steel','Dean Wesley Smith',1997,'Tor Books','POI6.1409.1997','1','4','Man of Steel, Steel'),(17,'Secure Internet of Things','	Dr.	Thiemo	Voigt',2017,'SICS Swedish Lab','POZS.1095.2017','3','4','Internet of Things, Internet');
 /*!40000 ALTER TABLE `catalog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,8 +277,9 @@ CREATE TABLE `user` (
   `idNumber` int(25) NOT NULL,
   `SQID` int(11) NOT NULL,
   `SQAnswer` varchar(250) NOT NULL,
+  `salt` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`userId`,`firstname`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -287,7 +288,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'teddyboi','test123','teddy_lim@gmail.com','Ted','Go','Lim','1','2017-07-14 23:54:14','1',19,5,1996,11342498,1,'Dog'),(3,'hazel_lim','test456','hazel_anne@gmail.com','Hazel','Legaspi','Brosas','1','2017-07-14 23:54:14','1',8,11,1997,11425598,1,'Pig'),(4,'randolph_yu','randy_santiago','randolph_yu@gmail.com','Randolph','Lim','Yu','1','2017-07-14 23:54:19','-1',28,11,1997,11433523,1,'Dinosaur'),(5,'den_silva','denise_123','denise_silva@gmail.com','Denise Anne','Restua','Silva','1','2017-07-14 23:54:14','1',1,4,1997,11421234,2,'Grahams'),(6,'admin_1','admin_123','admin@gmail.com','Admin One','One','Test','4','2017-07-14 23:54:14','1',1,1,1996,12345678,1,'Cat'),(8,'librarym_1','librarym_123','librarym@gmail.com','John','Israel','Caingles','2','2017-07-14 23:54:14','1',2,2,1996,12112456,1,'Pig'),(9,'librarys_1','librarys_123','librarys@gmail.com','Danica','Castro','Sevilla','3','2017-07-14 23:54:14','1',3,3,1996,12345612,1,'Dog');
+INSERT INTO `user` VALUES (2,'teddyboi','test123','teddy_lim@gmail.com','Ted','Go','Lim','1','2017-07-14 23:54:14','1',19,5,1996,11342498,1,'Dog',NULL),(3,'hazel_lim','test456','hazel_anne@gmail.com','Hazel','Legaspi','Brosas','1','2017-07-14 23:54:14','1',8,11,1997,11425598,1,'Pig',NULL),(4,'randolph_yu','randy_santiago','randolph_yu@gmail.com','Randolph','Lim','Yu','1','2017-07-14 23:54:19','-1',28,11,1997,11433523,1,'Dinosaur',NULL),(5,'den_silva','denise_123','denise_silva@gmail.com','Denise Anne','Restua','Silva','1','2017-07-14 23:54:14','1',1,4,1997,11421234,2,'Grahams',NULL),(6,'admin_1','admin_123','admin@gmail.com','Admin One','One','Test','4','2017-07-14 23:54:14','1',1,1,1996,12345678,1,'Cat',NULL),(8,'librarym_1','librarym_123','librarym@gmail.com','John','Israel','Caingles','2','2017-07-14 23:54:14','1',2,2,1996,12112456,1,'Pig',NULL),(9,'librarys_1','librarys_123','librarys@gmail.com','Danica','Castro','Sevilla','3','2017-07-14 23:54:14','1',3,3,1996,12345612,1,'Dog',NULL),(10,'hazelanne','[C@2d349e12','hazel_brosas@gmail.com','Hazel','Legaspi','Brosas','1','2017-08-10 20:00:40','-1',8,11,1997,11425598,1,'Oyteza','[C@c3273f9'),(11,'hazelbrosas','[C@6c999f2','hazelanne@gmail.com','Hazel','Lee','Bee','1','2017-08-10 20:05:24','-1',8,11,1997,11425598,2,'Blacky','[C@7f24c04');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,4 +325,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-16 10:04:05
+-- Dump completed on 2017-08-10 20:42:14

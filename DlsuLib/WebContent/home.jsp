@@ -88,7 +88,7 @@
 	                        </div>
 	                    </div>
 	                    <div class="card-footer">
-	                        <span class="float-right"></span>
+	                        <span class="float-right">${c.tags}</span>
 	                    </div>
 	                </div>
             	</div> <!-- end catalog -->
@@ -113,8 +113,8 @@
 						<div class="col-md-9">
 							<b>Author:</b> <span id="card-author">the author</span><br>
                             <b>Publisher:</b> <span id="card-publisher">the publisher</span><br>
-                        	<b>Year:</b> <span id="card-publisher">2001</span><br>
-                        	<b>Location:</b> <span id="card-publisher">AB12.125C.2001</span>
+                        	<b>Year:</b> <span id="card-year">2001</span><br>
+                        	<b>Location:</b> <span id="card-location">AB12.125C.2001</span>
 						</div>
 					</div>
 
