@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.securde.beans.User;
+import edu.securde.manager.UserManager;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -51,9 +52,8 @@ public class RegisterServlet extends HttpServlet {
 		user.setRoleid(Integer.parseInt(request.getParameter("role")));
 		user.setSqid(Integer.parseInt(request.getParameter("securityQuestion")));
 		user.setSqanswer(request.getParameter("sqAnswer"));
-		// create salt
-		// register account
-		// get user account
+		user.setSalt(UserManager.generateSalt());
+		int id = UserManager.CreateAccount(user);
 		// add request parameter
 		// redirect
 	}
