@@ -54,8 +54,9 @@ public class RegisterServlet extends HttpServlet {
 		user.setSqanswer(request.getParameter("sqAnswer"));
 		user.setSalt(UserManager.generateSalt());
 		int id = UserManager.CreateAccount(user);
-		// add request parameter
-		// redirect
+		user.setUserid(id);
+		request.setAttribute("user", user);
+		request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 	}
 
 }
