@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="edu.securde.beans.User" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +43,7 @@
                                 <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
                                      <ul class="nav child_menu">
                                         <li><a href="admincreate.jsp"> Create New Account</a></li>
-                                        <li><a href="#"> Manage Accounts</a></li>
+                                        <li><a href="ManageAccountServlet"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
@@ -105,46 +106,49 @@
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>hazelanne</td>
-                        <td>hazelbrosas@gmail.com</td>
-                        <td>Date</td>
-                        <td>11425598</td>
-                        <td>Student</td>
-                        <td><span class="label label-success">Active</span></td>
-                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>hazelanne</td>
-                        <td>hazelbrosas@gmail.com</td>
-                        <td>Date</td>
-                        <td>11425598</td>
-                        <td>Student</td>
-                        <td><span class="label label-success">Active</span></td>
-                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>hazelanne</td>
-                        <td>hazelbrosas@gmail.com</td>
-                        <td>Date</td>
-                        <td>11425598</td>
-                        <td>Student</td>
-                        <td><span class="label label-success">Active</span></td>
-                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>hazelanne</td>
-                        <td>hazelbrosas@gmail.com</td>
-                        <td>Date</td>
-                        <td>11425598</td>
-                        <td>Student</td>
-                        <td><span class="label label-success">Active</span></td>
-                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
-                      </tr>
+                    	<c:forEach var = "user" items = "${users}">
+                    		<tr>
+                    			<td>${user.userid}</td>
+		                        <td>${user.username}</td>
+		                        <td>${user.emailaddress}</td>
+		                        <td>${user.lastloggedin}</td>
+		                        <td>${user.idnumber}</td>
+		                        <c:if test="${user.roleid == 1}">
+		                        	<td>Student</td>
+		                        </c:if>
+		                        <c:if test="${user.roleid == 2}">
+		                        	<td>Library Manager</td>
+		                        </c:if>
+		                        <c:if test="${user.roleid == 3}">
+		                        	<td>Library Staff</td>
+		                        </c:if>
+		                        <c:if test="${user.roleid == 4}">
+		                        	<td>Administrator</td>
+		                        </c:if>
+		                        <c:if test="${user.roleid == 5}">
+		                        	<td>Employee</td>
+		                        </c:if>
+		                        <c:if test="${user.roleid == 5}">
+		                        	<td>Employee</td>
+		                        </c:if>
+		                        <c:if test="${user.status == -1}">
+		                        	<td><span class="label label-danger">Expired</span></td>
+		                        </c:if>
+		                        <c:if test="${user.status == 1}">
+		                        	<td><span class="label label-success">Active</span></td>
+		                        </c:if>
+		                        <c:if test="${user.status == 0}">
+		                        	<td><span class="label label-info">Pending</span></td>
+		                        </c:if>
+		                        <td><button class="btn btn-block" id="editUserBtn" data-id="${user.userid}"
+		                        data-username="${user.username}" data-email="${user.emailaddress}"
+		                        data-lastloggedin="${user.lastloggedin}" data-idnum="${user.idnumber}"
+		                        data-role="${user.roleid}" data-fname="${user.firstname}"
+		                        data-mname="${user.middlename}" data-lname="${user.lastname}"
+		                        data-bdate="${user.birthdate}" data-bmonth="${user.birthmonth}"
+		                        data-byear="${user.birthyear}" data-status="${user.status}">View/Edit Details</button></td>
+		                    </tr>
+                    	</c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -176,55 +180,55 @@
                         <div class="row">
                             <div class="col-xs-6 col-md-2">
                                 <div class="form-group">
-                                    <label for="author">User ID</label>
-                                    <input type="text" class="form-control" id="author" value="1">
+                                    <label for="userid">User ID</label>
+                                    <input type="text" class="form-control" id="userid" value="1">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-5">
                                 <div class="form-group">
-                                    <label for="publisher">Username</label>
-                                    <input type="text" class="form-control" id="publisher" value="Gandalf the Grey">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" value="Gandalf the Grey">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-5">
                                 <div class="form-group">
-                                    <label for="year">Password</label>
-                                    <input type="text" class="form-control" id="year" value="1998">
+                                    <label for="lastloggedin">Last Logged In</label>
+                                    <input type="text" class="form-control" id="lastloggedin" value="1998">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="author">First Name</label>
-                                    <input type="text" class="form-control" id="location" value="Hazel">
+                                    <label for="firstname">First Name</label>
+                                    <input type="text" class="form-control" id="firstname" value="Hazel">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="author">Middle Name</label>
-                                    <input type="text" class="form-control" id="tags" value="Legaspi">
+                                    <label for="middlename">Middle Name</label>
+                                    <input type="text" class="form-control" id="middlename" value="Legaspi">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="author">Last Name</label>
-                                    <input type="text" class="form-control" id="tags" value="Brosas">
+                                    <label for="lastname">Last Name</label>
+                                    <input type="text" class="form-control" id="lastname" value="Brosas">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="author">Email Address</label>
-                                    <input type="text" class="form-control" id="location" value="The Shire">
+                                    <label for="email">Email Address</label>
+                                    <input type="text" class="form-control" id="email" value="The Shire">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-8">
-                                <label for="author">Birthday</label>
-                                <div class="form-group" id="">
+                                <label for="bdate">Birthday</label>
+                                <div class="form-group">
                                     <div class="col-md-3">
-                                        <select type="text" class="form-control" id="inputBirthdate" required>
+                                        <select type="text" class="form-control" id="bdate" required>
                                             <option selected disabled="true">Day</option>
                                             <option value="1">1</option> <option value="2">2</option>
                                             <option value="3">3</option> <option value="4">4</option> 
@@ -245,7 +249,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-5">
-                                        <select type="text" class="form-control" id="inputBirthMonth" required>
+                                        <select type="text" class="form-control" id="bmonth" required>
                                             <option selected disabled="true">Month</option>
                                             <option value="1">January</option>
                                             <option value="2">February</option>
@@ -262,18 +266,18 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" id="year" value="1997">
+                                        <input type="text" class="form-control" id="byear" value="1997">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-12 col-md-4">
+                            <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="role">Role</label><br>
                                     <select class="form-control" id="role">
-                                        <option value="1" selected> Student </option>
+                                        <option value="1"> Student </option>
                                         <option value="2"> Library Manager </option>
                                         <option value="3"> Library Staff </option>
                                         <option value="4"> Administrator </option>
@@ -281,16 +285,14 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-md-4">
+                            <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="idNum">ID Number</label><br>
-                                    <input type="text" class="form-control" id="idNum" value="11425598">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="lastLoggedIn">Last Logged In</label><br>
-                                    <input type="text" class="form-control" id="lastLoggedIn" value="11425598">
+                                    <label for="status">Account Status</label><br>
+                                    <select class="form-control" id="status">
+                                        <option value="-1"> Expired </option>
+                                        <option value="0"> Pending </option>
+                                        <option value="1"> Active </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -304,6 +306,27 @@
         </div>
     </div>
     
+    <jsp:include page="admin_dependencies_script.jsp" />
+    <script>
+    	$(document).on("click", "#editUserBtn", function(){
+    		$("#userid").val($(this).data("id"));
+    		$("#userid").attr("disabled", "disabled");
+    		$("#username").val($(this).data("username"));
+    		$("#lastloggedin").val($(this).data("lastloggedin"));
+    		$("#lastloggedin").attr("disabled", "disabled");
+    		$("#firstname").val($(this).data("fname"));
+    		$("#lastname").val($(this).data("lname"));
+    		$("#middlename").val($(this).data("mname"));
+    		$("#email").val($(this).data("email"));
+    		$("#bdate").val($(this).data("bdate"));
+    		$("#bmonth").val($(this).data("bmonth"));
+    		$("#byear").val($(this).data("byear"));
+    		$("#role").val($(this).data("role"));
+    		$("#status").val($(this).data("status"));
+    		
+    		$("#editUser").modal('toggle');
+    	});
+    </script>
+    
 </body>
-	<jsp:include page="admin_dependencies_script.jsp" />
 </html>

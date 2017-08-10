@@ -1,11 +1,16 @@
 package edu.securde.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import edu.securde.beans.User;
+import edu.securde.manager.UserManager;
 
 /**
  * Servlet implementation class ManageAccountServlet
@@ -27,7 +32,7 @@ public class ManageAccountServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -35,7 +40,9 @@ public class ManageAccountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		ArrayList<User> users = UserManager.GetAllAccount();
+		request.setAttribute("users", users);
+		request.getRequestDispatcher("adminmanageaccounts.jsp").forward(request, response);
 	}
 
 }

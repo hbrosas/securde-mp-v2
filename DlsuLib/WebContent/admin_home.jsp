@@ -48,7 +48,7 @@
                                 <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
                                      <ul class="nav child_menu">
                                         <li><a href="admincreate.jsp"> Create New Account</a></li>
-                                        <li><a href="adminmanageaccounts.jsp"> Manage Accounts</a></li>
+                                        <li><a href="ManageAccountServlet"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
