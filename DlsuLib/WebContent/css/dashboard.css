@@ -1,0 +1,15 @@
+.flex-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-timeslot {
+    display: block;
+    overflow-x: auto;
+}
+
+.table-timeslot th, td {
+    text-align: center;
+    vertical-align: middle;
+}

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DLSU Lib App | Admin</title>
+    <title>Admin Panel | De La Salle University SHS Online Library</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,23 +43,14 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                       <!-- menu profile quick info -->
-                    <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="images/gandalf.jpg" alt="..." class="img-circle profile_img">
-                        </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>Gandalf the Grey</h2>
-                        </div>
-                    </div>
+	                    <div class="profile clearfix">
+	                        <div class="profile_info">
+	                            <span>Welcome,</span>
+	                            <h2>${user.firstname} ${user.lastname}</h2>
+	                        </div>
+	                    </div>
                     <!-- /menu profile quick info -->
-
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>Gandalf the Grey</h2>
-                        </div>
                     </div>
-                    <!-- /menu profile quick info -->
 
                     <br />
 
@@ -104,7 +95,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/user.png" alt="">John Doe
+                                    <img src="images/user.png" alt="">${user.firstname} ${user.lastname}
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -120,8 +111,7 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-                <h1>Welcome Back, Gandalf</h1>
-                <br><br><br><br>
+            	<br><br><br><br><br>
                 <div class="row">
                   <a href="register.html">
                       <div class="col-xs-12 col-md-2 col-md-offset-1 ">
@@ -185,65 +175,8 @@
             <!-- /footer content -->
         </div>
     </div>
-    <!-- Modal -->
-    <div id="addBook" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add a New Book</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="title">Book title:</label>
-                            <input type="text" class="form-control" id="title">
-                        </div>
-                        <div class="form-group">
-                            <label for="author">Book Author:</label>
-                            <input type="text" class="form-control" id="author">
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="category">Category:</label><br>
-                                    <select class="category">
-                                  <option value="1" selected>Book</option>
-                                  <option value="2">Magazine</option>
-                                  <option value="3">Thesis</option>
-                                </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="availability">Availability:</label><br>
-                                    <select class="availability">
-                                  <option value="1" selected>Available</option>
-                                  <option value="2">Unavailable</option>
-                                </select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="overview">Book Overview:</label>
-                            <textarea name="overview" rows="5" style="width:100%"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="addButton">Add</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- jQuery -->
+    
+   <!-- jQuery -->
     <script src="js/jquery-1.12.4.min.js"></script>
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
@@ -252,14 +185,15 @@
     <!-- iCheck -->
     <script src="vendors/iCheck/icheck.min.js"></script>
     <!-- Swal -->
-    <script type="text/javascript" src="js/sweetalert.min.js">
-    </script>
-
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <!-- Data Table -->
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="js/gentelella.min.js"></script>
 
     <!-- Dashboard Script -->
-    <script type="text/javascript" src="js/dashboard.js"></script>
+    <script type="text/javascript" src="js/dashboard.js">
+
 </body>
 
 </html>

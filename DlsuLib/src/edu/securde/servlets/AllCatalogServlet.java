@@ -62,7 +62,8 @@ public class AllCatalogServlet extends HttpServlet {
 			User user = (User) session.getAttribute("ucx");
 			switch(user.getRoleid()) {
 			case 2: case 3: case 4:
-				System.out.println("Admin");
+				request.setAttribute("user", user);
+				request.getRequestDispatcher("admin_home.jsp").forward(request, response);
 				break;
 			case 1: case 5:
 				ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
