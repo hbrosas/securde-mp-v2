@@ -64,7 +64,10 @@
 						<button class="btn btn-small btn-success btn-block submitbtn" id="reqBtn" type="button">REQUEST AN ACCOUNT</button>
 					</form><!-- /form -->
 					<hr>
-					<button class="btn btn-small btn-default btn-block submitbtn">SIGN IN AS GUEST</button>
+					<form id="guestLoginForm" action="AllCatalogServlet" method="POST">
+						<input type="hidden" value="Guest" name="inputEmail">
+					</form>
+					<button class="btn btn-small btn-default btn-block submitbtn" id="guestBtn">SIGN IN AS GUEST</button>
 		        </div><!-- /card-container -->
 			</div>
 
