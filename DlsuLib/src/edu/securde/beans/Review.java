@@ -9,7 +9,7 @@ public class Review {
 	public static final String COLUMN_DATEREVIEWED = "dateReviewed";
 	
 	int reviewid, catalogid, userid;
-	String review, datereviewed;
+	String review, datereviewed, username;
 	
 	public Review() {
 		
@@ -46,6 +46,14 @@ public class Review {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getReview() {
