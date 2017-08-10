@@ -31,8 +31,8 @@
 						<li><a href="borrow_history.html">Borrow History</a></li>
 						<li><a href="#">Reservation History</a></li>
 						<li role="separator" class="divider"></li>
-						<li><a href="edit_profile.html">Edit Profile</a></li>
-						<li><a href="#">Logout</a></li>
+						<li><a href="edit_profile.jsp">Edit Profile</a></li>
+						<li><a href="LogoutServlet">Logout</a></li>
 					</ul>
 				</li>
 			</ul>

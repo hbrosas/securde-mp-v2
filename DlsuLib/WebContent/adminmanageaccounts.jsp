@@ -1,6 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="edu.securde.beans.User" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -8,91 +10,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DLSU Lib App | </title>
-
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- Swal -->
-    <link rel="stylesheet" href="css/sweetalert.css">
-    <!-- Data Tables -->
-    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
-
-    <!-- Custom Theme Style -->
-    <link href="css/gentelella.min.css" rel="stylesheet">
-
-    <!-- Dashboard Style -->
-    <link rel="stylesheet" href="css/dashboard.css">
+    <title>Create Account | De La Salle University SHS Online Library</title>
+	<jsp:include page="admin_dependencies.jsp" />
 </head>
 
 <body class="nav-md">
+	<% User user=(User)session.getAttribute("ucx"); %>
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
-                    <div class="navbar nav_title">
-                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>DLSU Lib App</span></a>
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span> Admin Panel</span></a>
                     </div>
-
                     <div class="clearfix"></div>
-
-                    <!-- menu profile quick info -->
                     <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="images/gandalf.jpg" alt="..." class="img-circle profile_img">
-                        </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>Gandalf the Grey</h2>
-                        </div>
+	                    <div class="profile clearfix">
+	                        <div class="profile_info">
+	                            <span>Welcome,</span>
+	                            <h2> <%=user.getFirstname() %> <%=user.getLastname()%></h2>
+	                        </div>
+	                    </div>
                     </div>
-                    <!-- /menu profile quick info -->
-
                     <br />
-
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <h3>Navigation</h3>
                             <ul class="nav side-menu">
-                                <li><a href="libstaff_home.html"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a href="admin_home.html"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
+                                     <ul class="nav child_menu">
+                                        <li><a href="admincreate.jsp"> Create New Account</a></li>
+                                        <li><a href="#"> Manage Accounts</a></li>
+                                    </ul>
+                                </li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a data-toggle="modal" data-target="#addBook">Add Book</a></li>
-                                        <li><a href="edit_books.html">Edit/Delete Book</a></li>
+                                        <li><a href="view_catalog.html">Add Catalog</a></li>
+                                        <li><a href="view_catalog.html">Manage Catalogs</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="availability_of_rooms.html">Change Room Availability</a></li>
+                                        <li><a href="view_reservation.html">Manage Reservations</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
-
-
                     </div>
-                    <!-- /sidebar menu -->
-
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <!-- /menu footer buttons -->
                 </div>
             </div>
 
@@ -107,7 +73,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/gandalf.jpg" alt="">John Doe
+                                    <img src="images/user.png" alt=""><%=user.getFirstname() %> <%=user.getLastname()%>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -123,85 +89,83 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-                <div class="main-container container">
-                  <table id="booksTable" class="display" cellspacing="0" width="100%">
+            	<div class="main-container container">
+                  <table id="usersTable" class="display" cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Publisher</th>
-                        <th>Category</th>
-                        <th>Location</th>
-                        <th>Tags</th>
-                        <th>Availability</th>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>Email Address</th>
+                        <th>Last Logged In</th>
+                        <th>ID Number</th>
+                        <th>Role</th>
+                        <th>Status</th>
                         <th> </th>
                       </tr>
                     </thead>
 
                     <tbody>
                       <tr>
-                        <td>Singing in the rain</td>
-                        <td>Rihanna</td>
-                        <td>Tom Holland</td>
-                        <td>Magazine</td>
-                        <td>100029</td>
-                        <td>lip,sync,battle</td>
-                        <td><span class="label label-success">Available</span></td>
-                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editBook">View Details</button></td>
+                        <td>1</td>
+                        <td>hazelanne</td>
+                        <td>hazelbrosas@gmail.com</td>
+                        <td>Date</td>
+                        <td>11425598</td>
+                        <td>Student</td>
+                        <td><span class="label label-success">Active</span></td>
+                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
                       </tr>
                       <tr>
-                        <td>How to be badass</td>
-                        <td>John Wick</td>
-                        <td>Keanu Reeves</td>
-                        <td>Book</td>
-                        <td>17289</td>
-                        <td>bad,ass,mofo</td>
-                        <td><span class="label label-success">Available</span></td>
-                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editBook">View Details</button></td>
+                        <td>1</td>
+                        <td>hazelanne</td>
+                        <td>hazelbrosas@gmail.com</td>
+                        <td>Date</td>
+                        <td>11425598</td>
+                        <td>Student</td>
+                        <td><span class="label label-success">Active</span></td>
+                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
                       </tr>
                       <tr>
-                        <td>Magic 101</td>
-                        <td>Dumbledore</td>
-                        <td>Gandalf the grey</td>
-                        <td>Thesis</td>
-                        <td>176682</td>
-                        <td>magic,wizardry,muggle</td>
-                        <td><span class="label label-success">Available</span></td>
-                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editBook">View Details</button></td>
+                        <td>1</td>
+                        <td>hazelanne</td>
+                        <td>hazelbrosas@gmail.com</td>
+                        <td>Date</td>
+                        <td>11425598</td>
+                        <td>Student</td>
+                        <td><span class="label label-success">Active</span></td>
+                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
                       </tr>
                       <tr>
-                        <td>Cussing and cooking</td>
-                        <td>Gordon Ramsay</td>
-                        <td>Simon Cowell</td>
-                        <td>Book</td>
-                        <td>19278</td>
-                        <td>word,food,fuck</td>
-                        <td><span class="label label-danger">Unavailable</span></td>
-                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editBook">View Details</button></td>
+                        <td>1</td>
+                        <td>hazelanne</td>
+                        <td>hazelbrosas@gmail.com</td>
+                        <td>Date</td>
+                        <td>11425598</td>
+                        <td>Student</td>
+                        <td><span class="label label-success">Active</span></td>
+                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-
             </div>
             <!-- /page content -->
 
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    DLSU Lib Application
+                    De La Salle University SHS Online Library
                 </div>
                 <div class="clearfix"></div>
             </footer>
             <!-- /footer content -->
         </div>
     </div>
-
-
-    <div id="editBook" class="modal fade" role="dialog">
+    
+    <!-- View/Edit -->
+    <div id="editUser" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
-            <!-- Modal content-->
+             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -330,8 +294,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -339,114 +301,9 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-
         </div>
     </div>
-
-    <!-- Modal -->
-    <div id="addBook" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add a New Book</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="title">Book title:</label>
-                            <input type="text" class="form-control" id="title">
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="author">Book Author:</label>
-                                    <input type="text" class="form-control" id="author">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="publisher">Publisher:</label>
-                                    <input type="text" class="form-control" id="publisher">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="year">Year:</label>
-                                    <input type="text" class="form-control" id="year">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="category">Category:</label><br>
-                                    <select class="category">
-                                  <option value="1" selected>Book</option>
-                                  <option value="2">Magazine</option>
-                                  <option value="3">Thesis</option>
-                                </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="availability">Availability:</label><br>
-                                    <select class="availability">
-                                  <option value="1" selected>Available</option>
-                                  <option value="2">Unavailable</option>
-                                </select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="author">Location:</label>
-                                    <input type="text" class="form-control" id="location">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="author">Tags:</label>
-                                    <input type="text" class="form-control" id="tags">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="addButton">Add</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="vendors/fastclick/lib/fastclick.js"></script>
-    <!-- iCheck -->
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <!-- Swal -->
-    <script type="text/javascript" src="js/sweetalert.min.js"></script>
-    <!-- Data Table -->
-    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-
-    <!-- Custom Theme Scripts -->
-    <script src="js/gentelella.min.js"></script>
-
-    <!-- Dashboard Script -->
-    <script type="text/javascript" src="js/dashboard.js">
-    </script>
+    
 </body>
-
+	<jsp:include page="admin_dependencies_script.jsp" />
 </html>
