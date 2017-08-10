@@ -60,3 +60,5 @@ Servers/.settings/org.eclipse.wst.server.core.prefs
 *.index
 .metadata/version.ini
 .metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/900562025.index
+*.class
+*.class

@@ -53,8 +53,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setSqid(Integer.parseInt(request.getParameter("securityQuestion")));
 		user.setSqanswer(request.getParameter("sqAnswer"));
 		user.setSalt(UserManager.generateSalt());
-		// register account
-		// get user account
+		int id = UserManager.CreateAccount(user);
 		// add request parameter
 		// redirect
 	}
