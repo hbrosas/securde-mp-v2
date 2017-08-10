@@ -8,7 +8,7 @@ import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 public class DBPool{
 	public static final String schema = "dlsulib";
 	public static final String username = "root";
-	public static final String password = "";
+	public static final String password = "p@ssword";
 	public static final String url = "jdbc:mysql://localhost:3306/";
 	public static final String driver = "com.mysql.jdbc.Driver";
 	

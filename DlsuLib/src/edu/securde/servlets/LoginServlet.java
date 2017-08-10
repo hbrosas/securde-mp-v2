@@ -79,7 +79,7 @@ public class LoginServlet extends HttpServlet {
 		// SESSIONS
 		HttpSession session = request.getSession();
 		session.setAttribute("cx", userid);
-		
+		session.setAttribute("ucx", UserManager.getUser(id));
 	    
 	}
 
