@@ -15,6 +15,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/list-catalog-style.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="css/sweetalert.css">
+  <link rel="stylesheet" href="css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -28,14 +29,14 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-				<a class="navbar-brand" href="#">DLSU SHS Online Library</a>
+				<a class="navbar-brand" href="list_catalog.html">DLSU SHS Online Library</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Reserve Meeting Room</a></li>
-					<li class="active"><a href="list_catalog.html"> Catalog List <span class="sr-only">(current)</span></a></li>
+					<li><a href="room_reservation.html">Reserve Meeting Room</a></li>
+					<li><a href="list_catalog.html"> Catalog List <span class="sr-only">(current)</span></a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -74,7 +75,7 @@
 					 					<option value="Thesis">Thesis</option>
 					 				</select>
 						</div>
-						<button type="submit" class="btn btn-default" style="width: 100px;">Submit</button>
+						<a href="search_catalog.html" type="button" class="btn btn-default" style="width: 100px;">Submit</a>
 					</form>
 				</li>
 			</ul>
@@ -82,96 +83,66 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<div class="main-container">
-		<div class="container">
-			<table class="table table-striped table-bordered table-hover">
+	<div class="main-container container">
+    <h2>Displaying results for 'Singing'</h2>
+    <br>
+    <table id="search-table" class="display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+					<th>Publisher</th>
+          <th>Category</th>
+					<th>Location</th>
+					<th>Tags</th>
+          <th>Availability</th>
+          <th> </th>
+        </tr>
+      </thead>
+
+      <tbody>
 				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
+					<td>Singing in the rain</td>
+					<td>Rihanna</td>
+					<td>Tom Holland</td>
+					<td>Magazine</td>
+					<td>100029</td>
+					<td>lip,sync,battle</td>
+					<td><span class="label label-success">Available</span></td>
+					<td><button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button></td>
 				</tr>
 				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
+					<td>How to be badass</td>
+					<td>John Wick</td>
+					<td>Keanu Reeves</td>
+					<td>Book</td>
+					<td>17289</td>
+					<td>bad,ass,mofo</td>
+					<td><span class="label label-success">Available</span></td>
+					<td><button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button></td>
 				</tr>
 				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
+					<td>Magic 101</td>
+					<td>Dumbledore</td>
+					<td>Gandalf the grey</td>
+					<td>Thesis</td>
+					<td>176682</td>
+					<td>magic,wizardry,muggle</td>
+					<td><span class="label label-success">Available</span></td>
+					<td><button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button></td>
 				</tr>
 				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
+					<td>Cussing and cooking</td>
+					<td>Gordon Ramsay</td>
+					<td>Simon Cowell</td>
+					<td>Book</td>
+					<td>19278</td>
+					<td>word,food,fuck</td>
+					<td><span class="label label-danger">Unavailable</span></td>
+					<td><button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button></td>
 				</tr>
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block">View Details</button>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
+      </tbody>
+    </table>
 	</div>
 
 	<!-- Modal -->
@@ -200,8 +171,8 @@
 						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success" id="reserveButton">Add to Cart</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-success" id="reserveButton">Reserve</button>
 				</div>
 			</div>
 		</div>
@@ -218,16 +189,11 @@
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-	<!-- List Catalog Script -->
-	<script type="text/javascript" src="js/list-catalog.js">
-	</script>
+  <!-- JQuery Data Tables -->
+  <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 
-	<script type="text/javascript">
-		$('#reserveButton').click(function(){
-		  swal("How to be badass", "has been added to your cart", "success")
-		});
-
-	</script>
+  <!-- Search Catalog Script -->
+  <script type="text/javascript" src="js/search-catalog.js"></script>
 </body>
 
 </html>
