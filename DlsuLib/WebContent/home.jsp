@@ -41,8 +41,8 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="mainsearch.jsp"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
-					<li class="active"><a href="reserve.jsp"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
+					<li><a href="SearchServlet"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="RoomServlet"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname}<span class="caret"></span></a>
@@ -127,8 +127,8 @@
 					<div class="container">
 						<div class="row" id="add-review">
 							<div class="col-md-6">
-								<textarea class="form-control" rows="3" placeholder="Enter your review here"></textarea>
-								<button class="btn btn-success btn-small btn-review pull-right" type="submit">Submit</button>
+								<textarea class="form-control" rows="3" placeholder="Enter your review here" id="review-details"></textarea>
+								<button class="btn btn-success btn-small btn-review pull-right" id="submit-review" type="submit">Submit</button>
 								<button class="btn btn-danger btn-small btn-review pull-right" id="cancel-review">Cancel</button>
 							</div>
 						</div>
@@ -234,7 +234,6 @@
 
 		$('#reserveButton').click(function(){
 		   
-		  //$("#signInModal").modal('show');
 		  var catalogId = $(this).data('id');
 		  var catalogTitle = $(this).data('title');
 		   $.ajax({
@@ -243,21 +242,15 @@
 				 data: { 'catalogId': catalogId },
 				success: function(status) {
 					if(status == "error") {
-						swal($(this).data("title"), "there was an error in your request", "error")
+						swal(catalogTitle, "there was an error in your request", "error")
 					} else {
 						console.log("check if correct swal");
 						swal({
 							 title: catalogTitle, 
 							 text:"has been successfully borrowed", 
 							 type: "success",
-<<<<<<< HEAD
-							 confirmButtonText: "Okay",
-							 showCancelButton:false,
-							 showConfirmButton:true},
-=======
 							 showCancelButton:false
 							 },
->>>>>>> origin/master
 							 function(isConfirm){
 								 if(isConfirm){
 									 location.reload();
@@ -280,6 +273,49 @@
 			}else{
 				$('#reserveButton').hide();
 			}
+			var catalogId = $(this).data('id');
+			var catalogTitle = $(this).data('title');
+			$.ajax({
+				  type: "GET",
+				  url: "ReviewServlet",
+				  data: { 'catalogId': catalogId },
+				  success : function(data) {
+					  $("#review-list").empty();
+		         	if(data == "No Reviews."){
+		         		console.log("No Reviews.");
+		         		$("#review-list").append("<h3>No Reviews.</h3>");
+		         	}else{
+		         		var reviews = jQuery.parseJSON(data);
+		         		$.each(reviews, function(reviewID, review){
+		         			var reviewHTML = '<article class="row">'+
+							'<div class="col-md-11 col-sm-11">'+
+								'<div class="panel panel-default arrow left">'+
+									'<div class="panel-body">'+
+										'<header class="text-left">'+
+											'<div class="comment-user">'+
+												'<span class="glyphicon glyphicon-user" aria-hidden="true"></span>'+
+												' '+ review.userid +
+											'</div>'+
+											'<time class="comment-date" datetime="16-12-2014 01:05">'+
+												'<span class="glyphicon glyphicon-time" aria-hidden="true"></span> '+
+											' '+review.datereviewed+'</time>'+
+										'</header>'+
+										'<div class="comment-post">'+
+											'<p>'+
+												' '+ review.review+''
+											'</p>'+
+										'</div>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+						'</article>'
+						$("#review-list").append(reviewHTML);
+		         		});
+			         	console.log(reviews);
+		         	}
+
+		          }
+				});
 			addReview.hide();
 			$("#add-review").hide();
 			$("#card-title").text($(this).data('title'));
@@ -290,6 +326,8 @@
 			$("#catalogModal").modal('show');
 			$("#reserveButton").data('title',$(this).data('title'));
 			$("#reserveButton").data('id',$(this).data('id'));
+			$("#submit-review").data('id',$(this).data('id'));
+			$("#submit-review").data('title',$(this).data('title'));
 		});
 
 		$(document).on("click", "#addReviewBtn", function() {
@@ -297,7 +335,42 @@
 			reviewList.hide();
 			addReview.show();
 		});
-
+		
+		$(document).on("click", "#submit-review", function() {
+			var reviewDetails = $("#review-details").val();
+			var catalogId = $(this).data('id');
+			var catalogTitle = $(this).data('title');
+			  console.log("catalog id: " + catalogId + "catalog title: " + catalogTitle);
+			   $.ajax({
+					url: "ReviewServlet",
+					type: "POST",
+					 data: { 'catalogId': catalogId,
+							 'review' : reviewDetails	
+					 },
+					success: function(status) {
+						if(status == "error") {
+							swal(catalogTitle, "there was an error in your request", "error")
+						} else {
+							console.log("check if correct swal");
+							swal({
+								 title: catalogTitle, 
+								 text:"has been successfully reviewed", 
+								 type: "success",
+								 showCancelButton:false
+								 },
+								 function(isConfirm){
+									 if(isConfirm){
+										 location.reload();
+									 }
+								 })
+								 
+							
+							console.log("Submit");
+						}
+					}
+				});
+		});
+		
 		$(document).on("click", "#cancel-review", function() {
 			addReviewBtn.show();
 			reviewList.show();

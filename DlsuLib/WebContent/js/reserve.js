@@ -272,13 +272,63 @@ $(document).on("click", "#contReserveBtn", function() {
 		li_base.append(buttonRemove);
 		$("#modal-list-group").append(li_base);
 	}
- 
+	
 	$("#continueReserve").modal('show');
 });
 
 $(document).on("click", "#close-modal", function() {
 	$(".temp").remove();
 });
+$(document).on("click","#reserveButton",function(){
+	var reservations = [];
+	 var reservationIds = [];
+	 
+	    reserveList.forEach(function (item) {
+	    	reservations.push(item.replace(/\'/g, '').split(/(\d+)/).filter(Boolean));
+	    });
+	    reservations.forEach(function (item){
+	    	var computedId = 252;
+	    	switch(item[0]){
+	    	case "bo" : computedId += 26
+	    	case "ra" : computedId += 26
+	    	case "l"  : computedId += 26
+	    	case "d"  : computedId += 26
+	    	case "ma" : computedId += parseInt(item[1])
+	    				break;
+	    	}
+	    	reservationIds.push(computedId);
+	    });
+	    console.log(reservations);
+	    console.log(reservationIds);
+		 
+	    $.ajax({
+			url: "RoomServlet",
+			type: "POST",
+			 data: { 'reservationIds': reservationIds
+			 },
+			success: function(status) {
+				if(status == "error") {
+					swal(catalogTitle, "there was an error in your request", "error")
+				} else {
+					console.log("check if correct swal");
+					swal({
+						 title: catalogTitle, 
+						 text:"has been successfully reviewed", 
+						 type: "success",
+						 showCancelButton:false
+						 },
+						 function(isConfirm){
+							 if(isConfirm){
+								 location.reload();
+							 }
+						 })						 
+					
+					console.log("Submit");
+				}
+			}
+		});
+})
+ 
 
 $(document).on("click", ".removetimeslot", function() {
 	id =  $(this).attr('id');

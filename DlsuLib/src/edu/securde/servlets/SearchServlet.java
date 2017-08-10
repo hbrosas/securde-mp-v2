@@ -39,14 +39,21 @@ public class SearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		User user = UserManager.getUser(Integer.parseInt(session.getAttribute("cx").toString()));
-		
-			ArrayList<Catalog> catalogs = CatalogManager.searchCatalog(request.getParameter("inputSearch"), 
-		    		((!request.getParameter("inputReference").isEmpty() ? request.getParameter("inputReference") : "")),
-		    		((!request.getParameter("inputBy").isEmpty() ? request.getParameter("inputBy") : "")));
-			System.out.println("Catalog size: "+catalogs.size());
-		    request.setAttribute("user", user);
-		    request.setAttribute("catalogs", catalogs);
-		    request.getRequestDispatcher("search.jsp").forward(request, response);
+		String inputReference = request.getParameter("inputReference");
+		String inputBy = request.getParameter("inputBy");
+			if(inputReference == null && inputBy == null) {
+				request.setAttribute("user", user);
+				request.getRequestDispatcher("mainsearch.jsp").forward(request, response);
+			}else {
+				ArrayList<Catalog> catalogs = CatalogManager.searchCatalog(request.getParameter("inputSearch"), 
+			    		inputReference,
+			    		inputBy);
+				System.out.println("Catalog size: "+catalogs.size());
+			    request.setAttribute("user", user);
+			    request.setAttribute("catalogs", catalogs);
+			    request.getRequestDispatcher("search.jsp").forward(request, response);
+			}
+			
 		
 	    
 	}

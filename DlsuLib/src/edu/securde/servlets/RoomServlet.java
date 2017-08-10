@@ -1,7 +1,6 @@
 package edu.securde.servlets;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,21 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import edu.securde.beans.Borrow;
 import edu.securde.beans.User;
-import edu.securde.manager.BorrowManager;
 
 /**
- * Servlet implementation class BorrowServlet
+ * Servlet implementation class RoomServlet
  */
-@WebServlet("/BorrowServlet")
-public class BorrowServlet extends HttpServlet {
+@WebServlet("/RoomServlet")
+public class RoomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BorrowServlet() {
+    public RoomServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +29,17 @@ public class BorrowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("ucx");
+		request.setAttribute("user", user);
+		request.getRequestDispatcher("reserve.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		int catalogId = Integer.parseInt(request.getParameter("catalogId"));
-		User user = (User) session.getAttribute("ucx");
 		
-		
-		if(catalogId > 0) {
-			BorrowManager.Borrow(catalogId, user);
-			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write("success");
-		} else {
-			
-			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write("error");
-		}
 	}
 
 }
