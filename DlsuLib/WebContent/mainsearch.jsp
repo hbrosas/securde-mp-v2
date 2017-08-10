@@ -28,7 +28,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-				<a class="navbar-brand" href="#">DLSU SHS Online Library</a>
+				<a class="navbar-brand" href="AllCatalogServlet">DLSU SHS Online Library</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,7 +40,7 @@
 					<li class="active"><a href="/"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hazel Brosas <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="borrow_history.html">Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
@@ -58,11 +58,11 @@
 	<div class="main-container">
 		<div id="home-cont" class="home-cont">
 			<h2 align="center">Search Catalog</h2> <br>
-			<div class="container">
+			<form class="container" action="SearchServlet" method="GET">
 				<div class="row">
 					<div class="col-md-3 col-sm-3 col-xs-3"></div>
 					<div class="col-md-3 col-sm-3 col-xs-3 sec">
-					 	<select class="form-control">
+					 	<select class="form-control" name="inputReference">
 					 		<option selected disabled="true">Reference</option>
 					 		<option value="libro">Books</option>
 					 		<option value="magasin">Magazines</option>
@@ -70,7 +70,7 @@
 					 	</select>
 				 	</div>
 				 	<div class="col-md-3 col-sm-3 col-xs-3 sec">
-					 	<select class="form-control">
+					 	<select class="form-control" name="inputBy">
 					 		<option selected disabled="true">By</option>
 					 		<option value="titulo">Title</option>
 					 		<option value="otor">Author</option>
@@ -85,7 +85,7 @@
 				<div class="row">
     				<div class="col-md-3 col-sm-3 col-xs-3"></div>
    					<div class="col-md-6 col-sm-6 col-xs-6 center">
-        				<input type="search" class="form-control" placeholder="What are you looking for?">
+        				<input type="search" class="form-control" name="inputSearch" placeholder="What are you looking for?">
         			</div>
     				<div class="col-md-3 col-sm-3 col-xs-3"></div>
     			</div>
@@ -93,11 +93,11 @@
 		        <div class="row">
 		            <div class="col-md-4 col-sm-4 col-xs-5"></div>
 		            <div class="col-md-4 col-sm-4 col-xs-5">
-		            	<button type="button" class="btn btn-block btn-success">Search</button>
+		            	<button type="submit" class="btn btn-block btn-success">Search</button>
 		            </div>
 		            <div class="col-md-5 col-sm-5 col-xs-35"></div>
 		        </div>
-			</div>
+			</form>
 		</div> <!-- Home Container -->
 	</div>
 	

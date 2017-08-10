@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,17 +39,17 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
+					<li><a href="mainsearch.jsp"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="/"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hazel Brosas <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname}<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="borrow_history.html">Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="edit_profile.html">Edit Profile</a></li>
-							<li><a href="#">Logout</a></li>
+							<li><a href="LogoutServlet">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -58,24 +61,38 @@
 	<div class="main-container">
 		<div class="container">
         	<div class="row">
-        		<div class="col-sm-6 col-md-4 col-lg-3 mt-4"> <!-- start catalog -->
-	                <div class="card" id="catalog">
+        		<c:forEach var="c" items="${catalogs}">
+        		<div class="col-sm-6 col-md-4 mt-4"> <!-- start catalog -->
+	                <div class="card open-catalog" data-toggle="modal" data-id="${c.catalogid }" data-status="${c.status}" data-title="${c.title}" 
+	                data-author="${c.author}" data-publisher="${c.publisher}" data-year="${c.year}" data-location="${c.location}" 
+	                data-tags="${c.tags}">
 	                    <img class="card-img-top" src="images/book.png">
 	                    <div class="card-block">
-	                    	<span class="label label-success">Available</span>
-	                        <h4 class="card-title" id="card-title">Catalog Title</h4>
+	                    	<c:if test="${c.status == 2}">
+	                    		<span class="label label-danger">Out</span>
+	                    	</c:if>
+	                    	<c:if test="${c.status == 3}">
+	                    		<span class="label label-info">Reserved</span>
+	                    	</c:if>
+	                    	<c:if test="${c.status == 4}">
+	                    		<span class="label label-success">Available</span>
+	                    	</c:if>
+	                    	
+	                    	
+	                        <h4 class="card-title">${c.title}</h4>
 	                        <div class="card-text">
-	                            <b>Author:</b> <span id="card-author">the author</span><br>
-	                            <b>Publisher:</b> <span id="card-publisher">the publisher</span><br>
-	                        	<b>Year:</b> <span id="card-publisher">2001</span><br>
-	                        	<b>Location:</b> <span id="card-publisher">AB12.125C.2001</span><br>
+	                            <b>Author:</b> <span>${c.author}</span><br>
+	                            <b>Publisher:</b> <span>${c.publisher}</span><br>
+	                        	<b>Year:</b> <span>${c.year}</span><br>
+	                        	<b>Location:</b> <span>${c.location}</span><br>
 	                        </div>
 	                    </div>
 	                    <div class="card-footer">
-	                        <span class="float-right" id="card-tags">Tags</span>
+	                        <span class="float-right"></span>
 	                    </div>
 	                </div>
             	</div> <!-- end catalog -->
+            	</c:forEach>
         	</div>
         </div>
 	</div>
@@ -86,7 +103,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title">How to be badass</h1>
+					<h1 class="modal-title" id="card-title">How to be badass</h1>
 				</div>
 				<div class="modal-body">
 					<div class="row">
@@ -114,31 +131,7 @@
 							</div>
 						</div>
 						<div class="review-list" id="review-list">
-							<!-- Review -->
-							<article class="row">
-								<div class="col-md-11 col-sm-11">
-									<div class="panel panel-default arrow left">
-										<div class="panel-body">
-											<header class="text-left">
-												<div class="comment-user">
-													<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
-													That Guy
-												</div>
-												<time class="comment-date" datetime="16-12-2014 01:05">
-													<span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
-													Dec 16, 2014
-												</time>
-											</header>
-											<div class="comment-post">
-												<p>
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</article>
-							<!-- END REVIEW -->
+							
 						</div>
 					</div>
 				</div>
@@ -218,8 +211,58 @@
 		  $("#signInModal").modal('show');
 		});
 
-		$(document).on("click", "#catalog", function() {
+		$(document).on("click", ".open-catalog", function() {
 			$("#add-review").hide();
+			reviewList.show();
+			addReviewBtn.show();
+			var catalogId = $(this).data('id')
+			$.ajax({
+				  type: "POST",
+				  url: "ReviewServlet",
+				  data: { 'catalogId': catalogId },
+				  success : function(data) {
+					  $("#review-list").empty();
+		         	if(data == "No Reviews."){
+		         		console.log("No Reviews.");
+		         		$("#review-list").append("<h3>No Reviews.</h3>");
+		         	}else{
+		         		var reviews = jQuery.parseJSON(data);
+		         		$.each(reviews, function(reviewID, review){
+		         			var reviewHTML = '<article class="row">'+
+							'<div class="col-md-11 col-sm-11">'+
+								'<div class="panel panel-default arrow left">'+
+									'<div class="panel-body">'+
+										'<header class="text-left">'+
+											'<div class="comment-user">'+
+												'<span class="glyphicon glyphicon-user" aria-hidden="true"></span>'+
+												' '+ review.userid +
+											'</div>'+
+											'<time class="comment-date" datetime="16-12-2014 01:05">'+
+												'<span class="glyphicon glyphicon-time" aria-hidden="true"></span> '+
+											' '+review.datereviewed+'</time>'+
+										'</header>'+
+										'<div class="comment-post">'+
+											'<p>'+
+												' '+ review.review+''
+											'</p>'+
+										'</div>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+						'</article>'
+						$("#review-list").append(reviewHTML);
+		         		});
+			         	console.log(reviews);
+		         	}
+
+		          }
+				});
+			
+			$("#card-title").text($(this).data('title'));
+			$("#card-author").text($(this).data('author'));
+			$("#card-publisher").text($(this).data('publisher'));
+			$("#card-year").text($(this).data('year'));
+			$("#card-location").text($(this).data('location'));
 			$("#catalogModal").modal('show');
 		});
 

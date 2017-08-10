@@ -8,26 +8,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import edu.securde.beans.Catalog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+
 import edu.securde.beans.Review;
-import edu.securde.beans.User;
-import edu.securde.manager.CatalogManager;
 import edu.securde.manager.ReviewManager;
-import edu.securde.manager.UserManager;
 
 /**
- * Servlet implementation class SearchServlet
+ * Servlet implementation class ReviewServlet
  */
-@WebServlet({ "/SearchServlet" })
-public class SearchServlet extends HttpServlet {
+@WebServlet("/ReviewServlet")
+public class ReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchServlet() {
+    public ReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,18 +36,18 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		User user = UserManager.getUser(Integer.parseInt(session.getAttribute("cx").toString()));
-		
-			ArrayList<Catalog> catalogs = CatalogManager.searchCatalog(request.getParameter("inputSearch"), 
-		    		((!request.getParameter("inputReference").isEmpty() ? request.getParameter("inputReference") : "")),
-		    		((!request.getParameter("inputBy").isEmpty() ? request.getParameter("inputBy") : "")));
-			System.out.println("Catalog size: "+catalogs.size());
-		    request.setAttribute("user", user);
-		    request.setAttribute("catalogs", catalogs);
-		    request.getRequestDispatcher("search.jsp").forward(request, response);
-		
-	    
+		String catalogId = request.getParameter("catalogId");
+		response.setContentType("text/plain");
+		ArrayList<Review> reviews = new ArrayList<>();
+		reviews = ReviewManager.getReviewsByCatalogId(catalogId);
+		if(reviews.size() > 0) {
+			System.out.println(reviews.get(0).getUsername());
+			Gson gson = new GsonBuilder().create();
+			JsonArray jsonReviews = gson.toJsonTree(reviews).getAsJsonArray();		
+			response.getWriter().write(jsonReviews.toString());
+		}else {
+			response.getWriter().write("No Reviews.");
+		}
 	}
 
 	/**
@@ -56,7 +55,7 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		doGet(request, response);
 	}
 
 }

@@ -8,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.securde.beans.Catalog;
+import edu.securde.beans.Review;
 import edu.securde.beans.User;
 import edu.securde.manager.CatalogManager;
+import edu.securde.manager.ReviewManager;
 import edu.securde.manager.UserManager;
 
 /**
@@ -34,8 +37,12 @@ public class AllCatalogServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		User user = (User) request.getAttribute("user");
-		System.out.println(user.getFirstname());
+		HttpSession session = request.getSession();
+		User user = UserManager.getUser(Integer.parseInt(session.getAttribute("cx").toString()));
+	    ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
+	    request.setAttribute("user", user);
+	    request.setAttribute("catalogs", catalogs);
+	    request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 	/**
@@ -43,10 +50,8 @@ public class AllCatalogServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String email = request.getParameter("inputEmail");
-		String password = request.getParameter("inputPassword");
-		int id = UserManager.checkCredentialsbyEmail(email, password);
-		User user = UserManager.getUser(id);
+		HttpSession session = request.getSession();
+		User user = UserManager.getUser(Integer.parseInt(session.getAttribute("cx").toString()));
 	    ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
 	    request.setAttribute("user", user);
 	    request.setAttribute("catalogs", catalogs);
