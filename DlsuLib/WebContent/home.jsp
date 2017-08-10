@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
-	<title>Home | De La Salle University - SHS Online Library</title>
+	<title>Search Results | De La Salle University - SHS Online Library</title>
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Lato" rel="stylesheet">
@@ -41,8 +41,8 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="mainsearch.jsp"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
-					<li class="active"><a href="/"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
+					<li><a href="/"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="reserve.jsp"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname}<span class="caret"></span></a>
@@ -65,7 +65,7 @@
         	<div class="row">
         		<c:forEach var="c" items="${catalogs}">
         		<div class="col-sm-6 col-md-4 mt-4"> <!-- start catalog -->
-	                <div class="card open-catalog" data-toggle="modal" data-id="${c.catalogid }" data-status="${c.status}" data-title="${c.title}" 
+	                <div class="card open-catalog" data-toggle="modal" data-status="${c.status}" data-title="${c.title}" 
 	                data-author="${c.author}" data-publisher="${c.publisher}" data-year="${c.year}" data-location="${c.location}" 
 	                data-tags="${c.tags}">
 	                    <img class="card-img-top" src="images/book.png">
@@ -133,7 +133,31 @@
 							</div>
 						</div>
 						<div class="review-list" id="review-list">
-							
+							<!-- Review -->
+							<article class="row">
+								<div class="col-md-11 col-sm-11">
+									<div class="panel panel-default arrow left">
+										<div class="panel-body">
+											<header class="text-left">
+												<div class="comment-user">
+													<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
+													That Guy
+												</div>
+												<time class="comment-date" datetime="16-12-2014 01:05">
+													<span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
+													Dec 16, 2014
+												</time>
+											</header>
+											<div class="comment-post">
+												<p>
+													Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<!-- END REVIEW -->
 						</div>
 					</div>
 				</div>
@@ -215,51 +239,6 @@
 
 		$(document).on("click", ".open-catalog", function() {
 			$("#add-review").hide();
-			reviewList.show();
-			addReviewBtn.show();
-			var catalogId = $(this).data('id')
-			$.ajax({
-				  type: "POST",
-				  url: "ReviewServlet",
-				  data: { 'catalogId': catalogId },
-				  success : function(data) {
-					  $("#review-list").empty();
-		         	if(data == "No Reviews."){
-		         		console.log("No Reviews.");
-		         		$("#review-list").append("<h3>No Reviews.</h3>");
-		         	}else{
-		         		var reviews = jQuery.parseJSON(data);
-		         		$.each(reviews, function(reviewID, review){
-		         			var reviewHTML = '<article class="row">'+
-							'<div class="col-md-11 col-sm-11">'+
-								'<div class="panel panel-default arrow left">'+
-									'<div class="panel-body">'+
-										'<header class="text-left">'+
-											'<div class="comment-user">'+
-												'<span class="glyphicon glyphicon-user" aria-hidden="true"></span>'+
-												' '+ review.userid +
-											'</div>'+
-											'<time class="comment-date" datetime="16-12-2014 01:05">'+
-												'<span class="glyphicon glyphicon-time" aria-hidden="true"></span> '+
-											' '+review.datereviewed+'</time>'+
-										'</header>'+
-										'<div class="comment-post">'+
-											'<p>'+
-												' '+ review.review+''
-											'</p>'+
-										'</div>'+
-									'</div>'+
-								'</div>'+
-							'</div>'+
-						'</article>'
-						$("#review-list").append(reviewHTML);
-		         		});
-			         	console.log(reviews);
-		         	}
-
-		          }
-				});
-			
 			$("#card-title").text($(this).data('title'));
 			$("#card-author").text($(this).data('author'));
 			$("#card-publisher").text($(this).data('publisher'));
