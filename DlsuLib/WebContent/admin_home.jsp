@@ -1,6 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -9,24 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Admin Panel | De La Salle University SHS Online Library</title>
-
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- Swal -->
-    <link rel="stylesheet" href="css/sweetalert.css">
-
-    <!-- Custom Theme Style -->
-    <link href="css/gentelella.min.css" rel="stylesheet">
-
-    <!-- Dashboard Style -->
-    <link rel="stylesheet" href="css/dashboard.css">
-
-    <!-- Date-Time Picker -->
-    <link rel="stylesheet" href="vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+	<jsp:include page="admin_dependencies.jsp" />
 </head>
 
 <body class="nav-md">
@@ -35,7 +20,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>Admin Page</span></a>
+                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span> Admin Panel</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -62,7 +47,7 @@
                                 <li><a href="admin_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
                                      <ul class="nav child_menu">
-                                        <li><a href="register.html"> Create New Account</a></li>
+                                        <li><a href="admincreate.jsp"> Create New Account</a></li>
                                         <li><a href="register.html"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
@@ -175,25 +160,6 @@
             <!-- /footer content -->
         </div>
     </div>
-    
-   <!-- jQuery -->
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="vendors/fastclick/lib/fastclick.js"></script>
-    <!-- iCheck -->
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <!-- Swal -->
-    <script type="text/javascript" src="js/sweetalert.min.js"></script>
-    <!-- Data Table -->
-    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="js/gentelella.min.js"></script>
-
-    <!-- Dashboard Script -->
-    <script type="text/javascript" src="js/dashboard.js">
-
 </body>
-
+	<jsp:include page="admin_dependencies_script.jsp" />
 </html>
