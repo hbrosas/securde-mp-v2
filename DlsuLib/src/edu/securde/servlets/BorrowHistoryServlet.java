@@ -44,6 +44,9 @@ public class BorrowHistoryServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
 		ArrayList<Borrow> borrows = BorrowManager.getAllBorrowHistory();
+		for(Borrow borrow : borrows) {
+			
+		}
 	}
 
 }

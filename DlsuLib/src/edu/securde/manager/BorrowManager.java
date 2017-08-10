@@ -127,5 +127,40 @@ public class BorrowManager {
 
 		return userid;
 	}
+   
+   public static boolean hasBorrowed(int catalogid, int userid) {
+	   	String sql = "SELECT * FROM " + Borrow.TABLE_NAME + " WHERE " + Borrow.COLUMN_CATALOGID + " = ? "
+	   				+ " and " + Borrow.COLUMN_USERID + " = ? "+";";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean hasborrowed = false;
 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				hasborrowed = true;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return hasborrowed;
+	}
+    
+   
+   
 }

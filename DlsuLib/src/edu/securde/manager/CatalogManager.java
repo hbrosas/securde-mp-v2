@@ -193,35 +193,37 @@ public class CatalogManager {
 		}
 	}
 
-	public static boolean DeleteCatalog(int catalogid) {
-	String sql = "DELETE " + "FROM" + Catalog.TABLE_NAME
-			 + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + "?" + ";";
-
-	Connection conn = DBPool.getInstance().getConnection();
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-
-	try {
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, catalogid);
-		pstmt.executeUpdate();
-
-
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} finally {
+		public static boolean DeleteCatalog(int catalogid) {
+		String sql = "DELETE " + "FROM" + Catalog.TABLE_NAME
+				 + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + "?" + ";";
+	
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
 		try {
-			rs.close();
-			pstmt.close();
-			conn.close();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, catalogid);
+			pstmt.executeUpdate();
+	
+	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+	
+		return true;
 	}
-
-	return true;
-}
+		
+		
 
 }

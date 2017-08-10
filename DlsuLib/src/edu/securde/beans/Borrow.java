@@ -12,8 +12,17 @@ public class Borrow implements Serializable {
 	public static final String COLUMN_STATUSID = "statusId";
 	
 	int borrowid, userid, catalogid, statusid;
-	String dateborrowed, dateexpectreturn;
+	String dateborrowed, dateexpectreturn, catalogTitle, userFirstname, userLastname, catalogType ;
 	
+
+	public String getCatalogType() {
+		return catalogType;
+	}
+
+	public void setCatalogType(String catalogType) {
+		this.catalogType = catalogType;
+	}
+
 	public Borrow() {}
 	
 	public Borrow(int borrowid, int userid, int catalogid, int statusid, String dateborrowed, String dateexpectreturn) {
@@ -75,7 +84,29 @@ public class Borrow implements Serializable {
 	}
 
 	
-	
+	public String getCatalogTitle() {
+		return catalogTitle;
+	}
+
+	public void setCatalogTitle(String catalogTitle) {
+		this.catalogTitle = catalogTitle;
+	}
+
+	public String getUserFirstname() {
+		return userFirstname;
+	}
+
+	public void setUserFirstname(String userFirstname) {
+		this.userFirstname = userFirstname;
+	}
+
+	public String getUserLastname() {
+		return userLastname;
+	}
+
+	public void setUserLastname(String userLastname) {
+		this.userLastname = userLastname;
+	}
 	
 	
 }	
