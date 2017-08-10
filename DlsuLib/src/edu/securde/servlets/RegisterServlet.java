@@ -42,7 +42,6 @@ public class RegisterServlet extends HttpServlet {
 		user.setUsername(request.getParameter("username"));
 		user.setEmailaddress(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
-		System.out.println(request.getParameter("password"));
 		user.setFirstname(request.getParameter("firstName"));
 		user.setLastname(request.getParameter("lastName"));
 		user.setMiddlename(request.getParameter("middleName"));
@@ -54,10 +53,10 @@ public class RegisterServlet extends HttpServlet {
 		user.setSqid(Integer.parseInt(request.getParameter("securityQuestion")));
 		user.setSqanswer(request.getParameter("sqAnswer"));
 		user.setSalt(UserManager.generateSalt());
-//		int id = UserManager.CreateAccount(user);
-//		user.setUserid(id);
-//		request.setAttribute("user", user);
-//		request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
+		int id = UserManager.CreateAccount(user);
+		user.setUserid(id);
+		request.setAttribute("user", user);
+		request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 	}
 
 }
