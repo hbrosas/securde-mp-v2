@@ -272,7 +272,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="addButton">Edit</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="editButton">Edit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -294,25 +294,25 @@
                     <form>
                         <div class="form-group">
                             <label for="title">Book title:</label>
-                            <input type="text" class="form-control" id="title">
+                            <input type="text" class="form-control" id="add_title">
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="author">Book Author:</label>
-                                    <input type="text" class="form-control" id="author">
+                                    <input type="text" class="form-control" id="add_author">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="publisher">Publisher:</label>
-                                    <input type="text" class="form-control" id="publisher">
+                                    <input type="text" class="form-control" id="add_publisher">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="year">Year:</label>
-                                    <input type="text" class="form-control" id="year">
+                                    <input type="text" class="form-control" id="add_year">
                                 </div>
                             </div>
                         </div>
@@ -321,7 +321,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="category">Category:</label><br>
-                                    <select class="category">
+                                    <select class="category" id ="add_category">
                                   <option value="1" selected>Book</option>
                                   <option value="2">Magazine</option>
                                   <option value="3">Thesis</option>
@@ -331,7 +331,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="availability">Availability:</label><br>
-                                    <select class="availability">
+                                    <select class="availability" id ="add_status">
                                   <option value="1" selected>Available</option>
                                   <option value="2">Unavailable</option>
                                 </select>
@@ -344,20 +344,20 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="author">Location:</label>
-                                    <input type="text" class="form-control" id="location">
+                                    <input type="text" class="form-control" id="add_location">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="author">Tags:</label>
-                                    <input type="text" class="form-control" id="tags">
+                                    <input type="text" class="form-control" id="add_tags">
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="addButton">Add</button>
+                    <button type="POST" class="btn btn-success" data-dismiss="modal" id="addButton">Add</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -384,6 +384,22 @@
     <!-- Dashboard Script -->
     <script type="text/javascript" src="js/dashboard.js">
     </script>
+    
+    <script type="text/javascript">
+    
+	$(document).on("click", "#addButton", function(){
+		var title = $("#add_title").val();
+		var author = $("#add_author").val();
+		var year = $("#add_year").val();
+		var publisher = $("#add_publisher").val();
+		var location = $("#add_location").val();
+		var catalogTyp = $("#add_category").val();
+		var status = $("#add_status").val();
+		var tags = $("#add_tags").val();	
+	});
+    
+    </script>
+    
 </body>
 
 </html>
