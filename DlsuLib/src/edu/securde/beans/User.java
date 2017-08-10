@@ -20,18 +20,19 @@ public class User implements Serializable{
 	public static final String COLUMN_IDNUMBER = "idNumber";
 	public static final String COLUMN_SQID = "SQID";
 	public static final String COLUMN_SQANSWER = "SQAnswer";
+	public static final String COLUMN_SALT = "salt";
 	
 	
 	int userid, roleid, sqid, birthdate, birthmonth, birthyear, status;
 	String username, password, emailaddress, sqanswer, idnumber, lastloggedin;
-	String firstname, middlename, lastname;
+	String firstname, middlename, lastname, salt;
 	
 	public User() {
 		
 	}
 	
 	public User(int userid, int roleid, int sqid, int birthdate, int birthmonth, int birthyear, String username,
-			String password, String emailaddress, String sqanswer, String idnumber) {
+			String password, String emailaddress, String sqanswer, String idnumber, String salt) {
 		super();
 		this.userid = userid;
 		this.roleid = roleid;
@@ -44,6 +45,15 @@ public class User implements Serializable{
 		this.emailaddress = emailaddress;
 		this.sqanswer = sqanswer;
 		this.idnumber = idnumber;
+		this.salt = salt;
+	}
+	
+	public String getSalt() {
+		return salt;
+	}
+	
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 	
 	

@@ -126,8 +126,20 @@
 							</div>
 						</div>
 						<br>								
-						<div class="inline-form">
-						<button class="btn btn-small btn-success btn-block submitbtn" type="submit">LET'S GET STARTED!</button>
+						<div class="row">
+							<div class="col-md-6">
+								<p class="input_title">Are you a Student or an Employee?</p>
+								<select type="text" id="inputSQ" name="role" class="login_box" onkeyup = "Validate(this)" required>
+									<option selected disabled="true">Choose role</option>
+									<option value="1"> I am a Student </option>
+									<option value="5"> I am an Employee </option>
+								</select>
+							</div>
+							<div class="col-md-6">
+								<br>
+								<button class="btn btn-small btn-success btn-block submitbtn" type="submit">LET'S GET STARTED!</button>
+							</div>
+						</div>
 					</form><!-- /form -->
 		        </div><!-- /card-container -->
 			</div>
