@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
@@ -12,7 +14,6 @@
 	<!-- Stylesheets -->
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/index-style.css" rel="stylesheet" type="text/css" />
-	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body class="the-body">
@@ -35,35 +36,23 @@
 					</h2>
 					<hr class="top-hr">
 					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
-					<form class="form-signin" id="signin" action="/login" method="POST">
+					<form class="form-signin" name="username">	
 						<p class="input_title">Username/Email</p>
-						<input type="text" id="inputEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus>
+						<input type="text" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
 						<br>
 						<p class="input_title">Password</p>
 						<input type="password" id="inputPassword" class="login_box" placeholder="******" required>
 						<br>
-						<div class="inline-form">
+						<div class="inline-form" name="password">
 							<div class="form-group">
 								<label class="checkbox-inline remember" for="checkRememberMe">
-									<input type="checkbox" id="checkRememberMe" name="remember" value="remember">
+									<input type="checkbox" id="checkRememberMe" value="remember">
 									Remember Me
 								</label>
 								<a class="pull-right forgot" href="#">Forgot password?</a>
 							</div>
 						</div>
-						    <div class="form-group">
-						        <label class="col-xs-3 control-label">Captcha</label>
-						        <div class="col-xs-9 captchaContainer">
-						            <div id="recaptcha"></div>
-						        </div>
-						    </div>
-						<button
-							class="g-recaptcha"
-							data-sitekey="6LeUWCwUAAAAAH9zcT07ofHFZPn2But_dk3bIstL"
-							data-callback="YourOnSubmitFn">
-							Submit
-							</button>
-						<button class="btn btn-small btn-success btn-block submitbtn" type="button">SIGN IN</button>
+						<button class="btn btn-small btn-success btn-block submitbtn" type="submit">SIGN IN</button>
 					</form><!-- /form -->
 		        </div><!-- /card-container -->
 			</div>
@@ -76,7 +65,7 @@
 					<hr class="top-hr">
 					<form class="form-request-acct">
 						<p class="input_title">Email Address</p>
-						<input type="email" id="inputEmailRequest" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus><br>
+						<input type="email" id="inputEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus><br>
 						<button class="btn btn-small btn-success btn-block submitbtn" type="submit">REQUEST AN ACCOUNT</button>
 					</form><!-- /form -->
 					<hr>
@@ -89,167 +78,12 @@
 	<!-- body -->
 
 	<!-- Scripts -->
+	<script type="text/javascript" src="js/validation.js"></script>
 	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/typed.min.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
-	<script src='https://www.google.com/recaptcha/api.js'></script>
-
-	<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-		    // Call the FormValidation plugin
-		    $('#defaultForm').formValidation({
-		        icon: {
-		            valid: 'glyphicon glyphicon-ok',
-		            invalid: 'glyphicon glyphicon-remove',
-		            validating: 'glyphicon glyphicon-refresh'
-		        }
-		        // You can define other settings and other fields on form here
-		    });
-
-		    // Replace 'PUBLIC_KEY' with your public key
-		    // The second parameter 'recaptcha' is the Id of element showing up the captcha image
-		    Recaptcha.create('PUBLIC_KEY', 'recaptcha', {
-		        theme: 'white'
-		    });
-		});
-
-		<script type="text/javascript">
-		$(document).ready(function() {
-		    $('#defaultForm').formValidation(...);
-
-		    Recaptcha.create('PUBLIC_KEY', 'recaptcha', {
-		        theme: 'white',
-		        // captchaLoaded function will be called after the captcha image is loaded
-		        callback: captchaLoaded
-		    });
-
-		    function captchaLoaded() {
-		        // Add new field after loading captcha
-		        $('#defaultForm').formValidation('addField', 'recaptcha_response_field', {
-		            validators: {
-		                notEmpty: {
-		                    message: 'The captcha is required and can\'t be empty'
-		                }
-		            }
-		        });
-		    };
-		});
-		</script>
-		<script type="text/javascript">
-		$(document).ready(function() {
-		    ...
-
-		    function captchaLoaded() {
-		        $('#defaultForm')
-		            .on('added.field.fv', function(e, data) {
-		                // The field "recaptcha_response_field" has just been added
-		                if (data.field === 'recaptcha_response_field') {
-		                    // Find the icon
-		                    var $icon = data.element.data('fv.icon');
-
-		                    // Move icon to other position
-		                    $icon.insertAfter('#recaptcha');
-		                }
-		            })
-		            .formValidation('addField', 'recaptcha_response_field', {
-		                validators: {
-		                    notEmpty: {
-		                        message: 'The captcha is required and can\'t be empty'
-		                    }
-		                }
-		            });
-		    };
-		});
-		</script>
-
-		<script type="text/javascript">
-		$(document).ready(function() {
-		    ...
-
-		    function captchaLoaded() {
-		        $('#defaultForm')
-		            .on('added.field.fv', function(e, data) {
-		                ...
-		            })
-		            .formValidation('addField', 'recaptcha_response_field', {
-		                validators: {
-		                    notEmpty: {
-		                        message: 'The captcha is required and can\'t be empty'
-		                    },
-		                    remote: {
-		                        type: 'POST',
-		                        url: 'recaptcha.php',
-		                        message: 'The captcha is not valid',
-		                        data: function() {
-		                            // We also need to send the challenge field value
-		                            return {
-		                                recaptcha_challenge_field: $('#defaultForm').find('[name="recaptcha_challenge_field"]').val()
-		                            };
-		                        },
-		                        // Set it to enough time that you think the user complete typing the captcha
-		                        delay: 1000
-		                    }
-		                }
-		            });
-		    };
-		});
-		</script>
-
-				<script>
-			$(document).ready(function() {
-			    $('#defaultForm').formValidation({
-			        icon: {
-			            valid: 'glyphicon glyphicon-ok',
-			            invalid: 'glyphicon glyphicon-remove',
-			            validating: 'glyphicon glyphicon-refresh'
-			        }
-			    });
-
-			    // Replace 'PUBLIC_KEY' with your public key
-			    Recaptcha.create('PUBLIC_KEY', 'recaptcha', {
-			         theme: 'white',
-			         callback: captchaLoaded
-			    });
-
-			    function captchaLoaded() {
-			        $('#defaultForm')
-			            .on('added.field.fv', function(e, data) {
-			                // The field 'recaptcha_response_field' has just been added
-			                if (data.field === 'recaptcha_response_field') {
-			                    // Find the icon
-			                    var $icon = data.element.data('fv.icon');
-
-			                    // Move icon to other position
-			                    $icon.insertAfter('#recaptcha');
-			                }
-			            })
-			            // Add new field after loading captcha
-			            .formValidation('addField', 'recaptcha_response_field', {
-			                validators: {
-			                    notEmpty: {
-			                        message: 'The captcha is required and can\'t be empty'
-			                    },
-			                    remote: {
-			                        type: 'POST',
-			                        url: 'recaptcha.php',
-			                        message: 'The captcha is not valid',
-			                        data: function() {
-			                            return {
-			                                recaptcha_challenge_field: $('#defaultForm').find('[name="recaptcha_challenge_field"]').val()
-			                            };
-			                        },
-			                        // Set it to enough time that you think the user complete typing the captcha
-			                        delay: 1000
-			                    }
-			                }
-			            });
-			    };
-			});
-			</script>
-</script>
 </body>
 
 </html>

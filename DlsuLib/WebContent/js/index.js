@@ -35,7 +35,7 @@ $(document).ready(function() {
 		var password = $("#inputPassword").val();
 		var data = {user:username, password:password}
 		$.ajax({
-			url: "/login",
+			url: "/LoginServlet",
 			type: "POST",
 			data: data,
 			success: function(status) {

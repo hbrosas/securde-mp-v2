@@ -1,7 +1,7 @@
+
 <!DOCTYPE html>
-<%@page import="net.tanesha.recaptcha.ReCaptcha"%>
-<%@page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
@@ -15,11 +15,11 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/index-style.css" rel="stylesheet" type="text/css" />
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-
 </head>
 
 <body class="the-body">
 	<div class="main-container">
+
 		<div id="home-cont" class="home-cont">
 			<img src="images/logo.png" class="img-responsive" id="logo" alt="Responsive image" style="width: 150px;">
 			<div id="main">
@@ -37,34 +37,23 @@
 					</h2>
 					<hr class="top-hr">
 					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
-					<form class="form-signin" id="signin" action="/login" method="POST">
+					<form class="form-signin" name="username">	
 						<p class="input_title">Username/Email</p>
-						<input type="text" id="inputEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus>
+						<input type="text" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
 						<br>
 						<p class="input_title">Password</p>
 						<input type="password" id="inputPassword" class="login_box" placeholder="******" required>
 						<br>
-						<div class="inline-form">
+						<div class="inline-form" name="password">
 							<div class="form-group">
 								<label class="checkbox-inline remember" for="checkRememberMe">
-									<input type="checkbox" id="checkRememberMe" name="remember" value="remember">
+									<input type="checkbox" id="checkRememberMe" value="remember">
 									Remember Me
 								</label>
 								<a class="pull-right forgot" href="#">Forgot password?</a>
 							</div>
 						</div>
-						<%
-					          ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LeUWCwUAAAAAH9zcT07ofHFZPn2But_dk3bIstL", "6LeUWCwUAAAAALaRhU1cILjFCRGJGCwmmNrVy6Vx", false);
-					          out.print(c.createRecaptchaHtml(null, null));
-					        %>
-
-						<button
-							class="g-recaptcha"
-							data-sitekey="6LeUWCwUAAAAAH9zcT07ofHFZPn2But_dk3bIstL"
-							data-callback="YourOnSubmitFn">
-							Submit
-							</button>
-						<button class="btn btn-small btn-success btn-block submitbtn" type="button">SIGN IN</button>
+						<button class="btn btn-small btn-success btn-block submitbtn" type="submit">SIGN IN</button>
 					</form><!-- /form -->
 		        </div><!-- /card-container -->
 			</div>
@@ -77,7 +66,7 @@
 					<hr class="top-hr">
 					<form class="form-request-acct">
 						<p class="input_title">Email Address</p>
-						<input type="email" id="inputEmailRequest" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus><br>
+						<input type="email" id="inputEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus><br>
 						<button class="btn btn-small btn-success btn-block submitbtn" type="submit">REQUEST AN ACCOUNT</button>
 					</form><!-- /form -->
 					<hr>
@@ -95,7 +84,7 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/typed.min.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script type="text/javascript" src="js/validation.js"></script>
 </body>
 
 </html>
