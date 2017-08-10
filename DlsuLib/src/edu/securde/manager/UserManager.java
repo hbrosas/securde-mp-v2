@@ -77,16 +77,15 @@ public class UserManager {
 	
 	// Create Account
 	public static int CreateAccount(User user) {
-		String sql = "INSERT INTO " + User.TABLE_NAME + " ( " + User.COLUMN_USERNAME + "," + User.COLUMN_PASSWORD
-				+ User.COLUMN_EMAILADDRESS + "," + User.COLUMN_FIRSTNAME + "," + User.COLUMN_MIDDLENAME + "," + User.COLUMN_LASTNAME
+		String sql = "INSERT INTO " + User.TABLE_NAME + " ( " + User.COLUMN_USERNAME + "," + User.COLUMN_PASSWORD + ","
+				+ User.COLUMN_EMAILADDRESS + "," + User.COLUMN_FIRSTNAME + "," + User.COLUMN_MIDDLENAME + "," + User.COLUMN_LASTNAME + ","
 				+ User.COLUMN_ROLEID + "," + User.COLUMN_LASTLOGGEDIN + "," + User.COLUMN_STATUS + ","
 				+ User.COLUMN_BIRTHDATE + "," + User.COLUMN_BIRTHMONTH + "," + User.COLUMN_BIRTHYEAR + ","
 				+ User.COLUMN_IDNUMBER + "," + User.COLUMN_SQID + "," + User.COLUMN_SQANSWER + "," + User.COLUMN_SALT + ") " + " VALUES " 
-				 + " (?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?)" +";";
+				 + " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" +";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -97,14 +96,15 @@ public class UserManager {
 			pstmt.setString(5, user.getMiddlename());
 			pstmt.setString(6, user.getLastname());
 			pstmt.setInt(7, user.getRoleid());
-			pstmt.setInt(8, -1);
-			pstmt.setInt(9, user.getBirthdate());
-			pstmt.setInt(10, user.getBirthmonth());
-			pstmt.setInt(11, user.getBirthyear());
-			pstmt.setString(12, user.getIdnumber());
-			pstmt.setInt(13, user.getSqid());
-			pstmt.setString(14, user.getSqanswer());
-			pstmt.setString(15, user.getSalt());
+			pstmt.setString(8, "now()");
+			pstmt.setInt(9, -1);
+			pstmt.setInt(10, user.getBirthdate());
+			pstmt.setInt(11, user.getBirthmonth());
+			pstmt.setInt(12, user.getBirthyear());
+			pstmt.setString(13, user.getIdnumber());
+			pstmt.setInt(14, user.getSqid());
+			pstmt.setString(15, user.getSqanswer());
+			pstmt.setString(16, user.getSalt());
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -112,7 +112,6 @@ public class UserManager {
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (SQLException e) {

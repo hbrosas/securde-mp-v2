@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.securde.beans.User;
+
 /**
  * Servlet implementation class AllCatalogServlet
  */
@@ -27,7 +29,8 @@ public class AllCatalogServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Hello
+		User user = (User) request.getAttribute("user");
+		System.out.println(user.getFirstname());
 	}
 
 	/**
