@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import edu.securde.beans.User;
+=======
+>>>>>>> b37c2526238f5f94e39ad542d7bd8dfcf6bc9029
 import edu.securde.beans.Catalog;
 import edu.securde.beans.User;
 import edu.securde.manager.CatalogManager;
@@ -35,6 +38,14 @@ public class AllCatalogServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+		User user = (User) request.getAttribute("user");
+		System.out.println(user.getFirstname());
+>>>>>>> origin/master
+>>>>>>> b37c2526238f5f94e39ad542d7bd8dfcf6bc9029
 	}
 
 	/**
