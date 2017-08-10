@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.securde.beans.User;
 import edu.securde.manager.UserManager;
@@ -55,7 +56,10 @@ public class RegisterServlet extends HttpServlet {
 		user.setSalt(UserManager.generateSalt());
 		int id = UserManager.CreateAccount(user);
 		user.setUserid(id);
+		
+		HttpSession session = request.getSession();
 		request.setAttribute("user", user);
+		session.setAttribute("ucx", UserManager.getUser(id));
 		request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 	}
 
