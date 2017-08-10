@@ -323,12 +323,12 @@
 	</div>
 	
 	<!-- Scripts -->
-	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="vendors/moment/min/moment.min.js"></script>
-	<script type="text/javascript" src="js/reserve.js"></script>
-	<script type="text/javascript" src="vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./vendors/moment/min/moment.min.js"></script>
+	<script type="text/javascript" src="./js/reserve.js"></script>
+	<script type="text/javascript" src="./vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
 	<script type="text/javascript">
 		$("#datetimepicker1").datetimepicker({format: 'YYYY-MM-DD', minDate:new Date()});
