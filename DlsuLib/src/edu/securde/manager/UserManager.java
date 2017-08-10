@@ -483,6 +483,12 @@ public class UserManager {
         return "";
 	}
 	
+	public static String generateSalt() {
+		Set<PasswordCharacterSet> values = new HashSet<PasswordCharacterSet>(EnumSet.allOf(SummerCharacterSets.class));
+        PasswordGenerator pwGenerator = new PasswordGenerator(values, 5, 5);
+        return pwGenerator.generatePassword().toString();
+	}
+	
 	
 	private enum SummerCharacterSets implements PasswordCharacterSet {
 	    ALPHA_UPPER(ALPHA_UPPER_CHARACTERS, 1),
