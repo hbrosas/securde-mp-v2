@@ -33,13 +33,18 @@ $(document).ready(function() {
 	$(document).on("click", "#signin", function() {
 		var username = $("#inputEmail").val();
 		var password = $("#inputPassword").val();
-		var data = {user:username, password:password}
+		var remember;
+		if($('#checkRememberMe').is(":checked")){
+			remember = "yes";
+		} else remember = "no";
+		
+		var data = {user:username, password:password, remember:remember}
 		$.ajax({
-			url: "/LoginServlet",
+			url: "LoginServlet",
 			type: "POST",
 			data: data,
 			success: function(status) {
-				if(status == "invalid") {
+				if(status == "error") {
 					error.show();
 				} else {
 					error.hide();

@@ -33,18 +33,18 @@ public class StartServlet extends HttpServlet {
 		Cookie[] cookieList = request.getCookies();
 		if (cookieList != null) {
 			for (int i = 0; i < cookieList.length; i++) {
-				if (cookieList[i].getName().equals("id")) {
-					session.setAttribute("id", cookieList[i].getValue());					
+				if (cookieList[i].getName().equals("cx")) {
+					session.setAttribute("cx", cookieList[i].getValue());					
 				}
 			}
 		}
 		
 		// check if session has started
 		
-		if (session.getAttribute("id") == null) {
-			request.getRequestDispatcher("index.html").forward(request, response);
+		if (session.getAttribute("cx") == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
-			request.getRequestDispatcher("index.html").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 

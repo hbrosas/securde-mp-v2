@@ -15,7 +15,7 @@ import edu.securde.manager.UserManager;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet({ "/LoginServlet", "/login" })
+@WebServlet({ "/LoginServlet" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,27 +40,41 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String user = request.getParameter("username");
-		String password = request.getParameter("password");		
-		int accountId = UserManager.checkCredentialsbyEmail(user, password);
-		System.out.println("accountid = " + accountId);
-		if(accountId == -1) {
+		String user = request.getParameter("user");
+		String password = request.getParameter("password");	
+		String remember = request.getParameter("remember");
+		System.out.println(remember);
+		int emailAccountId = UserManager.checkCredentialsbyEmail(user, password);
+		int userAccountId = UserManager.checkCredentialsbyUsername(user, password);
+		if(emailAccountId == -1) {
+			if(userAccountId == -1) {
+				response.setContentType("text/html;charset=UTF-8");
+		        response.getWriter().write("error");
+			} else {
+				login(userAccountId, remember, request, response);
+				response.setContentType("text/html;charset=UTF-8");
+		        response.getWriter().write("success");
+			}
+		} else {
+			login(emailAccountId, remember, request, response);
 			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write("error");
-		} else {			
-			System.out.println("Login Successful");
-		String userid = accountId+"";
+	        response.getWriter().write("success");
+		}
+	}
+	
+	public void login(int id, String remember, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userid = id+"";
 		
-		Cookie usernameCookie = new Cookie("userid", userid);
+		if(remember.equals("yes")) {
+			Cookie usernameCookie = new Cookie("cx", userid);
 			usernameCookie.setMaxAge(60*60*24);
 			usernameCookie.setHttpOnly(true); 
 			response.addCookie(usernameCookie);
-			
-			// SESSIONS
-			HttpSession session = request.getSession();
-			session.setAttribute("id", userid);
-			request.getRequestDispatcher("mainsearch.jsp").forward(request, response);
 		}
+
+		// SESSIONS
+		HttpSession session = request.getSession();
+		session.setAttribute("cx", userid);
 	}
 
 }

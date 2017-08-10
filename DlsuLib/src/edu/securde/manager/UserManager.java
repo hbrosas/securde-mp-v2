@@ -106,6 +106,7 @@ public class UserManager {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				userid = rs.getInt(User.COLUMN_USERID);
+				System.out.println("userid" + userid);
 			}
 			
 		} catch (SQLException e) {
@@ -141,6 +142,7 @@ public class UserManager {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				userid = rs.getInt(User.COLUMN_USERID);
+				System.out.println("userid" + userid);
 			}
 			
 		} catch (SQLException e) {

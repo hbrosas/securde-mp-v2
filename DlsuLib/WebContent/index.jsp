@@ -30,7 +30,7 @@
 					</h2>
 					<hr class="top-hr">
 					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
-					<form class="form-signin" name="username">	
+					<form class="form-signin" name="username" action="/search">	
 						<p class="input_title">Username/Email</p>
 						<input type="text" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
 						<br>
@@ -46,7 +46,7 @@
 								<a class="pull-right forgot" href="#">Forgot password?</a>
 							</div>
 						</div>
-						<button class="btn btn-small btn-success btn-block submitbtn" type="submit">SIGN IN</button>
+						<button class="btn btn-small btn-success btn-block submitbtn" id="signin" type="button">SIGN IN</button>
 					</form><!-- /form -->
 		        </div><!-- /card-container -->
 			</div>
@@ -70,7 +70,6 @@
 		</div> <!-- Home Container -->
 	</div>
 	<!-- body -->
-	
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="js/validation.js"></script>
 </body>
