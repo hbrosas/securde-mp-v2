@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 		String user = request.getParameter("username");
 		String password = request.getParameter("password");		
 		int accountId = UserManager.checkCredentialsbyEmail(user, password);
+		System.out.println("accountid = " + accountId);
 		if(accountId == -1) {
 			response.setContentType("text/html;charset=UTF-8");
 	        response.getWriter().write("error");

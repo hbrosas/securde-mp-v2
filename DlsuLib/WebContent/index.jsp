@@ -6,15 +6,8 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 	<title>De La Salle University - SHS Online Library</title>
-
-	<!-- Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Lato" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
-
-	<!-- Stylesheets -->
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<jsp:include page="user_dependencies.jsp" />
 	<link href="css/index-style.css" rel="stylesheet" type="text/css" />
-	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body class="the-body">
@@ -77,12 +70,7 @@
 		</div> <!-- Home Container -->
 	</div>
 	<!-- body -->
-
-	<!-- Scripts -->
-	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/typed.min.js"></script>
+	
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="js/validation.js"></script>
 </body>
