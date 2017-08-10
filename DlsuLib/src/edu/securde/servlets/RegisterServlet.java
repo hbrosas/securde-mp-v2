@@ -56,7 +56,7 @@ public class RegisterServlet extends HttpServlet {
 		int id = UserManager.CreateAccount(user);
 		user.setUserid(id);
 		request.setAttribute("user", user);
-		
+		request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 	}
 
 }
