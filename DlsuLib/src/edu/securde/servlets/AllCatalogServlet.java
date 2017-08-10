@@ -37,39 +37,40 @@ public class AllCatalogServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		User user = UserManager.getUser(Integer.parseInt(session.getAttribute("cx").toString()));
-	    ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
-	    request.setAttribute("user", user);
-	    request.setAttribute("catalogs", catalogs);
-	    request.getRequestDispatcher("home.jsp").forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getAttribute("user") == null) {
-			HttpSession session = request.getSession();
-			User user;
-			String email = request.getParameter("inputEmail");
-			if(email.equals("Guest")) {
-				user = new User();
-				user.setUsername("Guest");
-				user.setFirstname("Guest");
-				user.setRoleid(6);
-			} else {
-				user = UserManager.getUser(Integer.parseInt(session.getAttribute("cx").toString()));
-			}
-			
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("ucx") == null) {
+			// For guests
+			User user = new User();
+			user.setUsername("Guest");
+			user.setFirstname("Guest");
+			user.setRoleid(6);
+			session.setAttribute("ucx", user);
 			ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
-		    request.setAttribute("user", user);
-		    request.setAttribute("catalogs", catalogs);
-		    request.getRequestDispatcher("home.jsp").forward(request, response);
-		} else {
-			ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
+			request.setAttribute("user", user);
 			request.setAttribute("catalogs", catalogs);
-		    request.getRequestDispatcher("home.jsp").forward(request, response);
+			request.getRequestDispatcher("home.jsp").forward(request, response);
+		} else {
+			// Newly Registered & Logged in account
+			User user = (User) session.getAttribute("ucx");
+			switch(user.getRoleid()) {
+			case 2: case 3: case 4:
+				System.out.println("Admin");
+				break;
+			case 1: case 5:
+				ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
+				request.setAttribute("user", user);
+				request.setAttribute("catalogs", catalogs);
+			    request.getRequestDispatcher("home.jsp").forward(request, response);
+				break;
+			}
 		}
 	}
 
