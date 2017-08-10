@@ -1,0 +1,39 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #ffffff;
+}
+
+.the-body {
+    color: #f2f2f2;
+    background: url('../images/home-bg.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.main-container {
+    height: 100%;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.main-title {
+    font-size: 4em;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+    padding-top: 10%;
+    padding-bottom: 0;
+}
+
+.registration-form{
+  padding: 10%;
+}
+
+.registration-form input{
+  height: 50px;
+  font-size: 1.5em;
+}
+.registration-form button{
+  height: 50px;
+}
