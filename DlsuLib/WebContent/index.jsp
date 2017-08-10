@@ -30,7 +30,7 @@
 					</h2>
 					<hr class="top-hr">
 					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
-					<form class="form-signin" name="username" action="/search">	
+					<form class="form-signin" id="formsignin" name="username" action="SearchServlet" method="GET">	
 						<p class="input_title">Username/Email</p>
 						<input type="text" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
 						<br>
@@ -57,10 +57,11 @@
 						<span class="pull-right backbtn" id="back"><< Back</span>
 					</h2>
 					<hr class="top-hr">
-					<form class="form-request-acct">
+					<form class="form-request-acct" action="ComposeAccount" method="POST">
+						<div class="alert alert-danger" id="emailerror" role="alert">Email Address already taken</div>
 						<p class="input_title">Email Address</p>
-						<input type="email" id="inputEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus><br>
-						<button class="btn btn-small btn-success btn-block submitbtn" type="submit">REQUEST AN ACCOUNT</button>
+						<input type="email" id="inputReqEmail" name="inputReqEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus><br>
+						<button class="btn btn-small btn-success btn-block submitbtn" id="reqBtn" type="button">REQUEST AN ACCOUNT</button>
 					</form><!-- /form -->
 					<hr>
 					<button class="btn btn-small btn-default btn-block submitbtn">SIGN IN AS GUEST</button>

@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.securde.manager.UserManager;
+
 /**
- * Servlet implementation class SearchServlet
+ * Servlet implementation class ConfirmEmailServlet
  */
-@WebServlet({ "/SearchServlet" })
-public class SearchServlet extends HttpServlet {
+@WebServlet("/ConfirmEmailServlet")
+public class ConfirmEmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchServlet() {
+    public ConfirmEmailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +29,7 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("search");
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -35,7 +37,14 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String email = request.getParameter("email");
+		if(UserManager.checkEmailExists(email)) {
+			response.setContentType("text/html;charset=UTF-8");
+	        response.getWriter().write("taken");
+		} else {
+			response.setContentType("text/html;charset=UTF-8");
+	        response.getWriter().write("available");
+		}
 	}
 
 }
