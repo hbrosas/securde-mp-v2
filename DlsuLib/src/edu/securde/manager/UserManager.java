@@ -405,9 +405,9 @@ public class UserManager {
 	}	
 	
 	// Forgot Password - Get SQAnswer
-	public static String getSQAns(int userid) {
+	public static String getSQAns(String email) {
 		String sql = "SELECT "+ User.COLUMN_SQANSWER +" FROM " + User.TABLE_NAME + " WHERE " +
-				User.COLUMN_USERID +" =?;";
+				User.COLUMN_EMAILADDRESS +" =?;";
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -415,7 +415,7 @@ public class UserManager {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, userid);
+			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			if(rs.next())
 				sqAnswer = rs.getString(User.COLUMN_SQANSWER);
@@ -434,6 +434,64 @@ public class UserManager {
 		}
 		
 		return sqAnswer;
+	}
+	
+	public static void setNewPass(String email, String pass) {
+		String sql = "UPDATE " + DBPool.schema + "." + User.TABLE_NAME + " SET " + User.COLUMN_PASSWORD + " =?" +
+				" WHERE " + User.COLUMN_EMAILADDRESS + "=? ;";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pass);
+			pstmt.setString(2,email);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public static int getUserid(String email) {
+		String sql = "SELECT * FROM " + User.TABLE_NAME + " WHERE " +
+				User.COLUMN_EMAILADDRESS +" =?;";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int userid = -1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				userid = rs.getInt(User.COLUMN_USERID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return userid;
 	}
 	
 	// Check if username is unique
