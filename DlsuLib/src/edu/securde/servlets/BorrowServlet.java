@@ -1,11 +1,17 @@
 package edu.securde.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import edu.securde.beans.Borrow;
+import edu.securde.beans.User;
+import edu.securde.manager.BorrowManager;
 
 /**
  * Servlet implementation class BorrowServlet
@@ -26,8 +32,20 @@ public class BorrowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		int catalogId = Integer.parseInt(request.getParameter("catalogId"));
+		User user = (User) session.getAttribute("ucx");
+		
+		
+		if(catalogId > 0) {
+			BorrowManager.Borrow(catalogId, user);
+			response.setContentType("text/html;charset=UTF-8");
+	        response.getWriter().write("success");
+		} else {
+			
+			response.setContentType("text/html;charset=UTF-8");
+	        response.getWriter().write("error");
+		}
 	}
 
 	/**

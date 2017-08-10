@@ -8,34 +8,42 @@ import java.util.ArrayList;
 import edu.securde.db.*;
 import com.mysql.jdbc.Statement;
 import edu.securde.beans.Borrow;
+import edu.securde.beans.Review;
+import edu.securde.beans.User;
 public class BorrowManager {
-  public static int Borrow(Borrow brwhistory) {
-		String sql = "INSERT INTO " + Borrow.TABLE_NAME
+  public static int Borrow(int catalogId, User user) {
+	  String expectedReturn = "NOW()";
+	  if(user.getRoleid() == 1) {
+		  expectedReturn = "NOW() + INTERVAL 7 DAY";
+	  }else if(user.getRoleid() == 5) {
+		  expectedReturn = "NOW() + INTERVAL 30 DAY";
+	  }
+	  String sql = "INSERT INTO " + Borrow.TABLE_NAME
 				+ " (" + Borrow.COLUMN_CATALOGID + ", "
+				 + Borrow.COLUMN_USERID + ", "
 			   + Borrow.COLUMN_STATUSID + ", "
 			   + Borrow.COLUMN_DATEBORROWED + ", "
-			   + Borrow.COLUMN_DATEEXPECTRETURN + ", "
-			   + Borrow.COLUMN_STATUSID + " "
-			   + ") VALUES (?, ?, ?, ?, ?);";
+			   + Borrow.COLUMN_DATEEXPECTRETURN + " "
+			   + ") VALUES (?, ?, ?, NOW(), "+expectedReturn+");";
 
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		int borrowID = 0;
 		try {
 			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, brwhistory.getCatalogid());
-			pstmt.setInt(2, brwhistory.getStatusid());
-			pstmt.setString(3, brwhistory.getDateborrowed());
-			pstmt.setString(4, brwhistory.getDateexpectreturn());
-			pstmt.setInt(5, brwhistory.getStatusid());
+			pstmt.setInt(1, catalogId);
+			pstmt.setInt(2, user.getUserid());
+			pstmt.setInt(3, 2);
 			pstmt.executeUpdate();
-
+			
+			CatalogManager.ChangeStatus(catalogId, 2);
+			
 			try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
 	            if (generatedKeys.next()) {
 	            	borrowID = generatedKeys.getInt(1);
 	            }
 	            else {
-	                throw new SQLException("Creating user failed, no ID obtained.");
+	                throw new SQLException("Borrowing catalog failed.");
 	            }
 	        }
 
@@ -55,5 +63,5 @@ public class BorrowManager {
 		}
 		return -1;
 	}
-
+  
 }
