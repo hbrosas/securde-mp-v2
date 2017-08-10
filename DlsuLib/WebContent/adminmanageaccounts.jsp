@@ -41,8 +41,8 @@
                                 <li><a href="admin_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
                                      <ul class="nav child_menu">
-                                        <li><a href="#"> Create New Account</a></li>
-                                        <li><a href="register.html"> Manage Accounts</a></li>
+                                        <li><a href="admincreate.jsp"> Create New Account</a></li>
+                                        <li><a href="#"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
@@ -161,6 +161,149 @@
             <!-- /footer content -->
         </div>
     </div>
+    
+    <!-- View/Edit -->
+    <div id="editUser" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+             <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">View/Edit User</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-2">
+                                <div class="form-group">
+                                    <label for="author">User ID</label>
+                                    <input type="text" class="form-control" id="author" value="1">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-5">
+                                <div class="form-group">
+                                    <label for="publisher">Username</label>
+                                    <input type="text" class="form-control" id="publisher" value="Gandalf the Grey">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-5">
+                                <div class="form-group">
+                                    <label for="year">Password</label>
+                                    <input type="text" class="form-control" id="year" value="1998">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="author">First Name</label>
+                                    <input type="text" class="form-control" id="location" value="Hazel">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="author">Middle Name</label>
+                                    <input type="text" class="form-control" id="tags" value="Legaspi">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="author">Last Name</label>
+                                    <input type="text" class="form-control" id="tags" value="Brosas">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="author">Email Address</label>
+                                    <input type="text" class="form-control" id="location" value="The Shire">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-8">
+                                <label for="author">Birthday</label>
+                                <div class="form-group" id="">
+                                    <div class="col-md-3">
+                                        <select type="text" class="form-control" id="inputBirthdate" required>
+                                            <option selected disabled="true">Day</option>
+                                            <option value="1">1</option> <option value="2">2</option>
+                                            <option value="3">3</option> <option value="4">4</option> 
+                                            <option value="5">5</option> <option value="6">6</option>
+                                            <option value="7">7</option> <option value="8">8</option> 
+                                            <option value="9">9</option> <option value="10">10</option> 
+                                             <option value="11">11</option><option value="12">12</option>
+                                            <option value="13">13</option> <option value="14">14</option>
+                                            <option value="15">15</option> <option value="16">16</option>
+                                            <option value="17">17</option> <option value="18">18</option>
+                                            <option value="19">19</option> <option value="20">20</option>
+                                            <option value="21">21</option> <option value="22">22</option>
+                                            <option value="23">23</option> <option value="24">24</option>
+                                            <option value="25">25</option> <option value="26">26</option>
+                                            <option value="27">27</option> <option value="28">28</option>
+                                            <option value="29">29</option> <option value="30">30</option>
+                                            <option value="31">31</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <select type="text" class="form-control" id="inputBirthMonth" required>
+                                            <option selected disabled="true">Month</option>
+                                            <option value="1">January</option>
+                                            <option value="2">February</option>
+                                            <option value="3">March</option>
+                                            <option value="4">April</option>
+                                            <option value="5">May</option>
+                                            <option value="6">June</option>
+                                            <option value="7">July</option>
+                                            <option value="8">August</option>
+                                            <option value="9">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="year" value="1997">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="role">Role</label><br>
+                                    <select class="form-control" id="role">
+                                        <option value="1" selected> Student </option>
+                                        <option value="2"> Library Manager </option>
+                                        <option value="3"> Library Staff </option>
+                                        <option value="4"> Administrator </option>
+                                        <option value="5"> Employee </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="idNum">ID Number</label><br>
+                                    <input type="text" class="form-control" id="idNum" value="11425598">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="lastLoggedIn">Last Logged In</label><br>
+                                    <input type="text" class="form-control" id="lastLoggedIn" value="11425598">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="addButton">Edit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 	<jsp:include page="admin_dependencies_script.jsp" />
 </html>
