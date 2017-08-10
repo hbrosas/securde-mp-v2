@@ -32,6 +32,7 @@
 					<div class="alert alert-danger" id="error" role="alert">Please fill-up all the details</div>
 					<form class="form-signin" action="RegisterServlet" method="POST">
 						<input type="hidden" value="${email}" name="email">
+						<input type="hidden" value="${tempPw}" name="password">
 						<div class="row">
 							<div class="col-md-6">
 								<p class="input_title">Username</p>
@@ -39,7 +40,7 @@
 							</div>
 							<div class="col-md-6">
 								<p class="input_title">Temporary Password</p>
-								<input type="text" id="inputPassword" name="tempPassword" class="login_box" placeholder="******" disabled="true" value="${tempPw}">
+								<input type="text" id="inputPassword" value="${tempPw}" name="tempPassword" class="login_box" placeholder="******" disabled="disabled">
 							</div>
 						</div>
 						<br>

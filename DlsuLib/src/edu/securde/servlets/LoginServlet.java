@@ -1,6 +1,8 @@
 package edu.securde.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -9,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.securde.beans.Catalog;
 import edu.securde.beans.User;
+import edu.securde.manager.CatalogManager;
 import edu.securde.manager.UserManager;
 
 /**
@@ -75,6 +79,8 @@ public class LoginServlet extends HttpServlet {
 		// SESSIONS
 		HttpSession session = request.getSession();
 		session.setAttribute("cx", userid);
+		
+	    
 	}
 
 }
