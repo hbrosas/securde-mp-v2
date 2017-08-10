@@ -10,12 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import edu.securde.beans.User;
 =======
+=======
+>>>>>>> 8e44629951476a6c4358b627fe2818d71a7497dc
 import edu.securde.beans.Catalog;
 import edu.securde.beans.User;
 import edu.securde.manager.CatalogManager;
 import edu.securde.manager.UserManager;
+<<<<<<< HEAD
+>>>>>>> 8e44629951476a6c4358b627fe2818d71a7497dc
+=======
 >>>>>>> 8e44629951476a6c4358b627fe2818d71a7497dc
 
 /**
@@ -39,8 +45,11 @@ public class AllCatalogServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 <<<<<<< HEAD
+<<<<<<< HEAD
 		User user = (User) request.getAttribute("user");
 		System.out.println(user.getFirstname());
+=======
+>>>>>>> 8e44629951476a6c4358b627fe2818d71a7497dc
 =======
 >>>>>>> 8e44629951476a6c4358b627fe2818d71a7497dc
 	}
