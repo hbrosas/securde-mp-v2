@@ -32,6 +32,7 @@ public class CatalogManager {
 				catalog.setCatalogtype(rs.getInt(Catalog.COLUMN_CATALOGTYPE));
 				catalog.setStatus(rs.getInt(Catalog.COLUMN_STATUS));
 				catalog.setTags(rs.getString(Catalog.COLUMN_TAGS));
+				catalog.setLocation(rs.getString(Catalog.COLUMN_LOCATION));
 				catalogs.add(catalog);
 			}
 
