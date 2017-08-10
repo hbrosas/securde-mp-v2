@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="edu.securde.beans.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +10,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Admin Panel | De La Salle University SHS Online Library</title>
+    <title>Create Account | De La Salle University SHS Online Library</title>
 	<jsp:include page="admin_dependencies.jsp" />
 </head>
 
 <body class="nav-md">
+	<% User user=(User)session.getAttribute("ucx"); %>
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
@@ -22,23 +23,16 @@
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="#" class="site_title"><i class="fa fa-paw"></i> <span> Admin Panel</span></a>
                     </div>
-
                     <div class="clearfix"></div>
-
-                    <!-- menu profile quick info -->
                     <div class="profile clearfix">
-                      <!-- menu profile quick info -->
 	                    <div class="profile clearfix">
 	                        <div class="profile_info">
 	                            <span>Welcome,</span>
-	                            <h2>${user.firstname} ${user.lastname}</h2>
+	                            <h2> <%=user.getFirstname() %> <%=user.getLastname()%></h2>
 	                        </div>
 	                    </div>
-                    <!-- /menu profile quick info -->
                     </div>
-
                     <br />
-
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
@@ -47,25 +41,24 @@
                                 <li><a href="admin_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
                                      <ul class="nav child_menu">
-                                        <li><a href="admincreate.jsp"> Create New Account</a></li>
-                                        <li><a href="adminmanageaccounts.jsp"> Manage Accounts</a></li>
+                                        <li><a href="#"> Create New Account</a></li>
+                                        <li><a href="register.html"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="edit_books.jsp">Add Catalog</a></li>
-                                        <li><a href="view_catalog.jsp">Manage Catalogs</a></li>
+                                        <li><a href="view_catalog.html">Add Catalog</a></li>
+                                        <li><a href="view_catalog.html">Manage Catalogs</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_reservation.jsp">Manage Reservations</a></li>
+                                        <li><a href="view_reservation.html">Manage Reservations</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <!-- /sidebar menu -->
                 </div>
             </div>
 
@@ -80,7 +73,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/user.png" alt="">${user.firstname} ${user.lastname}
+                                    <img src="images/user.png" alt=""><%=user.getFirstname() %> <%=user.getLastname()%>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -96,56 +89,64 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-            	<br><br><br><br><br>
-                <div class="row">
-                  <a href="register.html">
-                      <div class="col-xs-12 col-md-2 col-md-offset-1 ">
-                          <div class="row">
-                              <div class="col-xs-12">
-                                  <div class="fa fa-pencil-square-o" style="font-size: 10em;"></div>
-                              </div>
-                              <div class="col-xs-12">
-                                  <h2>Register</h2>
-                              </div>
-                          </div>
-                      </div>
-                  </a>
-                    <a href="view_catalog.html">
-                        <div class="col-xs-12 col-md-2 col-md-offset-1 ">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="fa fa-book" style="font-size: 10em;"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <h2>View Library Catalog</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="view_reservation.html">
-                        <div class="col-xs-12 col-md-2 col-md-offset-1 ">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="fa fa-lightbulb-o" style="font-size: 10em;"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <h2>View all <br>rooms</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <a id="upload">
-                            <div class="col-xs-12 col-md-2 col-md-offset-1 ">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="fa fa-file-excel-o" style="font-size: 10em;"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <h2>Export XML<br>/Excel</h2>
-                                    </div>
-                                    <input id="file-input" type="file" name="name" style="display: none;" />
-                                </div>
-                            </div>
-                        </a>
+            	<div class="main-container container">
+                  <table id="usersTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                      <tr>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>Email Address</th>
+                        <th>Last Logged In</th>
+                        <th>ID Number</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th> </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>hazelanne</td>
+                        <td>hazelbrosas@gmail.com</td>
+                        <td>Date</td>
+                        <td>11425598</td>
+                        <td>Student</td>
+                        <td><span class="label label-success">Active</span></td>
+                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>hazelanne</td>
+                        <td>hazelbrosas@gmail.com</td>
+                        <td>Date</td>
+                        <td>11425598</td>
+                        <td>Student</td>
+                        <td><span class="label label-success">Active</span></td>
+                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>hazelanne</td>
+                        <td>hazelbrosas@gmail.com</td>
+                        <td>Date</td>
+                        <td>11425598</td>
+                        <td>Student</td>
+                        <td><span class="label label-success">Active</span></td>
+                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>hazelanne</td>
+                        <td>hazelbrosas@gmail.com</td>
+                        <td>Date</td>
+                        <td>11425598</td>
+                        <td>Student</td>
+                        <td><span class="label label-success">Active</span></td>
+                        <td><button class="btn btn-block" data-toggle="modal" data-target="#editUser">View/Edit Details</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
             </div>
             <!-- /page content -->
