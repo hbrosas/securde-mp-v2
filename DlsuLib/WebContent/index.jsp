@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 	<title>De La Salle University - SHS Online Library</title>
 	<jsp:include page="user_dependencies.jsp" />
-	<link href="css/index-style.css" rel="stylesheet" type="text/css" />
+	<link href="./css/index-style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="the-body">

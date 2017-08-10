@@ -75,9 +75,9 @@
 							<span class="pull-right backbtn" id="back3"><< Back</span>	
 						</h2>
 						<hr class="top-hr">
-						<span class="input_title">Password has been successfully changed!</p>
-						<button class="btn btn-small btn-success btn-block submitbtn" id="confirm" href="AllCatalogsServlet" type="button">
-						CONTINUE</button>
+						<span class="input_title" action="index.jsp">Password has been successfully changed!</p></span>
+						<a class="btn btn-small btn-success btn-block submitbtn" id="confirm" href="index.jsp" type="button">
+						CONTINUE</a>
 					</div>
 		        </div><!-- /card-container -->
 			</div>
@@ -134,10 +134,7 @@
 				changepw.hide();
 				pwchange.show(500);
 			});*/		
-
-			$(document).on("click", "#confirm", function(){
-				
-			});	
+			
 		});
 
 		$(document).on("click", "#changenow", function(){
