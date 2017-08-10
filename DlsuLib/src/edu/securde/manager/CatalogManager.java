@@ -163,10 +163,10 @@ public class CatalogManager {
 	}
 
 
-	public static void ChangeStatus(int catalogID, int statusID, int borrower) {
-		String sql = "UPDATE " + Borrow.TABLE_NAME + " SET "
-			    + Borrow.COLUMN_STATUSID + "=?, " + Borrow.COLUMN_BORROWID
-				+ "=? WHERE "+ Borrow.COLUMN_CATALOGID +" =?;";
+	public static void ChangeStatus(int catalogID, int statusID) {
+		String sql = "UPDATE " + Catalog.TABLE_NAME + " SET "
+			    + Catalog.COLUMN_STATUS 
+				+ "=? WHERE "+ Catalog.COLUMN_CATALOGID +" =?;";
 
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -174,9 +174,8 @@ public class CatalogManager {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(3, catalogID);
+			pstmt.setInt(2, catalogID);
 			pstmt.setInt(1, statusID);
-			pstmt.setInt(2, borrower);
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -223,6 +222,37 @@ public class CatalogManager {
 	
 		return true;
 	}
+		
+		public static boolean AddCatalog(int catalogid) {
+			String sql = "INSERT INTO FROM " + Catalog.TABLE_NAME
+					 + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + "?" + ";";
+		
+			Connection conn = DBPool.getInstance().getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, catalogid);
+				pstmt.executeUpdate();
+		
+		
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					pstmt.close();
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+			return true;
+		}
 		
 		
 

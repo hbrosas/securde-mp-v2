@@ -41,7 +41,7 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
+					<li><a href="mainsearch.jsp"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="reserve.jsp"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
@@ -65,7 +65,7 @@
         	<div class="row">
         		<c:forEach var="c" items="${catalogs}">
         		<div class="col-sm-6 col-md-4 mt-4"> <!-- start catalog -->
-	                <div class="card open-catalog" data-toggle="modal" data-status="${c.status}" data-title="${c.title}" 
+	                <div class="card open-catalog" data-toggle="modal" data-id="${c.catalogid}" data-status="${c.status}" data-title="${c.title}" 
 	                data-author="${c.author}" data-publisher="${c.publisher}" data-year="${c.year}" data-location="${c.location}" 
 	                data-tags="${c.tags}">
 	                    <img class="card-img-top" src="images/book.png">
@@ -235,7 +235,8 @@
 		$('#reserveButton').click(function(){
 		   
 		  //$("#signInModal").modal('show');
-		  var catalogId = $(this).data('id')
+		  var catalogId = $(this).data('id');
+		  var catalogTitle = $(this).data('title');
 		   $.ajax({
 				url: "BorrowServlet",
 				type: "POST",
@@ -244,17 +245,25 @@
 					if(status == "error") {
 						swal($(this).data("title"), "there was an error in your request", "error")
 					} else {
-						swal({title:$(this).data("title"), 
+						console.log("check if correct swal");
+						swal({
+							 title: catalogTitle, 
 							 text:"has been successfully borrowed", 
 							 type: "success",
+<<<<<<< HEAD
 							 confirmButtonText: "Okay",
 							 showCancelButton:false,
 							 showConfirmButton:true},
+=======
+							 showCancelButton:false
+							 },
+>>>>>>> origin/master
 							 function(isConfirm){
 								 if(isConfirm){
 									 location.reload();
 								 }
 							 })
+							 
 						
 						console.log("Submit");
 					}
@@ -263,6 +272,15 @@
 		});
 
 		$(document).on("click", ".open-catalog", function() {
+			addReviewBtn.show();
+			reviewList.show();
+			console.log($(this).data('status'));
+			if($(this).data('status') == 4){
+				$('#reserveButton').show();
+			}else{
+				$('#reserveButton').hide();
+			}
+			addReview.hide();
 			$("#add-review").hide();
 			$("#card-title").text($(this).data('title'));
 			$("#card-author").text($(this).data('author'));
@@ -271,6 +289,7 @@
 			$("#card-location").text($(this).data('location'));
 			$("#catalogModal").modal('show');
 			$("#reserveButton").data('title',$(this).data('title'));
+			$("#reserveButton").data('id',$(this).data('id'));
 		});
 
 		$(document).on("click", "#addReviewBtn", function() {
