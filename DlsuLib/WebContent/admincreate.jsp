@@ -95,40 +95,40 @@
             		<div class="row">
 	                	<form class="form-signin" action="RegisterServlet" method="POST">
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<p class="input_title">Username</p>
 									<input type="text" id="inputUser" name="username" class="form-control" placeholder="user1234" required autofocus>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<p class="input_title">Temporary Password</p>
 									<input type="text" id="inputPassword" name="tempPassword" class="form-control" placeholder="******">
 								</div>
 							</div>
 							<br>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<p class="input_title">First Name</p>
-									<input type="text" id="inputFirstName" name="firstName" class="login_box" placeholder="John" required>
+									<input type="text" id="inputFirstName" name="firstName" class="form-control" placeholder="John" required>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<p class="input_title">Middle Name</p>
-									<input type="text" id="inputMiddleName" name="middleName" class="login_box" placeholder="Middle" required>
+									<input type="text" id="inputMiddleName" name="middleName" class="form-control" placeholder="Middle" required>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<p class="input_title">Last Name</p>
-									<input type="text" id="inputLastName" name="lastName" class="login_box" placeholder="Doe" required>
+									<input type="text" id="inputLastName" name="lastName" class="form-control" placeholder="Doe" required>
 								</div>
 							</div>
 							<br>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<p class="input_title">ID Number</p>
-									<input type="text" id="inputIDnumber" name="idNumber" class="login_box" placeholder="ID Number" required>
+									<input type="text" id="inputIDnumber" name="idNumber" class="form-control" placeholder="ID Number" required>
 								</div>
-								<div class="col-md-8">
+								<div class="col-md-4">
 									<p class="input_title">Birthday</p>
 									<div class="col-md-4">
-										<select type="text" class="login_box" id="inputBirthdate" name="bDate" required>
+										<select type="text" class="form-control" id="inputBirthdate" name="bDate" required>
 											<option selected disabled="true">Day</option>
 											<option value="1">1</option> <option value="2">2</option>
 											<option value="3">3</option> <option value="4">4</option> 
@@ -150,7 +150,7 @@
 										</select>
 									</div>
 									<div class="col-md-4">
-										<select type="text" class="login_box" id="inputBirthMonth" name="bMonth" required>
+										<select type="text" class="form-control" id="inputBirthMonth" name="bMonth" required>
 											<option selected disabled="true">Month</option>
 											<option value="1">January</option>
 											<option value="2">February</option>
@@ -167,15 +167,15 @@
 										</select>
 									</div>
 									<div class="col-md-4">
-										<input type="text" id="inputBirthyear" class="login_box" name="bYear" placeholder="Year" required>
+										<input type="text" id="inputBirthyear" class="form-control" name="bYear" placeholder="Year" required>
 									</div>
 								</div>
 							</div>
 							<br>								
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<p class="input_title">User Role</p>
-									<select type="text" id="role" name="role" class="login_box" required>
+									<select type="text" id="role" name="role" class="form-control" required>
 										<option selected disabled="true">Choose role</option>
 										<option value="1"> Student </option>
 										<option value="2"> Library Manager </option>
@@ -184,7 +184,7 @@
 										<option value="5"> Employee </option>
 									</select>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-2">
 									<br>
 									<button class="btn btn-small btn-success btn-block submitbtn" type="submit">CREATE ACCOUNT</button>
 								</div>

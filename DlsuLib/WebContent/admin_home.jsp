@@ -53,13 +53,13 @@
                                 </li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_catalog.html">Add Catalog</a></li>
-                                        <li><a href="view_catalog.html">Manage Catalogs</a></li>
+                                        <li><a href="edit_books.jsp">Add Catalog</a></li>
+                                        <li><a href="view_catalog.jsp">Manage Catalogs</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_reservation.html">Manage Reservations</a></li>
+                                        <li><a href="view_reservation.jsp">Manage Reservations</a></li>
                                     </ul>
                                 </li>
                             </ul>

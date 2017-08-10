@@ -47,11 +47,11 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname}<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="borrow_history.html">Borrow History</a></li>
+							<li><a href="borrow_history.jsp">Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="edit_profile.html">Edit Profile</a></li>
-							<li><a href="LogoutServlet">Logout</a></li>
+							<li><a href="LogoutServlet">Logout</a></li>	
 						</ul>
 					</li>
 				</ul>
@@ -249,8 +249,14 @@
 							 title: catalogTitle, 
 							 text:"has been successfully borrowed", 
 							 type: "success",
+<<<<<<< HEAD
+							 confirmButtonText: "Okay",
+							 showCancelButton:false,
+							 showConfirmButton:true},
+=======
 							 showCancelButton:false
 							 },
+>>>>>>> origin/master
 							 function(isConfirm){
 								 if(isConfirm){
 									 location.reload();

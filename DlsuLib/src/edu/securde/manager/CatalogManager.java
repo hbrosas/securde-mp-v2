@@ -192,35 +192,73 @@ public class CatalogManager {
 		}
 	}
 
-	public static boolean DeleteCatalog(int catalogid) {
-	String sql = "DELETE " + "FROM" + Catalog.TABLE_NAME
-			 + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + "?" + ";";
-
-	Connection conn = DBPool.getInstance().getConnection();
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-
-	try {
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, catalogid);
-		pstmt.executeUpdate();
-
-
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} finally {
+		public static boolean DeleteCatalog(int catalogid) {
+		String sql = "DELETE " + "FROM" + Catalog.TABLE_NAME
+				 + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + "?" + ";";
+	
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
 		try {
-			rs.close();
-			pstmt.close();
-			conn.close();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, catalogid);
+			pstmt.executeUpdate();
+	
+	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+	
+		return true;
 	}
-
-	return true;
-}
-
+		
+		public static boolean AddCatalog(String title, String author, int year, String publisher, String location, int catalogType, int status, String tags) {
+			String sql = "INSERT INTO FROM " + Catalog.TABLE_NAME + " ( " + Catalog.COLUMN_TITLE + ", " + Catalog.COLUMN_AUTHOR + ", " + Catalog.COLUMN_YEAR + ", "
+																		+ Catalog.COLUMN_PUBLISHER + ", " + Catalog.COLUMN_LOCATION + ", " + Catalog.COLUMN_CATALOGTYPE + ", "
+																		+ Catalog.COLUMN_STATUS + ", " + Catalog.COLUMN_TAGS + ") " + "VALUES (?,?,?,?,?,?,?,?);";
+		
+			Connection conn = DBPool.getInstance().getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, author );
+				pstmt.setInt(2, year);
+				pstmt.setString(3, publisher);
+				pstmt.setString(4,location);
+				pstmt.setInt(5, catalogType);
+				pstmt.setInt(6, status);
+				pstmt.setString(7, tags);
+				pstmt.executeUpdate();
+	
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					pstmt.close();
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+			return true;
+		}
+		
+		
 }
