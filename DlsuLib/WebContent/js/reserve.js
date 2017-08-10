@@ -32,6 +32,8 @@ $(document).on("click", ".slot", function() {
 				successBar.show();
 				infoBar.hide();
 				errorBar.hide();
+				$("#"+id).removeClass("available");
+				$("#"+id).addClass("chosen");
 			} else {
 				errorBar.text("Oops! You've already chosen ' "+ translateId(id) +" '. Try choosing another one.");
 				errorBar.show();
@@ -44,6 +46,18 @@ $(document).on("click", ".slot", function() {
 			errorBar.show();
 			infoBar.hide();
 			successBar.hide();
+		} else if(element.hasClass("chosen")) {
+			var idIndex = reserveList.indexOf(id);
+			if (idIndex > -1) {
+			    reserveList.splice(idIndex, 1);
+			}
+			successBar.text("Timeslot ' "+ translateId(id) +" ' have been successfully removed from the reservation list.")
+			successBar.show();
+			infoBar.hide();
+			errorBar.hide();
+			$("#"+id).removeClass("chosen");
+			$("#"+id).addClass("available");
+			
 		}
 	} else {
 		errorBar.text("Oops! Choose a date first.")
