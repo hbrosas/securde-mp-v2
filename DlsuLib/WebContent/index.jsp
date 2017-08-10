@@ -30,12 +30,12 @@
 					</h2>
 					<hr class="top-hr">
 					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
-					<form class="form-signin" id="formsignin" name="username" action="SearchServlet" method="GET">	
+					<form class="form-signin" id="formsignin" name="username" action="AllCatalogServlet" method="POST">	
 						<p class="input_title">Username/Email</p>
-						<input type="text" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
+						<input type="text" name="inputEmail" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
 						<br>
 						<p class="input_title">Password</p>
-						<input type="password" id="inputPassword" class="login_box" placeholder="******" required>
+						<input type="password" name="inputPassword" id="inputPassword" class="login_box" placeholder="******" required>
 						<br>
 						<div class="inline-form" name="password">
 							<div class="form-group">
