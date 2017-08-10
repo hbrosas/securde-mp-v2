@@ -28,7 +28,7 @@
 						<hr class="top-hr">
 						<form class="form-signin">
 							<p class="input_title">Email</p>
-							<input type="email" id="inputEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus>
+							<input type="email" id="inputEmail" class="forgotEmail login_box" placeholder="user@dlsu.edu.ph" required autofocus>
 							<br>
 							<button class="btn btn-small btn-success btn-block submitbtn" id="changenow" type="button">SUBMIT</button>
 						</form><!-- /form -->
@@ -43,7 +43,7 @@
 						<form class="form-signin">
 							<span class="input_title">Security Question</span>
 							<br>
-							<label class="input_title"> Question </label>
+							<label class="input_title" id="securityQuestion"> Question </label>
 							<br><br>
 							<p class="input_title">Security Answer</p>
 							<input type="text" id="secanswer" class="login_box" placeholder="Security Answer" required autofocus>
@@ -141,19 +141,20 @@
 		});
 
 		$(document).on("click", "#changenow", function(){
-		var email = $("#forgotEmail").val();
+		var email = $(".forgotEmail").val();
 
-		var data = {email:email, x:"hello"}
+		var data = {email:email}
 		$.ajax({
 			url: "ForgotServlet",
 			type: "POST",
 			data: data,
 			success: function(status) {
+				console.log(status);
 				if(status == "error") {
 					error.show();
 				} else {
 					error.hide();
-					$(".input_title").text(status);
+					$("#securityQuestion").text(status);
 					user.hide();
 					sqanswer.show(500);
 				}

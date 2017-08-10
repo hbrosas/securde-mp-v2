@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.securde.manager.SecurityQuestionManager;
 import edu.securde.manager.UserManager;
 
 /**
@@ -38,16 +39,18 @@ public class ForgotServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
-		int emailAccount = UserManager.checkEmail(email);
-		int sqid = UserManager.getSQid(email);
-		String sq = UserManager.getSQ(sqid);
-		if(emailAccount == -1) {
-			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write("error");
-		} else {
+		if(UserManager.checkEmailExists(email)) {
+			int sqid = UserManager.getSQid(email);
+			String sq = SecurityQuestionManager.getSQ(sqid);
+			System.out.println(sq);
 			response.setContentType("text/html;charset=UTF-8");
 	        response.getWriter().write(sq);
+		} else {
+			System.out.println("error");
+			response.setContentType("text/html;charset=UTF-8");
+	        response.getWriter().write("error");
 		}
+		
 	}
 
 }

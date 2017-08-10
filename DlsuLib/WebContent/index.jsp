@@ -43,7 +43,7 @@
 									<input type="checkbox" id="checkRememberMe" value="remember">
 									Remember Me
 								</label>
-								<a class="pull-right forgot" href="forgot.jsp">Forgot passwordd?</a>
+								<a class="pull-right forgot" href="forgot.jsp">Forgot password?</a>
 							</div>
 						</div>
 						<button class="btn btn-small btn-success btn-block submitbtn" id="signin" type="button">SIGN IN</button>

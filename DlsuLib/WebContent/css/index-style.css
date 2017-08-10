@@ -81,6 +81,7 @@ hr {
 
 #inputEmail,
 #inputPassword,
+#inputReqEmail,
 #secanswer, #newpw, #confirmpw {
     direction: ltr;
     height: 30px;

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.securde.manager.SecurityQuestionManager;
 import edu.securde.manager.UserManager;
 
 /**
@@ -40,6 +41,7 @@ public class ComposeAccount extends HttpServlet {
 		String email = request.getParameter("inputReqEmail");
 		request.setAttribute("email", email);
 		request.setAttribute("tempPw", UserManager.generateTemporaryPassword());
+		request.setAttribute("sq", SecurityQuestionManager.GetAllQuestions());
 		request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
 	}
 

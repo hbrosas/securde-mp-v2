@@ -113,15 +113,16 @@
 						<div class="row">
 							<div class="col-md-6">
 								<p class="input_title">Security Question</p>
-								<select type="text" id="inputSQ" class="login_box" required>
+								<select type="text" id="inputSQ" name="securityQuestion" class="login_box" required>
 									<option selected disabled="true">Choose a security question</option>
-									<option value="animal"> What is favorite animal? </option>
-									<option value="food"> What is your favorite food? </option>
+									<c:forEach var = "s" items = "${sq}">
+										<option value="${s.id}">${s.question}</option>
+									</c:forEach>
 								</select>
 							</div>
 							<div class="col-md-6">
 								<p class="input_title">Security Answer</p>
-								<input type="text" id="inputSQAnswer" class="login_box" placeholder="Answer" required>
+								<input type="text" id="inputSQAnswer" name="sqAnswer" class="login_box" placeholder="Answer" required>
 							</div>
 						</div>
 						<br>								
