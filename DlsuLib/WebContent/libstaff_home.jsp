@@ -59,8 +59,8 @@
                                 <li><a href="libstaff_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a data-toggle="modal" data-target="#addBook">Add Book</a></li>
-                                        <li><a href="edit_books.html">Edit/Delete Book</a></li>
+                                        <li><a data-toggle="modal" href="add_books.jsp">Add Book</a></li>
+                                        <li><a href="edit_books.jsp">Edit/Delete Book</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
