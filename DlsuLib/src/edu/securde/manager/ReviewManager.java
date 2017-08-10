@@ -12,21 +12,19 @@ import edu.securde.beans.Review;
 import edu.securde.beans.Catalog;
 
 public class ReviewManager {
-		public static void AddReview(int catalogid, String review) {
-		String sql = "INSERT INTO " + Review.TABLE_NAME  + " ( " + Review.COLUMN_CATALOGID + ", " + Review.COLUMN_REVIEW
-				 + ", " + Review.COLUMN_DATEREVIEWED + ") " + " VALUES (?, ?, NOW()) " + ";";
+		public static void AddReview(int catalogid, int userId, String review) {
+		String sql = "INSERT INTO " + Review.TABLE_NAME  + " ( " + Review.COLUMN_CATALOGID + ", "+ Review.COLUMN_USERID + ", "  + Review.COLUMN_REVIEW
+				 + ", " + Review.COLUMN_DATEREVIEWED + ") " + " VALUES (?, ?, ?, NOW()) " + ";";
 
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
 			pstmt.setInt(1, catalogid);
-			pstmt.setString(2, review);
+			pstmt.setString(3, review);
+			pstmt.setInt(2, userId);
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -34,7 +32,6 @@ public class ReviewManager {
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (SQLException e) {
