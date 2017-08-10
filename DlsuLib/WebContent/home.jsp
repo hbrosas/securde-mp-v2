@@ -41,8 +41,8 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="mainsearch.jsp"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
-					<li class="active"><a href="reserve.jsp"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
+					<li><a href="SearchServlet"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="RoomServlet"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname}<span class="caret"></span></a>
@@ -249,14 +249,8 @@
 							 title: catalogTitle, 
 							 text:"has been successfully borrowed", 
 							 type: "success",
-<<<<<<< HEAD
-							 confirmButtonText: "Okay",
-							 showCancelButton:false,
-							 showConfirmButton:true},
-=======
 							 showCancelButton:false
 							 },
->>>>>>> origin/master
 							 function(isConfirm){
 								 if(isConfirm){
 									 location.reload();
