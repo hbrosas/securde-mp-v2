@@ -45,8 +45,8 @@
 							<li><a href="borrow_history.html">Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="edit_profile.html">Edit Profile</a></li>
-							<li><a href="#">Logout</a></li>
+							<li><a href="edit_profile.jsp">Edit Profile</a></li>
+							<li><a href="LogoutServlet">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -85,7 +85,7 @@
 				<div class="row">
     				<div class="col-md-3 col-sm-3 col-xs-3"></div>
    					<div class="col-md-6 col-sm-6 col-xs-6 center">
-        				<input type="search" class="form-control" name="inputSearch" placeholder="What are you looking for?">
+        				<input type="search" class="form-control" onkeyup="validatespecial(this)" name="inputSearch" placeholder="What are you looking for?">
         			</div>
     				<div class="col-md-3 col-sm-3 col-xs-3"></div>
     			</div>
@@ -106,6 +106,7 @@
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/navbar.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>
 </body>
 
 </html>
