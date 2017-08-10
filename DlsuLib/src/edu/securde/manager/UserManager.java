@@ -5,10 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
+
 import edu.securde.db.*;
+import edu.securde.manager.PasswordGenerator.PasswordCharacterSet;
 import edu.securde.beans.User;
 
 public class UserManager {
+	
+	private static final char[] ALPHA_UPPER_CHARACTERS = { 'A', 'B', 'C', 'D',
+	        'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
+	        'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+	private static final char[] ALPHA_LOWER_CHARACTERS = { 'a', 'b', 'c', 'd',
+	        'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+	        'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+	private static final char[] NUMERIC_CHARACTERS = { '0', '1', '2', '3', '4',
+	        '5', '6', '7', '8', '9' };
+	private static final char[] SPECIAL_CHARACTERS = { '~', '`', '!', '@', '#',
+	        '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', '{',
+	        ']', '}', '\\', '|', ';', ':', '\'', '"', ',', '<', '.', '>', '/',
+	        '?' };
 	
 	// Get all accounts (without password, sqid and role)
 	public static ArrayList<User> GetAllAccount() {
@@ -106,7 +124,6 @@ public class UserManager {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				userid = rs.getInt(User.COLUMN_USERID);
-				System.out.println("userid" + userid);
 			}
 			
 		} catch (SQLException e) {
@@ -125,6 +142,41 @@ public class UserManager {
 		
 		return userid;
 	}
+	
+	// Check if Email Exists
+		public static boolean checkEmailExists(String email) {
+			String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
+					User.COLUMN_EMAILADDRESS +" =?;";
+			Connection conn = DBPool.getInstance().getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int userid = -1;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, email);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					userid = rs.getInt(User.COLUMN_USERID);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					pstmt.close();
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(userid == -1) return false;
+			else return true;
+		}
 	
 	// Check Credentials by username
 	public static int checkCredentialsbyUsername(String username, String password) {
@@ -302,5 +354,76 @@ public class UserManager {
 		}
 		
 		return sqAnswer;
+	}
+	
+	// Check if username is unique
+		public static boolean checkPasswordUnique(String password) {
+			String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
+					User.COLUMN_PASSWORD +" =?;";
+			Connection conn = DBPool.getInstance().getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			boolean isUnique = true;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, password);
+				rs = pstmt.executeQuery();
+				if(rs.next())
+					isUnique = false;
+				else isUnique = true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					pstmt.close();
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			return isUnique;
+		}
+	
+	public static String generateTemporaryPassword() {
+		Set<PasswordCharacterSet> values = new HashSet<PasswordCharacterSet>(EnumSet.allOf(SummerCharacterSets.class));
+        PasswordGenerator pwGenerator = new PasswordGenerator(values, 10, 14);
+        boolean available = false;
+        while(!available) {
+        	String pw = pwGenerator.generatePassword().toString();
+        	if(!checkPasswordUnique(pw)) available = false;
+        	else return pw;
+        }
+        return "";
+	}
+	
+	
+	private enum SummerCharacterSets implements PasswordCharacterSet {
+	    ALPHA_UPPER(ALPHA_UPPER_CHARACTERS, 1),
+	    ALPHA_LOWER(ALPHA_LOWER_CHARACTERS, 1),
+	    NUMERIC(NUMERIC_CHARACTERS, 1),
+	    SPECIAL(SPECIAL_CHARACTERS, 1);
+
+	    private final char[] chars;
+	    private final int minUsage;
+
+	    private SummerCharacterSets(char[] chars, int minUsage) {
+	        this.chars = chars;
+	        this.minUsage = minUsage;
+	    }
+
+	    @Override
+	    public char[] getCharacters() {
+	        return chars;
+	    }
+
+	    @Override
+	    public int getMinCharacters() {
+	        return minUsage;
+	    }
 	}
 }

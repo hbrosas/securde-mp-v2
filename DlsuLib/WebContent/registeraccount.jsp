@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,42 +30,43 @@
 					<hr class="top-hr">
 					<div class="alert alert-info" id="info" role="alert">Your account is still temporary. Just wait for the administrator to confirm your account. But please fill-up the following details to help him know you.</div>
 					<div class="alert alert-danger" id="error" role="alert">Please fill-up all the details</div>
-					<form class="form-signin">
+					<form class="form-signin" action="RegisterServlet" method="POST">
+						<input type="hidden" value="${email}" name="email">
 						<div class="row">
 							<div class="col-md-6">
 								<p class="input_title">Username</p>
-								<input type="text" id="inputUser" class="login_box" placeholder="user1234" required autofocus>
+								<input type="text" id="inputUser" name="username" class="login_box" placeholder="user1234" required autofocus>
 							</div>
 							<div class="col-md-6">
 								<p class="input_title">Temporary Password</p>
-								<input type="text" id="inputPassword" class="login_box" placeholder="******" disabled="true" value="inputPasswordhere">
+								<input type="text" id="inputPassword" name="tempPassword" class="login_box" placeholder="******" disabled="true" value="${tempPw}">
 							</div>
 						</div>
 						<br>
 						<div class="row">
 							<div class="col-md-4">
 								<p class="input_title">First Name</p>
-								<input type="text" id="inputFirstName" class="login_box" placeholder="John" required>
+								<input type="text" id="inputFirstName" name="firstName" class="login_box" placeholder="John" required>
 							</div>
 							<div class="col-md-4">
 								<p class="input_title">Middle Name</p>
-								<input type="text" id="inputMiddleName" class="login_box" placeholder="Middle" required>
+								<input type="text" id="inputMiddleName" name="middleName" class="login_box" placeholder="Middle" required>
 							</div>
 							<div class="col-md-4">
 								<p class="input_title">Last Name</p>
-								<input type="text" id="inputLastName" class="login_box" placeholder="Doe" required>
+								<input type="text" id="inputLastName" name="lastName" class="login_box" placeholder="Doe" required>
 							</div>
 						</div>
 						<br>
 						<div class="row">
 							<div class="col-md-4">
 								<p class="input_title">ID Number</p>
-								<input type="text" id="inputIDnumber" class="login_box" placeholder="ID Number" required>
+								<input type="text" id="inputIDnumber" name="idNumber" class="login_box" placeholder="ID Number" required>
 							</div>
 							<div class="col-md-8">
 								<p class="input_title">Birthday</p>
 								<div class="col-md-4">
-									<select type="text" class="login_box" id="inputBirthdate" required>
+									<select type="text" class="login_box" id="inputBirthdate" name="bDate" required>
 										<option selected disabled="true">Day</option>
 										<option value="1">1</option> <option value="2">2</option>
 										<option value="3">3</option> <option value="4">4</option> 
@@ -84,7 +88,7 @@
 									</select>
 								</div>
 								<div class="col-md-4">
-									<select type="text" class="login_box" id="inputBirthMonth" required>
+									<select type="text" class="login_box" id="inputBirthMonth" name="bMonth" required>
 										<option selected disabled="true">Month</option>
 										<option value="1">January</option>
 										<option value="2">February</option>
@@ -101,7 +105,7 @@
 									</select>
 								</div>
 								<div class="col-md-4">
-									<input type="text" id="inputBirthyear" class="login_box" placeholder="Year" required>
+									<input type="text" id="inputBirthyear" class="login_box" name="bYear" placeholder="Year" required>
 								</div>
 							</div>
 						</div>
