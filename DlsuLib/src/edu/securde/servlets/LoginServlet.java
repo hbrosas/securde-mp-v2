@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String user = request.getParameter("user");
+		String user = request.getParameter("userz");
 		String password = request.getParameter("password");	
 		String remember = request.getParameter("remember");
 		System.out.println(remember);

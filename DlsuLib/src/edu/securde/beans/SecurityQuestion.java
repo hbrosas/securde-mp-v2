@@ -1,9 +1,9 @@
 package edu.securde.beans;
 
 public class SecurityQuestion {
-	public static final String TABLE_NAME = "meetingroomtype";
-	public static final String COLUMN_QUESTIONID = "questionid";
-	public static final String COLUMN_QUESTION = "question";
+	public static final String TABLE_NAME = "secretquestions";
+	public static final String COLUMN_QUESTIONID = "sqid";
+	public static final String COLUMN_QUESTION = "squestion";
 	
 	int id;
 	String question;
@@ -14,4 +14,6 @@ public class SecurityQuestion {
 	public String getQuestion() {
 		return question;
 	}
+	
+	
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import edu.securde.db.*;
+import edu.securde.beans.SecurityQuestion;
 import edu.securde.beans.User;
 
 public class UserManager {
@@ -207,6 +208,38 @@ public class UserManager {
 		return user;
 	}
 	
+	//Checks if the email is valid
+	public static int checkEmail(String email) {
+		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
+				User.COLUMN_EMAILADDRESS +" =?;";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int userid = -1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				userid = rs.getInt(User.COLUMN_USERID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return userid;
+	}
+	
 	// Check if email is unique (returns -1)/exists (returns userid)
 	public static int checkEmailUnique(String email) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
@@ -272,8 +305,71 @@ public class UserManager {
 		return isUnique;
 	}
 	
+	public static int getSQid(String email) {
+		String sql = "SELECT * FROM " + User.TABLE_NAME + " WHERE " +
+				User.COLUMN_EMAILADDRESS +" =?;";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int sqid = -1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				sqid = rs.getInt(User.COLUMN_SQID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return sqid;
+	}
+	
+	public static String getSQ(int sqid) {
+		String sql = "SELECT * FROM " + SecurityQuestion.TABLE_NAME + " WHERE " +
+				SecurityQuestion.COLUMN_QUESTIONID +" =?;";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sq = "";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, sqid);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				sq = rs.getString(SecurityQuestion.COLUMN_QUESTION);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return sq;
+	}
+	
+	
 	// Forgot Password - Get SQAnswer
-	public static String forgotPassword(int userid) {
+	public static String getSQAns(int userid) {
 		String sql = "SELECT "+ User.COLUMN_SQANSWER +" FROM " + User.TABLE_NAME + " WHERE " +
 				User.COLUMN_USERID +" =?;";
 		Connection conn = DBPool.getInstance().getConnection();

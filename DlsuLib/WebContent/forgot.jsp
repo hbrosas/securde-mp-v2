@@ -84,7 +84,7 @@
 
 
 		</div> <!-- Home Container -->
-	</div>
+	</div>	
 	<!-- body -->
 
 	<!-- Scripts -->
@@ -120,10 +120,10 @@
 				changepw.show(500);
 			});			
 
-			$(document).on("click", "#changenow", function(){
+			/*$(document).on("click", "#changenow", function(){
 				user.hide();
 				sqanswer.show(500);
-			});
+			});*/
 
 			$(document).on("click", "#submit", function(){
 				sqanswer.hide();
@@ -139,6 +139,27 @@
 
 			});	
 		});
+
+		$(document).on("click", "#changenow", function(){
+		var email = $("#forgotEmail").val();
+
+		var data = {email:email, x:"hello"}
+		$.ajax({
+			url: "ForgotServlet",
+			type: "POST",
+			data: data,
+			success: function(status) {
+				if(status == "error") {
+					error.show();
+				} else {
+					error.hide();
+					$(".input_title").text(status);
+					user.hide();
+					sqanswer.show(500);
+				}
+			}
+		});
+	});
 	</script>
 
 </body>
