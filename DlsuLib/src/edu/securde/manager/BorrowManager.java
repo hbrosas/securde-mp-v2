@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import edu.securde.db.*;
 import com.mysql.jdbc.Statement;
 import edu.securde.beans.Borrow;
+import edu.securde.beans.Catalog;
 public class BorrowManager {
   public static int Borrow(Borrow brwhistory) {
 		String sql = "INSERT INTO " + Borrow.TABLE_NAME
@@ -54,6 +55,77 @@ public class BorrowManager {
 			}
 		}
 		return -1;
+	}
+  
+   public static ArrayList<Borrow> getAllBorrowHistory(){
+	   String sql = "SELECT * FROM " + Borrow.TABLE_NAME + ";";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Borrow> borrows = new ArrayList<>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				Borrow borrow = new Borrow();
+				borrow.setBorrowid(rs.getInt(Borrow.COLUMN_BORROWID));
+				borrow.setUserid(rs.getInt(Borrow.COLUMN_USERID));
+				borrow.setCatalogid(rs.getInt(Borrow.COLUMN_CATALOGID));
+				borrow.setDateborrowed(rs.getString(Borrow.COLUMN_DATEBORROWED));
+				borrow.setDateexpectreturn(rs.getString(Borrow.COLUMN_DATEEXPECTRETURN));
+				borrow.setStatusid(rs.getInt(Borrow.COLUMN_STATUSID));
+				borrows.add(borrow);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return borrows;
+	}
+   
+   public static int BorrowerUserid() {
+	   String sql = "SELECT * FROM " + Borrow.TABLE_NAME + ";";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int userid = -1;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				userid = rs.getInt(Borrow.COLUMN_USERID);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return userid;
 	}
 
 }
