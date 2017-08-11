@@ -1,6 +1,3 @@
-<%@ page import="edu.securde.beans.User" %>
-<%@ page import="org.owasp.encoder.Encode" %>
-
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -11,7 +8,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-			<a class="navbar-brand" href="AllCatalogServlet">DLSU SHS Online Library</a>
+			<a class="navbar-brand" href="#">DLSU SHS Online Library</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,19 +17,16 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="mainsearch.jsp"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
 				<li class="active"><a href="/"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 				<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						Hazel Brosas <span class="caret"></span>
-					</a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="borrow_history.html">Borrow History</a></li>
-						<li><a href="#">Reservation History</a></li>
+						<li><a href="BorrowHistoryServlet">Borrow History</a></li>
+						<li><a href="ReservationHistoryServlet">Reservation History</a></li>
 						<li role="separator" class="divider"></li>
-						<li><a href="edit_profile.jsp">Edit Profile</a></li>
-						<li><a href="LogoutServlet">Logout</a></li>
+						<li><a href="edit_profile.html">Edit Profile</a></li>
+						<li><a href="#">Logout</a></li>
 					</ul>
 				</li>
 			</ul>

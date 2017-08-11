@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="edu.securde.beans.User" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +21,7 @@
 </head>
 
 <body>
+	<% User user=(User)session.getAttribute("ucx"); %>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -40,13 +45,13 @@
 					<li class="active"><a href="/"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hazel Brosas <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=user.getFirstname() %> <%=user.getLastname()%> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li class="active"><a>Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="edit_profile.html">Edit Profile</a></li>
-							<li><a href="#">Logout</a></li>
+							<li><a href="LogoutServlet">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -61,7 +66,6 @@
         	<div class="row">
         		<table class="table table-striped table-bordered">
 				  <thead>
-				  	<th></th>
 				  	<th>Catalog Type</th>
 				  	<th>Catalog Title</th>
 				  	<th>Date Borrowed</th>
@@ -69,31 +73,38 @@
 				  	<th>Status</th>
 				  </thead>
 				  <!-- BORROW DETAILS -->
-				  <tr>
-				  	<td>1</td>
-				  	<td>Book</td>
-				  	<td>How To Be Badass</td>
-				  	<td>January 01, 2017</td>
-				  	<td>January 10, 2017</td>
-				  	<td>
-				  		<button type="button" class="btn btn-primary btn-block">On Hand</button> <!--if borrowed-->
-				  		<button type="button" class="btn btn-danger btn-block">Due</button> <!--if done na reservation-->
-				  		<button type="button" class="btn btn-success btn-block">Returned</button> <!--if returned na-->
-				  	</td>
-				  </tr>
-
-				  <tr>
-				  	<td>1</td>
-				  	<td>Book</td>
-				  	<td>How To Be Badass</td>
-				  	<td>January 01, 2017</td>
-				  	<td>January 10, 2017</td>
-				  	<td>
-				  		<button type="button" class="btn btn-primary btn-block">On Hand</button> <!--if borrowed-->
-				  		<button type="button" class="btn btn-danger btn-block">Due</button> <!--if done na reservation-->
-				  		<button type="button" class="btn btn-success btn-block">Returned</button> <!--if returned na-->
-				  	</td>
-				  </tr>
+				  
+				  <c:forEach var = "b" items = "${borrows}">
+				  	<c:forEach var = "c" items = "${catalogs}">
+				  		<c:if test="${b.catalogid == c.catalogid}">
+				  			<tr>
+				  				<c:if test="${c.catalogtype == 1}">
+		                        	<td>Book</td>
+		                        </c:if>
+		                        <c:if test="${c.catalogtype == 2}">
+		                        	<td>Magazine</td>
+		                        </c:if>
+		                        <c:if test="${c.catalogtype == 3}">
+		                        	<td>Thesis</td>
+		                        </c:if>
+					  			<td>${c.title}</td>
+					  			<td>${b.dateborrowed}</td>
+					  			<td>${b.dateexpectreturn}</td>
+					  			<td>
+					  				<c:if test="${b.statusid == 3}">
+			                        	<button type="button" class="btn btn-success btn-block">Reserved</button>
+			                        </c:if>
+			                        <c:if test="${b.statusid == 2}">
+			                        	<button type="button" class="btn btn-warning btn-block">On Hand</button>
+			                        </c:if>
+			                        <c:if test="${b.statusid == -1}">
+			                        	<button type="button" class="btn btn-info btn-block">Returned</button>
+			                        </c:if>
+							  	</td>
+							</tr>
+				  		</c:if>
+				  	</c:forEach>
+				  </c:forEach>
 				</table>
         	</div>
         </div>
@@ -109,33 +120,6 @@
 
 	<!-- List Catalog Script -->
 	<script type="text/javascript" src="js/list-catalog.js">
-	</script>
-
-	<script type="text/javascript">
-		var addReviewBtn = $("#addReviewBtn"), addReview = $("#add-review");
-		var reviewList = $("#review-list");
-
-		$('#reserveButton').click(function(){
-		  // swal("How to be badass", "has been successfully borrowed", "success")
-		  $("#signInModal").modal('show');
-		});
-
-		$(document).on("click", "#catalog", function() {
-			$("#add-review").hide();
-			$("#catalogModal").modal('show');
-		});
-
-		$(document).on("click", "#addReviewBtn", function() {
-			addReviewBtn.hide();
-			reviewList.hide();
-			addReview.show();
-		});
-
-		$(document).on("click", "#cancel-review", function() {
-			addReviewBtn.show();
-			reviewList.show();
-			addReview.hide();
-		});
 	</script>
 </body>
 
