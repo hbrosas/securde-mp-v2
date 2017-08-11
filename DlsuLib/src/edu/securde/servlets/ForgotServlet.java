@@ -62,6 +62,11 @@ public class ForgotServlet extends HttpServlet {
 					response.setContentType("text/html;charset=UTF-8");
 					response.getWriter().write("correct");
 				}
+				else {
+					System.out.println("else error");
+					response.setContentType("text/html;charset=UTF-8");
+			        response.getWriter().write("error");
+				}
 			}
 			else if (type == 3) {
 				boolean confirm = false;
@@ -76,13 +81,12 @@ public class ForgotServlet extends HttpServlet {
 						response.getWriter().write("correct");
 						UserManager.setNewPass(email, newpw);
 					}
-			}
-				else {
-					System.out.println("else error");
-					response.setContentType("text/html;charset=UTF-8");
-			        response.getWriter().write("error");
+					else {
+						System.out.println("else error");
+						response.setContentType("text/html;charset=UTF-8");
+				        response.getWriter().write("error");
 				}
-		
+			}
 			
 	}
 }

@@ -81,6 +81,7 @@ public class MeetingRoomManager {
   		}
   		return false;
   	}
+<<<<<<< HEAD
 
     public static ArrayList<MeetingRoom> GetAllRoomSlots() {
       String sql = "SELECT * FROM "+ MeetingRoom.TABLE_NAME +";";
@@ -155,4 +156,47 @@ public class MeetingRoomManager {
         }
         return null;
       }
+=======
+//
+//    public static ArrayList<Reservation> GetAllReservation(Reservation reservation) {
+//      String sql = "SELECT " + Reservation.TABLE_NAME + " WHERE "
+//            + Reservation.COLUMN_RESERVEID + " LIKE ?"
+//          + " AND " + Reservation.COLUMN_ACCOUNTID + " LIKE ? " + " AND " + Reservation.COLUMN_DATERESERVED
+//          + " LIKE ?;";
+//
+//      Connection conn = DbPool.getInstance().getConnection();
+//      PreparedStatement pstmt = null;
+//      ResultSet rs = null;
+//      ArrayList<Reservation> Reservation = new ArrayList<>();
+//
+//      try {
+//        pstmt = conn.prepareStatement(sql);
+//        pstmt.setInt(1, reservation.getReserveid());
+//        pstmt.setInt(2, reservation.);
+//        pstmt.setString(3, reservation.getDateReserved());
+//        rs = pstmt.executeQuery();
+//
+//        Reservation.add(new Reservation(rs.getInt(reservation.COLUMN_RESERVEID),
+//                            rs.getInt(reservation.COLUMN_ROOMID),
+//                            rs.getInt(reservation.COLUMN_ACCOUNTID),
+//                            rs.getString(reservation.COLUMN_DATERESERVED)));
+//
+//        return Reservation;
+//      } catch (SQLException e) {
+//        // TODO Auto-generated catch block
+//        e.printStackTrace();
+//      } finally {
+//        try {
+//          pstmt.close();
+//          conn.close();
+//        } catch (SQLException e) {
+//          // TODO Auto-generated catch block
+//          e.printStackTrace();
+//        }
+//      }
+//      return null;
+//    }
+  
+  	
+>>>>>>> e31dae402a204a6c04dd25a823c1e68ef6406121
 }

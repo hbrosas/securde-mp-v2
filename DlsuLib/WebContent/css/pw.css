@@ -1,49 +1,60 @@
-body { padding-top:30px; }
-.form-control { margin-bottom: 10px; }
-
-
-/* password widget */
-
-.pwdfield
-{
-	width:100%;
+body{
+    font-family: "Lucida Grande", "Verdana", sans-serif;
 }
-.pwdopsdiv
-{
-	display: block;
-	float: left;
-	margin-right:6px;	
+ 
+h1{
+    font-size: 30px;
+    padding: 0;
+    margin: 0;
 }
-.pwdopsdiv a
-{
-	font-family : Arial, Helvetica, sans-serif;
-	font-size : 10px; 
+ 
+h2{
+    font-size: 18px;
+    padding: 0;
+    margin: 0 5px 30px 0;
 }
-
-.pwdstrengthbar
-{
-	float:right;
-	background:#cccccc;
-	height:4px;
-	margin:0;
-
+ 
+input{
+    width: 288px;
+    height: 30px;
+    margin: 50px 0 0 0;
+    padding: 3px 5px;
+    font-size: 22px;
+    font-family: "Lucida Grande", "Verdana", sans-serif;
 }
-
-.pwdstrength
-{
-	float:right; 
-	height:20px;
-	width:70px;
-	margin-top:3px;
-
+ 
+#container{
+    width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px 0 0 0;
 }
-.pwdstrengthstr
-{
-    float:right;
-	clear:both;
-	height:14px;
-	margin-top:0px;
-	font-family : Arial, Helvetica, sans-serif;
-	font-size : 10px; 
-
+ 
+.block{
+    width: 300px;
+    margin: 0 auto 0 auto;
+}
+ 
+#complexity, #results{
+    width: 300px;
+    padding: 3px 0;
+    height: 20px;
+    color: #000;
+    font-size: 14px;
+    text-align: center;
+}
+ 
+#results{
+    margin: 30px 0 20px 0;
+}
+ 
+.default{background-color: #CCC;}
+.weak{background-color: #FF5353;}
+.strong{background-color: #FAD054;}
+.stronger{background-color: #93C9F4; }
+.strongest{background-color: #B6FF6C;}
+ 
+span.value{
+    font-weight:bold;
+    float: right;
 }
