@@ -1,31 +1,25 @@
 package edu.securde.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import edu.securde.beans.Borrow;
-import edu.securde.beans.Catalog;
-import edu.securde.manager.BorrowManager;
-import edu.securde.manager.CatalogManager;
+import edu.securde.manager.UserManager;
 
 /**
- * Servlet implementation class BorrowHistoryServlet
+ * Servlet implementation class LockAccountServlet
  */
-@WebServlet("/BorrowHistoryServlet")
-public class BorrowHistoryServlet extends HttpServlet {
+@WebServlet("/LockAccountServlet")
+public class LockAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BorrowHistoryServlet() {
+    public LockAccountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +29,7 @@ public class BorrowHistoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -43,13 +37,9 @@ public class BorrowHistoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		int id = Integer.parseInt(session.getAttribute("cx").toString());
-		ArrayList<Borrow> borrows = BorrowManager.getUserBorrowHistory(id);
-		ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
-		request.setAttribute("borrows", borrows);
-		request.setAttribute("catalogs", catalogs);
-		request.getRequestDispatcher("borrowhistory.jsp").forward(request, response);
+		int userid = Integer.parseInt(request.getParameter("userid"));
+		UserManager.lockAccount(userid);
+		request.getRequestDispatcher("LogoutServlet").forward(request, response);
 	}
 
 }

@@ -2,6 +2,7 @@ var maindiv = $("#main"), logindiv = $("#login-cont"), otherdiv = $("#other-cont
 var openSignin = $("#openSignin"), openOthers = $("#openOthers");
 var logo = $("#logo"), error = $("#error"), emailError = $("#emailerror");
 var opened = 0;
+var trials = 5;
 
 $(document).ready(function() {
 	logindiv.hide();
@@ -49,12 +50,21 @@ $(document).ready(function() {
 			type: "POST",
 			data: data,
 			success: function(status) {
-				if(status == "error") {
-					error.show();
-				} else {
+				console.log(status);
+				if(status == "success") {
 					error.hide();
-					console.log("Submit");
-					$("#formsignin").submit();
+//					$("#formsignin").submit();
+				} else {
+					trial--;
+					if(trial < 3 && trial > 0) {
+						error.show();
+						error.text("Error! " + status +". You have " + trial + " number of trials left.");
+					} else if(trial == 0) {
+						error.show();
+						error.text("Your account will be locked. Please contact the authority regarding this matter");
+						$("#lockAccountForm").submit()
+					}
+					
 				}
 			}
 		});

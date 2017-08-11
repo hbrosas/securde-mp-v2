@@ -19,70 +19,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				<a class="navbar-brand" href="list_catalog.html">DLSU SHS Online Library</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="room_reservation.html">Reserve Meeting Room</a></li>
-					<li><a href="list_catalog.html"> Catalog List <span class="sr-only">(current)</span></a></li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#" id="enable-search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-					<li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hazel Brosas <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="borrow_history.html">Borrow History</a></li>
-							<li><a href="#">Reservation History</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="edit_profile.html">Edit Profile</a></li>
-							<li><a href="#">Logout</a></li>
-						</ul>
-					</li>
-				</ul>
-
-
-			</div>
-			<!-- /.navbar-collapse -->
-			<ul class="nav navbar-nav" id="search-navbar">
-				<li>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<select class="form-control">
-										<option value="Title">Title</option>
-					 					<option value="Location">Location</option>
-					 					<option value="Author">Author</option>
-					 					<option value="Publisher">Publisher</option>
-					 					<option value="Tags">Tags</option>
-					 				</select>
-							<input type="text" class="form-control" placeholder="Keyword" style="width: 800px;">
-							<select class="form-control">
-					 					<option value="Books">Books</option>
-					 					<option value="Magazines">Magazines</option>
-					 					<option value="Thesis">Thesis</option>
-					 				</select>
-						</div>
-						<a href="search_catalog.html" type="button" class="btn btn-default" style="width: 100px;">Submit</a>
-					</form>
-				</li>
-			</ul>
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
-
+	<jsp:include page="navbar.jsp" />
 	<div class="main-container container">
     <h2>Displaying results for 'Singing'</h2>
     <br>

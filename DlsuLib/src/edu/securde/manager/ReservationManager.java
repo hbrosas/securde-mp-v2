@@ -10,6 +10,46 @@ import edu.securde.beans.Reservation;
 import edu.securde.db.DBPool;
 
 public class ReservationManager {
+	public static ArrayList<Reservation> getUserReservation(int userid) {
+        String sql = "SELECT * FROM " + Reservation.TABLE_NAME + " WHERE "+ Reservation.COLUMN_USERID +" = ?";
+
+        Connection conn = DBPool.getInstance().getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<Reservation> reservations = new ArrayList<>();
+
+        try {
+          pstmt = conn.prepareStatement(sql);
+          pstmt.setInt(1, userid);
+          rs = pstmt.executeQuery();
+          
+          while(rs.next()) {
+        	  Reservation reservation = new Reservation();
+        	  reservation.setReserveid(rs.getInt(Reservation.COLUMN_RESERVEID));
+        	  reservation.setUserid(rs.getInt(Reservation.COLUMN_USERID));
+        	  reservation.setDatereserved(rs.getString(Reservation.COLUMN_DATERESERVED));
+        	  reservation.setRoomtimeslotid(rs.getInt(Reservation.COLUMN_ROOMTIMESLOTID));
+        	  reservation.setStatusid(rs.getInt(Reservation.COLUMN_STATUSID));
+        	  reservations.add(reservation);
+          }
+          
+          return reservations;
+          
+        } catch (SQLException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } finally {
+          try {
+            pstmt.close();
+            conn.close();
+          } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        }
+        return null;
+      }
+	
     public static ArrayList<Reservation> getReservationWithDate(String date) {
         String sql = "SELECT * FROM " + Reservation.TABLE_NAME + " WHERE "+ Reservation.COLUMN_DATERESERVED+" LIKE '"+ date +"'";
 

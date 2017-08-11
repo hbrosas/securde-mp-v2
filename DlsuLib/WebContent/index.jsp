@@ -4,6 +4,9 @@
 
 <head>
 	<meta charset="utf-8" />
+	<meta http-equiv="expires" content="now">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 	<title>De La Salle University - SHS Online Library</title>
 	<jsp:include page="user_dependencies.jsp" />
@@ -73,6 +76,11 @@
 
 		</div> <!-- Home Container -->
 	</div>
+	
+	<form action="LockAccountServlet" method="POST" id="lockAccountForm">
+		<input type="hidden" id="userid" name="userid">
+	</form>
+	
 	<!-- body -->
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="js/validation.js"></script>
