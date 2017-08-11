@@ -13,13 +13,11 @@ public class Catalog implements Serializable {
 	public static final String COLUMN_CATALOGTYPE = "catalogType";
 	public static final String COLUMN_STATUS = "status";
 	public static final String COLUMN_TAGS = "tags";
-	
 
 	int catalogid, status, year, catalogtype;
 	String title, author, publisher, location, tags;
 	
 	public Catalog() {
-		
 	}
 	
 	public Catalog(int catalogid, int status, int year, int catalogtype, String title, String author, String publisher,

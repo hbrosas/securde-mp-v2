@@ -42,14 +42,14 @@
                                 <li><a href="admin_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
                                      <ul class="nav child_menu">
-                                        <li><a href="#"> Create New Account</a></li>
+                                        <li><a href="admincreate.jsp"> Create New Account</a></li>
                                         <li><a href="ManageAccountServlet" id="manageAccounts"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-book"></i> Catalog <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_catalog.html">Add Catalog</a></li>
-                                        <li><a href="view_catalog.html">Manage Catalogs</a></li>
+                                        <li><a href="add_books.jsp">Add Catalog</a></li>
+                                        <li><a href="ManageCatalogServlet">Manage Catalogs</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
@@ -78,7 +78,7 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="LogoutServlet"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
                         </ul>

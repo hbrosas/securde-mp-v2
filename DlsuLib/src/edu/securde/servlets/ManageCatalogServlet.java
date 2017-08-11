@@ -1,11 +1,16 @@
 package edu.securde.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import edu.securde.beans.Catalog;
+import edu.securde.manager.CatalogManager;
 
 /**
  * Servlet implementation class ManageCatalogServlet
@@ -27,7 +32,7 @@ public class ManageCatalogServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -35,7 +40,9 @@ public class ManageCatalogServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
+		request.setAttribute("catalogs", catalogs);
+		request.getRequestDispatcher("edit_books.jsp").forward(request, response);
 	}
 
 }

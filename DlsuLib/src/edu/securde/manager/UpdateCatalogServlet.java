@@ -1,4 +1,4 @@
-package edu.securde.servlets;
+package edu.securde.manager;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.securde.beans.Catalog;
-import edu.securde.manager.CatalogManager;
+import edu.securde.beans.User;
 
 /**
- * Servlet implementation class AddCatalogServlet
+ * Servlet implementation class UpdateCatalogServlet
  */
-@WebServlet("/AddCatalogServlet")
-public class AddCatalogServlet extends HttpServlet {
+@WebServlet("/UpdateCatalogServlet")
+public class UpdateCatalogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddCatalogServlet() {
+    public UpdateCatalogServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,13 +41,14 @@ public class AddCatalogServlet extends HttpServlet {
 		Catalog c = new Catalog();
 		c.setTitle(request.getParameter("title"));
 		c.setAuthor(request.getParameter("author"));
-		c.setYear(Integer.parseInt(request.getParameter("year")));
 		c.setPublisher(request.getParameter("publisher"));
-		c.setLocation(request.getParameter("location"));
-		c.setCatalogtype(Integer.parseInt(request.getParameter("catalogType")));
-		c.setStatus(4);
+		c.setYear(Integer.parseInt(request.getParameter("year")));
 		c.setTags(request.getParameter("tags"));
-		CatalogManager.AddCatalog(c);
+		c.setCatalogid(Integer.parseInt(request.getParameter("catalogid")));
+		c.setCatalogtype(Integer.parseInt(request.getParameter("catalogtype")));
+		c.setStatus(Integer.parseInt(request.getParameter("status")));
+		c.setLocation(request.getParameter("location"));
+		CatalogManager.EditCatalog(c);
 		request.getRequestDispatcher("admin_home.jsp").forward(request, response);
 	}
 
