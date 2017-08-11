@@ -54,7 +54,7 @@
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_reservation.html">Manage Reservations</a></li>
+                                        <li><a href="AdminReserveServlet">Manage Reservations</a></li>
                                     </ul>
                                 </li>
                             </ul>
