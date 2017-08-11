@@ -81,7 +81,6 @@ public class MeetingRoomManager {
   		}
   		return false;
   	}
-<<<<<<< HEAD
 
     public static ArrayList<MeetingRoom> GetAllRoomSlots() {
       String sql = "SELECT * FROM "+ MeetingRoom.TABLE_NAME +";";
@@ -156,7 +155,6 @@ public class MeetingRoomManager {
         }
         return null;
       }
-=======
 //
 //    public static ArrayList<Reservation> GetAllReservation(Reservation reservation) {
 //      String sql = "SELECT " + Reservation.TABLE_NAME + " WHERE "
@@ -197,6 +195,4 @@ public class MeetingRoomManager {
 //      return null;
 //    }
   
-  	
->>>>>>> e31dae402a204a6c04dd25a823c1e68ef6406121
 }

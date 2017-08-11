@@ -76,6 +76,41 @@ public class UserManager {
 		return users;
 	}
 	
+	public static boolean checkIfActive(User user) {
+		String sql = "SELECT "+ User.COLUMN_STATUS +" FROM " + User.TABLE_NAME + " WHERE "+
+					User.COLUMN_EMAILADDRESS +" =? AND "+ User.COLUMN_PASSWORD +"=?;";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getEmailaddress());
+			pstmt.setString(2, user.getPassword());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int status = rs.getInt(User.COLUMN_STATUS);
+				if(status == -1) return false;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return true;
+	}
+	
 	// Update User Details - ADMIN
 	public static void AdminEditAccount(User user) {
 		String sql = "UPDATE "+ User.TABLE_NAME +" SET "+ User.COLUMN_ROLEID +" = ?, "+ 
@@ -465,6 +500,32 @@ public class UserManager {
 		}
 		
 		return sqAnswer;
+	}
+	
+	public static void lockAccount(int userid) {
+		String sql = "UPDATE " + DBPool.schema + "." + User.TABLE_NAME + " SET " + User.COLUMN_STATUS + " =?" +
+				" WHERE " + User.COLUMN_USERID + "=? ;";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, -1);
+			pstmt.setInt(2, userid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public static void setNewPass(String email, String pass) {
