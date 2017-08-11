@@ -14,7 +14,7 @@ $(document).on("blur", ".dateReserve", function() {
 	// update
 	update();
 	reserveList = [];
-
+	
 	infoBar.text("Choose the time of reservation by clicking the box below.")
 	infoBar.show();
 	timeslot.show();
@@ -213,17 +213,36 @@ function translateId(id) {
 }
 
 function update() {
-	var reserved = $("#data").val();
-	console.log("reserved: " + reserved);
-	var res = reserved.split(" ");
-	console.log(res);
-	for(var i = 0; i < res.length; i++) {
-		console.log(res[i]);
-		var element = document.getElementById(res[i]);
-		console.log(element);
-		$(element).removeClass("available");
-		$(element).addClass("reserved");
-	}
+//	var reserved = $("#data").val();
+//	console.log("reserved: " + reserved);
+	var reservedDate = $("#datetimepicker1").val().toString();	
+	 	$('.slot').removeClass("available");
+		$('.slot').removeClass("reserved");
+		$('.slot').addClass("available");
+		$('.slot').removeClass("chosen");
+	$.ajax({
+		url: "RoomServlet",
+		type: "GET",
+		 data: { 'ajaxRequest': reservedDate,
+		 },
+		success: function(status) {
+			var res = status.split(" ");
+			console.log("status: "+status);
+			console.log(res);
+			 
+			
+				 
+			  
+			for(var i = 0; i < res.length; i++) {
+				console.log(res[i]);
+				var element = document.getElementById(res[i]);
+				console.log(element);
+				$(element).removeClass("available");
+				$(element).addClass("reserved");
+			}
+		}
+	});
+	
 }
 
 function checkDuplicate(id) {
@@ -300,20 +319,23 @@ $(document).on("click","#reserveButton",function(){
 	    });
 	    console.log(reservations);
 	    console.log(reservationIds);
-		 
+		var reservationIdsString = reservationIds.toString();
+		var reservedDate = $("#datetimepicker1").val().toString();
+		 console.log(reservedDate);
 	    $.ajax({
 			url: "RoomServlet",
 			type: "POST",
-			 data: { 'reservationIds': reservationIds
+			 data: { 'reservationIds': reservationIdsString,
+				 	 'reservedDate' : reservedDate
 			 },
 			success: function(status) {
 				if(status == "error") {
-					swal(catalogTitle, "there was an error in your request", "error")
+					swal("Meeting Room", "there was an error in your request", "error");
 				} else {
 					console.log("check if correct swal");
 					swal({
-						 title: catalogTitle, 
-						 text:"has been successfully reviewed", 
+						 title: "Meeting Room", 
+						 text:"has been successfully reserved", 
 						 type: "success",
 						 showCancelButton:false
 						 },
@@ -321,7 +343,7 @@ $(document).on("click","#reserveButton",function(){
 							 if(isConfirm){
 								 location.reload();
 							 }
-						 })						 
+						 });					 
 					
 					console.log("Submit");
 				}
@@ -336,4 +358,10 @@ $(document).on("click", ".removetimeslot", function() {
 	$(element).remove();
 	var index = getIndex(id);
 	reserveList.splice(index, 1);
+	
+	tdid = "#"+id;
+	tdid= tdid.replace(" temp","");
+	console.log(tdid);
+	$(tdid).removeClass("chosen");
+	$(tdid).addClass("available");
 });

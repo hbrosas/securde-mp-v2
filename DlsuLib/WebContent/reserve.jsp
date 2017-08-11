@@ -15,7 +15,7 @@
 	<link href="css/mainsearch.css" rel="stylesheet" type="text/css" />
 	<link href="css/reserve.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
-	<!-- <link rel="stylesheet" href="css/sweetalert.css"> -->
+	<link rel="stylesheet" href="css/sweetalert.css">
 </head>
 
 <body class="the-body">
@@ -41,7 +41,7 @@
 					<li class="active"><a href="/"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hazel Brosas <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname}<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="borrow_history.html">Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
@@ -95,7 +95,7 @@
 				</div>
 				<div class="row" id="timeslot">
 					<div class="table-responsive table-bordered">
-			            <table class="table">
+			            <table class="table" id="reservation-table">
 			                  <thead>
 			                  <tr class= "table-head">
 			                      <th>Room</th>
@@ -329,6 +329,8 @@
 	<script type="text/javascript" src="./vendors/moment/min/moment.min.js"></script>
 	<script type="text/javascript" src="./js/reserve.js"></script>
 	<script type="text/javascript" src="./vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- Sweet Alert -->
+	<script type="text/javascript" src="js/sweetalert.min.js"></script>
 
 	<script type="text/javascript">
 		$("#datetimepicker1").datetimepicker({format: 'YYYY-MM-DD', minDate:new Date()});

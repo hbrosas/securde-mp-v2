@@ -10,9 +10,16 @@ public class Reservation implements Serializable {
 	public static final String COLUMN_DATERESERVED = "dateReserved";
 	public static final String COLUMN_STATUSID = "statusId";
 	
-	int reserveid, roomtimeslotid, statusid;
+	int userid, reserveid, roomtimeslotid, statusid;
 	String datereserved;
-	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
 	public Reservation() {}
 	
 	public Reservation(int reserveid, int roomtimeslotid, int statusid, String datereserved) {
