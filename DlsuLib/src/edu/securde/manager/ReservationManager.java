@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import edu.securde.beans.Reservation;
+import edu.securde.beans.Reservation;	
 import edu.securde.db.DBPool;
 
 public class ReservationManager {
@@ -49,6 +49,73 @@ public class ReservationManager {
         }
         return null;
       }
+    
+    public static ArrayList<String> getAllDatesReserved() {
+        String sql = "SELECT * FROM " + Reservation.TABLE_NAME + " ; ";
+
+        Connection conn = DBPool.getInstance().getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<String> dates = new ArrayList<>();
+
+        try {
+          pstmt = conn.prepareStatement(sql);
+          rs = pstmt.executeQuery();
+          
+          while(rs.next()) {
+        	  dates.add(rs.getString(Reservation.COLUMN_DATERESERVED));
+          }
+          
+          return dates;
+          
+        } catch (SQLException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } finally {
+          try {
+            pstmt.close();
+            conn.close();
+          } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        }
+        return null;
+      }
+    
+    public static boolean EditStatusId(int reserveid, int status) {
+        String sql = "UPDATE " + Reservation.TABLE_NAME + " SET " + Reservation.COLUMN_STATUSID + "= ?" + " WHERE "
+        			+ Reservation.COLUMN_RESERVEID + "= ?;";
+
+        Connection conn = DBPool.getInstance().getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean success = false;
+
+        try { 
+          pstmt = conn.prepareStatement(sql);
+          rs = pstmt.executeQuery();
+          
+          if(rs.next()) {
+        	  success = true;
+          }
+          
+          return success;
+        } catch (SQLException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } finally {
+          try {
+            pstmt.close();
+            conn.close();
+          } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        }
+        return success;
+      }
+    
     
 //    public static boolean reserveRoom(int roomid, int userid, int roomtimeslotid, String date) {
 //    	String sql = "INSERT INTO " + Reservation.TABLE_NAME + "( " + Reservation.COLUMN_ROOMTIMESLOTID + ", " 
@@ -126,5 +193,7 @@ public class ReservationManager {
   		}
   		return success;
   	}
-    }
+    
+    
+  }
    
