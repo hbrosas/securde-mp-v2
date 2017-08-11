@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Create Account | De La Salle University SHS Online Library</title>
+    <title>Create Catalog | De La Salle University SHS Online Library</title>
 	<jsp:include page="admin_dependencies.jsp" />
 </head>
 
@@ -42,14 +42,14 @@
                                 <li><a href="admin_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
                                      <ul class="nav child_menu">
-                                        <li><a href="#"> Create New Account</a></li>
-                                        <li><a href="register.html"> Manage Accounts</a></li>
+                                        <li><a href="admincreate.jsp"> Create New Account</a></li>
+                                        <li><a href="ManageAccountServlet"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-book"></i> Catalog <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_catalog.html">Add Catalog</a></li>
-                                        <li><a href="view_catalog.html">Manage Catalogs</a></li>
+                                        <li><a href="add_books.jspl">Add Catalog</a></li>
+                                        <li><a href="ManageCatalogServlet">Manage Catalogs</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
@@ -78,8 +78,7 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="javascript:;">Edit Profile</a></li>
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="LogoutServlet"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -93,7 +92,7 @@
             	<br><br><br><br><br>
             	<div class="container">
             		<div class="row">
-	                	<form class="form-signin" action="RegisterServlet" method="POST">
+	                	<form class="form-signin" action="AddCatalogServlet" method="POST">
 							<div class="row">
 								<div class="col-md-2">
 									<p class="input_title">Title</p>
@@ -121,21 +120,22 @@
 							</div>
 							<br>
 							<div class="row">
-								<div class="col-md-2">
+								<div class="col-md-4">
 									<p class="input_title">Catalog Type</p>
-									<input type="text" id="inputCatalogType" name="catalogtype" class="form-control" placeholder="Catalog Type" required>
+									<select type="text" id="catalogType" name="catalogType" class="form-control" required>
+										<option selected disabled="true">Choose Catalog Type</option>
+										<option value="1"> Book </option>
+										<option value="2"> Magazine </option>
+										<option value="3"> Thesis </option>
+									</select>
 								</div>
-									<div class="col-md-4">
-										<input type="text" id="inputStatus" class="form-control" name="status" placeholder="Status" required>
+								<div class="col-md-4">
+										<input type="text" id="inputTags" class="form-control" name="tags" placeholder="Tags" required>
 									</div>
 								</div>
 							</div>
 							<br>								
 							<div class="row">
-								<div class="col-md-4">
-										<input type="text" id="inputTags" class="form-control" name="tags" placeholder="Tags" required>
-									</div>
-								</div>
 								<div class="col-md-2">
 									<br>
 									<button class="btn btn-small btn-success btn-block submitbtn" type="submit">ADD BOOK</button>

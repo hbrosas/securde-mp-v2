@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import edu.securde.db.*;
 import edu.securde.beans.Borrow;
 import edu.securde.beans.Catalog;
+import edu.securde.beans.User;
 
 public class CatalogManager {
 	public static ArrayList<Catalog> getAllCatalogs(){
@@ -223,24 +224,25 @@ public class CatalogManager {
 		return true;
 	}
 		
-		public static boolean AddCatalog(String title, String author, int year, String publisher, String location, int catalogType, int status, String tags) {
-			String sql = "INSERT INTO FROM " + Catalog.TABLE_NAME + " ( " + Catalog.COLUMN_TITLE + ", " + Catalog.COLUMN_AUTHOR + ", " + Catalog.COLUMN_YEAR + ", "
-																		+ Catalog.COLUMN_PUBLISHER + ", " + Catalog.COLUMN_LOCATION + ", " + Catalog.COLUMN_CATALOGTYPE + ", "
-																		+ Catalog.COLUMN_STATUS + ", " + Catalog.COLUMN_TAGS + ") " + "VALUES (?,?,?,?,?,?,?,?);";
+		public static void AddCatalog(Catalog catalog) {
+			String sql = "INSERT INTO " + Catalog.TABLE_NAME 
+					+ " (" + Catalog.COLUMN_TITLE + ", " + Catalog.COLUMN_AUTHOR + ", " + Catalog.COLUMN_YEAR + ", "
+					+ Catalog.COLUMN_PUBLISHER + ", " + Catalog.COLUMN_LOCATION + ", " + Catalog.COLUMN_CATALOGTYPE + ", "
+					+ Catalog.COLUMN_STATUS + ", " + Catalog.COLUMN_TAGS + ") VALUES (?,?,?,?,?,?,?,?);";
 		
 			Connection conn = DBPool.getInstance().getConnection();
 			PreparedStatement pstmt = null;
-			ResultSet rs = null;
 		
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, author );
-				pstmt.setInt(2, year);
-				pstmt.setString(3, publisher);
-				pstmt.setString(4,location);
-				pstmt.setInt(5, catalogType);
-				pstmt.setInt(6, status);
-				pstmt.setString(7, tags);
+				pstmt.setString(1, catalog.getTitle());
+				pstmt.setString(2, catalog.getAuthor());
+				pstmt.setInt(3, catalog.getYear());
+				pstmt.setString(4, catalog.getPublisher());
+				pstmt.setString(5, catalog.getLocation());
+				pstmt.setInt(6, catalog.getCatalogtype());
+				pstmt.setInt(7, catalog.getStatus());
+				pstmt.setString(8, catalog.getTags());
 				pstmt.executeUpdate();
 	
 			} catch (SQLException e) {
@@ -248,7 +250,6 @@ public class CatalogManager {
 				e.printStackTrace();
 			} finally {
 				try {
-					rs.close();
 					pstmt.close();
 					conn.close();
 				} catch (SQLException e) {
@@ -256,9 +257,44 @@ public class CatalogManager {
 					e.printStackTrace();
 				}
 			}
-		
-			return true;
 		}
 		
-		
+		// Update Catalog Details
+		public static void EditCatalog(Catalog c) {
+			String sql = "UPDATE "+ Catalog.TABLE_NAME +" SET " +
+						Catalog.COLUMN_TITLE +" = ?, "+ Catalog.COLUMN_AUTHOR +" = ?, "+ 
+						Catalog.COLUMN_PUBLISHER +" = ?, "+  Catalog.COLUMN_YEAR +" = ?, "+ 
+						Catalog.COLUMN_CATALOGTYPE +" = ?, "+  Catalog.COLUMN_LOCATION +" = ?, "+ 
+						Catalog.COLUMN_TAGS +" = ?, "+  Catalog.COLUMN_STATUS +" =? WHERE "+ 
+						Catalog.COLUMN_CATALOGID +"=?";
+			
+			Connection conn = DBPool.getInstance().getConnection();
+			PreparedStatement pstmt = null;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, c.getTitle());
+				pstmt.setString(2, c.getAuthor());
+				pstmt.setString(3, c.getPublisher());
+				pstmt.setInt(4, c.getYear());
+				pstmt.setInt(5, c.getCatalogtype());
+				pstmt.setString(6, c.getLocation());
+				pstmt.setString(7, c.getTags());
+				pstmt.setInt(8, c.getStatus());
+				pstmt.setInt(9, c.getCatalogid());
+				pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					pstmt.close();
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 }

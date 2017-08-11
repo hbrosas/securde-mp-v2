@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.securde.beans.Catalog;
 import edu.securde.manager.CatalogManager;
 
 /**
@@ -37,30 +38,30 @@ public class AddBookServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String title = request.getParameter("title");
-		String author = request.getParameter("author");
-		int year = Integer.parseInt(request.getParameter("year"));
-		String publisher = request.getParameter("publisher");
-		String location = request.getParameter("location");
+		Catalog c = new Catalog();
+		c.setTitle(request.getParameter("title"));
+		c.setAuthor(request.getParameter("author"));
+		c.setYear(Integer.parseInt(request.getParameter("year")));
+		c.setPublisher(request.getParameter("publisher"));
+		c.setLocation(request.getParameter("location"));
+		c.setTags(request.getParameter("tags"));
+		
 		String catalogType = request.getParameter("catalogType");
 		String status = request.getParameter("status");
-		String tags = request.getParameter("tags");
-		int catalogTyp = 0;
-		int statusid;
 		boolean add = false;
 		if(catalogType.equals("Book")) {
-			catalogTyp = 1;
+			c.setCatalogtype(1);
 		} else if(catalogType.equals("Magazine")) {
-			catalogTyp = 2;
+			c.setCatalogtype(2);
 		} else if(catalogType.equals("Thesis")) {
-			catalogTyp = 3;
+			c.setCatalogtype(3);
 		}
 		
 		if(status.equals("Available")) {
-			statusid = 4;
+			c.setStatus(4);
 		} else 
-			statusid = 2;
+			c.setStatus(2);
 		
-		add = CatalogManager.AddCatalog(title, author, year, publisher, location, catalogTyp, statusid, tags);
+		CatalogManager.AddCatalog(c);
 	}
 }
