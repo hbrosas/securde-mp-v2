@@ -250,14 +250,10 @@
 							 title: catalogTitle, 
 							 text:"has been successfully borrowed", 
 							 type: "success",
-<<<<<<< HEAD
 							 confirmButtonText: "Okay",
 							 showCancelButton:false,
 							 showConfirmButton:true},
-=======
-							 showCancelButton:false
-							 },
->>>>>>> origin/master
+							 showCancelButton:false,
 							 function(isConfirm){
 								 if(isConfirm){
 									 location.reload();

@@ -13,6 +13,7 @@
 	<!-- Stylesheets -->
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/index-style.css" rel="stylesheet" type="text/css" />
+	<link href="css/pw.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="the-body">
@@ -30,6 +31,7 @@
 							<p class="input_title">Email</p>
 							<input type="email" id="inputEmail" class="forgotEmail login_box" placeholder="user@dlsu.edu.ph" required autofocus>
 							<br>
+							<div class="alert alert-danger" id="emailerror" role="alert">Email Address is invalid</div>
 							<button class="btn btn-small btn-success btn-block submitbtn" id="changenow" type="button">SUBMIT</button>
 						</form><!-- /form -->
 					</div>
@@ -62,6 +64,14 @@
 							<p class="input_title">Change Password</p>
 							<input type="password" id="newpw" class="login_box" placeholder="*********" required autofocus>
 							<br>
+							<div class="row">	
+									<div class='col-xs-12' id='thepwddiv'></div>
+									<script  type="text/javascript" >
+									</script>
+									<noscript>
+									<div><input class="form-control" type='password'  name='regpwd' /></div>		
+									</noscript>
+								</div>
 							<p class="input_title">Confirm Password</p>
 							<input type="password" id="confirmpw" class="login_box" placeholder="*********" required>
 							<br>
@@ -92,17 +102,19 @@
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/typed.min.js"></script>
+	<script type="text/javascript" src="js/pw.js"></script>
 
 	<!-- Main Script -->
 	<script type="text/javascript">
 		var otherdiv = $("#other-cont"), error = $("#error");
 		var user = $("#inputuser"), sqanswer = $("#answersq"), changepw = $("#changepw"), pwchange = $("#pwchange");
-
+		var emailerror = $("#emailerror");
 		$(document).ready(function() {
 			sqanswer.hide();
 			changepw.hide();
 			pwchange.hide();
 			otherdiv.hide();
+			emailerror.hide();
 			error.hide();
 
 			$(document).on("click", "#back1", function() {
@@ -139,7 +151,7 @@
 
 		$(document).on("click", "#changenow", function(){
 		var email = $(".forgotEmail").val();
-
+		
 		var data = {email:email, type:"1"}
 		$.ajax({
 			url: "ForgotServlet",
@@ -149,6 +161,7 @@
 				console.log(status);
 				if(status == "error") {
 					error.show();
+					emailerror.show(500);
 				} else {
 					error.hide();
 					$("#securityQuestion").text(status);
