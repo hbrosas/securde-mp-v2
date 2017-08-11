@@ -46,7 +46,7 @@
                                         <li><a href="ManageAccountServlet" id="manageAccounts"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-book"></i> Catalog <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="view_catalog.html">Add Catalog</a></li>
                                         <li><a href="view_catalog.html">Manage Catalogs</a></li>
@@ -78,7 +78,6 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="javascript:;">Edit Profile</a></li>
                                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
@@ -93,7 +92,7 @@
             	<br><br><br><br><br>
             	<div class="container">
             		<div class="row">
-	                	<form class="form-signin" action="RegisterServlet" method="POST">
+	                	<form class="form-signin" action="CreateAccountServlet" method="POST">
 							<div class="row">
 								<div class="col-md-2">
 									<p class="input_title">Username</p>
