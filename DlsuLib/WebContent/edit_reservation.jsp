@@ -91,10 +91,10 @@
             <div class="right_col" role="main">
             	<div class="main-container container">
             	<div class="row">
-            		<div class="col-md-8">
+            		<div class="col-lg-12">
             			 <div class="form-group">
-						    <label for="exampleSelect1">Example select</label>
-						    <select class="form-control" id="exampleSelect1">
+						    <label for="exampleSelect1 col-lg-12">Example select</label>
+						    <select class="form-control col-lg-12" id="exampleSelect1">
 						      <option>1</option>
 						      <option>2</option>
 						      <option>3</option>

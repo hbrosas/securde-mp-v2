@@ -63,8 +63,11 @@
 						<hr class="top-hr">
 						<form class="form-forgot">
 							<p class="input_title">Change Password</p>
-							<input type="password" id="newpw" class="login_box" placeholder="*********" required autofocus>
+							<input type="password" id="newpw inputPassword" class="login_box" placeholder="*********" required autofocus>
 							<br>
+							<div class="block">
+								<div id="results" class="default">Breakdown of points</div>
+								<div id="details"></div>
 							<div class="row">	
 								</div>
 							<p class="input_title">Confirm Password</p>
@@ -245,6 +248,8 @@
 				});
 			});
 		});
+		
+		$("#newpw").bind("keyup", checkVal);
 		
 		var pwdwidget = new PasswordWidget('thepwddiv','regpwd');
 		pwdwidget.MakePWDWidget();
