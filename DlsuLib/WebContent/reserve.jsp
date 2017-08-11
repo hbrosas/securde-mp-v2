@@ -29,7 +29,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-				<a class="navbar-brand" href="#">DLSU SHS Online Library</a>
+				<a class="navbar-brand" href="AllCatalogServlet">DLSU SHS Online Library</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -38,7 +38,7 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="/"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="ReserveServlet"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname}<span class="caret"></span></a>

@@ -57,7 +57,7 @@ public class CatalogManager {
 		String sql = "SELECT * FROM " + Catalog.TABLE_NAME;
 		String whereReference = "";
 		String whereBy = "";
-		if(reference.length() > 0) {
+		if(reference != null) {
 			if(reference.equals("libro")) {
 				whereReference = Catalog.COLUMN_CATALOGTYPE + " = 1";
 			}else if(reference.equals("magasin")) {
@@ -66,7 +66,7 @@ public class CatalogManager {
 				whereReference = Catalog.COLUMN_CATALOGTYPE + " = 3";
 			}
 		}
-		if(by.length() > 0) {
+		if(by != null) {
 			if(by.equals("titulo")) {
 				whereBy = Catalog.COLUMN_TITLE + " LIKE '%" + search + "%'";
 			}else if(by.equals("otor")) {

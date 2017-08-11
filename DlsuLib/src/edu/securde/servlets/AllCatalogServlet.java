@@ -37,6 +37,20 @@ public class AllCatalogServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("ucx");
+		switch(user.getRoleid()) {
+		case 2: case 3: case 4:
+			request.setAttribute("user", user);
+			request.getRequestDispatcher("admin_home.jsp").forward(request, response);
+			break;
+		case 1: case 5:
+			ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
+			request.setAttribute("user", user);
+			request.setAttribute("catalogs", catalogs);
+		    request.getRequestDispatcher("home.jsp").forward(request, response);
+			break;
+		}
 		
 	}
 
@@ -45,7 +59,7 @@ public class AllCatalogServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
+	
 		if(session.getAttribute("ucx") == null) {
 			// For guests
 			User user = new User();
