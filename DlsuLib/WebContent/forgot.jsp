@@ -29,7 +29,7 @@
 						<hr class="top-hr">
 						<form class="form-signin">
 							<p class="input_title">Email</p>
-							<input type="email" id="inputEmail" class="forgotEmail login_box" placeholder="user@dlsu.edu.ph" required autofocus>
+							<input type="email" id="inputEmail" onkeyup="validatespecial(this)" class="forgotEmail login_box" placeholder="user@dlsu.edu.ph" required autofocus>
 							<br>
 							<div class="alert alert-danger" id="emailerror" role="alert">Email Address is invalid</div>
 							<button class="btn btn-small btn-success btn-block submitbtn" id="changenow" type="button">SUBMIT</button>
@@ -48,8 +48,9 @@
 							<label class="input_title" id="securityQuestion"> Question </label>
 							<br><br>
 							<p class="input_title">Security Answer</p>
-							<input type="text" id="secanswer" class="sqans login_box" placeholder="Security Answer" required autofocus>
+							<input type="text" id="secanswer" class="sqans login_box" onkeyup="validatespecial(this)" placeholder="Security Answer" required autofocus>
 							<br>
+							<div class="alert alert-danger" id="sqanserror" role="alert">Incorrect Answer</div>
 							<button class="btn btn-small btn-success btn-block submitbtn" id="submitanswer" type="button">SUBMIT</button>							
 						</form><!-- /form -->
 					</div>
@@ -65,18 +66,11 @@
 							<input type="password" id="newpw" class="login_box" placeholder="*********" required autofocus>
 							<br>
 							<div class="row">	
-									<div class='col-xs-12' id='thepwddiv'></div>
-									<script  type="text/javascript" >
-										var pwdwidget = new PasswordWidget('thepwddiv','regpwd');
-										pwdwidget.MakePWDWidget();
-									</script>
-									<noscript>
-									<div><input class="form-control" type='password'  name='regpwd' /></div>		
-									</noscript>
 								</div>
 							<p class="input_title">Confirm Password</p>
 							<input type="password" id="confirmpw" class="login_box" placeholder="*********" required>
 							<br>
+							<div class="alert alert-danger" id="passerror" role="alert">Password does not match!</div>
 							<button class="btn btn-small btn-success btn-block submitbtn" id="submitpassword" type="button">Submit</button>	
 						</form><!-- /form -->
 					</div>
@@ -105,12 +99,13 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/typed.min.js"></script>
 	<script type="text/javascript" src="js/pw.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>	
 
 	<!-- Main Script -->
 	<script type="text/javascript">
 		var otherdiv = $("#other-cont"), error = $("#error");
 		var user = $("#inputuser"), sqanswer = $("#answersq"), changepw = $("#changepw"), pwchange = $("#pwchange");
-		var emailerror = $("#emailerror");
+		var emailerror = $("#emailerror"), sqanserror = $("#sqanserror"), passerror = $("#passerror");
 		$(document).ready(function() {
 			sqanswer.hide();
 			changepw.hide();
@@ -118,6 +113,8 @@
 			otherdiv.hide();
 			emailerror.hide();
 			error.hide();
+			sqanserror.hide();
+			passerror.hide();
 
 			$(document).on("click", "#back1", function() {
 				user.show(500);
@@ -187,6 +184,7 @@
 					console.log(status);
 					if(status == "error") {
 						error.show();
+						sqanserror.show(500);
 					} else {
 						console.log("pass");
 						error.hide();
@@ -212,6 +210,7 @@
 						console.log(status);
 						if(status == "error") {
 							error.show();
+							passerror.show(500);
 						} else {
 							console.log("pass");
 							error.hide();
@@ -224,6 +223,9 @@
 				});
 			});
 		});
+		
+		var pwdwidget = new PasswordWidget('thepwddiv','regpwd');
+		pwdwidget.MakePWDWidget();
 	</script>
 
 </body>
