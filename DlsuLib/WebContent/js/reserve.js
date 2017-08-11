@@ -221,7 +221,7 @@ function update() {
 		$('.slot').addClass("available");
 		$('.slot').removeClass("chosen");
 	$.ajax({
-		url: "RoomServlet",
+		url: "ReserveServlet",
 		type: "GET",
 		 data: { 'ajaxRequest': reservedDate,
 		 },
@@ -323,7 +323,7 @@ $(document).on("click","#reserveButton",function(){
 		var reservedDate = $("#datetimepicker1").val().toString();
 		 console.log(reservedDate);
 	    $.ajax({
-			url: "RoomServlet",
+			url: "ReserveServlet",
 			type: "POST",
 			 data: { 'reservationIds': reservationIdsString,
 				 	 'reservedDate' : reservedDate
