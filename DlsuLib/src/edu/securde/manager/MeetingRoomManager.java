@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import edu.securde.beans.MeetingRoom;
+import edu.securde.beans.MeetingRoomType;
 import edu.securde.beans.Reservation;
 import edu.securde.db.DBPool;
 
@@ -80,43 +81,78 @@ public class MeetingRoomManager {
   		}
   		return false;
   	}
-//
-//    public static ArrayList<Reservation> GetAllReservation(Reservation reservation) {
-//      String sql = "SELECT " + Reservation.TABLE_NAME + " WHERE "
-//            + Reservation.COLUMN_RESERVEID + " LIKE ?"
-//          + " AND " + Reservation.COLUMN_ACCOUNTID + " LIKE ? " + " AND " + Reservation.COLUMN_DATERESERVED
-//          + " LIKE ?;";
-//
-//      Connection conn = DbPool.getInstance().getConnection();
-//      PreparedStatement pstmt = null;
-//      ResultSet rs = null;
-//      ArrayList<Reservation> Reservation = new ArrayList<>();
-//
-//      try {
-//        pstmt = conn.prepareStatement(sql);
-//        pstmt.setInt(1, reservation.getReserveid());
-//        pstmt.setInt(2, reservation.);
-//        pstmt.setString(3, reservation.getDateReserved());
-//        rs = pstmt.executeQuery();
-//
-//        Reservation.add(new Reservation(rs.getInt(reservation.COLUMN_RESERVEID),
-//                            rs.getInt(reservation.COLUMN_ROOMID),
-//                            rs.getInt(reservation.COLUMN_ACCOUNTID),
-//                            rs.getString(reservation.COLUMN_DATERESERVED)));
-//
-//        return Reservation;
-//      } catch (SQLException e) {
-//        // TODO Auto-generated catch block
-//        e.printStackTrace();
-//      } finally {
-//        try {
-//          pstmt.close();
-//          conn.close();
-//        } catch (SQLException e) {
-//          // TODO Auto-generated catch block
-//          e.printStackTrace();
-//        }
-//      }
-//      return null;
-//    }
+
+    public static ArrayList<MeetingRoom> GetAllRoomSlots() {
+      String sql = "SELECT * FROM "+ MeetingRoom.TABLE_NAME +";";
+
+      Connection conn = DBPool.getInstance().getConnection();
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      ArrayList<MeetingRoom> rooms = new ArrayList<MeetingRoom>();
+
+      try {
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
+
+        while(rs.next()) {
+        	MeetingRoom room = new MeetingRoom();
+            room.setRoomid(rs.getInt(MeetingRoom.COLUMN_ROOMID));
+            room.setRoomtypeid(rs.getInt(MeetingRoom.COLUMN_ROOMTYPEID));
+            room.setStatusid(rs.getInt(MeetingRoom.COLUMN_STATUSID));
+            room.setStarttimeslot(rs.getString(MeetingRoom.COLUMN_STARTTIMESLOT));
+            room.setEndtimeslot(rs.getString(MeetingRoom.COLUMN_ENDTIMESLOT));
+            rooms.add(room);
+        }
+
+        return rooms;
+      } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } finally {
+        try {
+          pstmt.close();
+          conn.close();
+        } catch (SQLException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+      return null;
+    }
+    
+    public static ArrayList<MeetingRoomType> GetAllMeetingRoomType() {
+        String sql = "SELECT * FROM "+ MeetingRoomType.TABLE_NAME +";";
+
+        Connection conn = DBPool.getInstance().getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<MeetingRoomType> types = new ArrayList<MeetingRoomType>();
+
+        try {
+          pstmt = conn.prepareStatement(sql);
+          rs = pstmt.executeQuery();
+
+          while(rs.next()) {
+        	  MeetingRoomType roomType = new MeetingRoomType();
+              roomType.setId(rs.getInt(MeetingRoomType.COLUMN_MEETINGROOMID));
+              roomType.setType(rs.getString(MeetingRoomType.COLUMN_MEETINGROOMTYPE));
+              types.add(roomType);
+              return types;
+          }
+         
+          
+        } catch (SQLException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } finally {
+          try {
+            pstmt.close();
+            conn.close();
+          } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        }
+        return null;
+      }
 }

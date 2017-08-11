@@ -4,6 +4,9 @@
 
 <head>
 	<meta charset="utf-8" />
+	<meta http-equiv="expires" content="now">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 	<title>De La Salle University - SHS Online Library</title>
 	<jsp:include page="user_dependencies.jsp" />

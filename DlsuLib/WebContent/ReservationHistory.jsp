@@ -8,7 +8,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
-	<title>Borrow History | De La Salle University - SHS Online Library</title>
+	<title>Reservation History | De La Salle University - SHS Online Library</title>
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Lato" rel="stylesheet">
@@ -24,43 +24,46 @@
 	<jsp:include page="navbar.jsp" />
 	<div class="main-container">
 		<div class="container">
-			<h2>Borrow History</h2><br>
+			<h2>Reservation History</h2><br>
         	<div class="row">
         		<table class="table table-striped table-bordered">
 				  <thead>
-				  	<th>Catalog Type</th>
-				  	<th>Catalog Title</th>
-				  	<th>Date Borrowed</th>
-				  	<th>Anticipated Date Return</th>
+				  	<th>Room Type</th>
+				  	<th>Start Time</th>
+				  	<th>End Time</th>
+				  	<th>Date/Time of Reservation</th>
 				  	<th>Status</th>
 				  </thead>
 				  <!-- BORROW DETAILS -->
 				  
-				  <c:forEach var = "b" items = "${borrows}">
-				  	<c:forEach var = "c" items = "${catalogs}">
-				  		<c:if test="${b.catalogid == c.catalogid}">
+				  <c:forEach var = "r" items = "${reservations}">
+				  	<c:forEach var = "room" items = "${rooms}">
+				  		<c:if test="${r.roomtimeslotid == room.roomid}">
 				  			<tr>
-				  				<c:if test="${c.catalogtype == 1}">
-		                        	<td>Book</td>
+				  				<c:if test="${room.roomtypeid == 1}">
+		                        	<td>MichaelAngelo</td>
 		                        </c:if>
-		                        <c:if test="${c.catalogtype == 2}">
-		                        	<td>Magazine</td>
+		                        <c:if test="${room.roomtypeid == 2}">
+		                        	<td>Donatello</td>
 		                        </c:if>
-		                        <c:if test="${c.catalogtype == 3}">
-		                        	<td>Thesis</td>
+		                        <c:if test="${room.roomtypeid == 3}">
+		                        	<td>Leonardo</td>
 		                        </c:if>
-					  			<td>${c.title}</td>
-					  			<td>${b.dateborrowed}</td>
-					  			<td>${b.dateexpectreturn}</td>
+		                        <c:if test="${room.roomtypeid == 4}">
+		                        	<td>Raphael</td>
+		                        </c:if>
+		                        <c:if test="${room.roomtypeid == 5}">
+		                        	<td>Boticelli</td>
+		                        </c:if>
+					  			<td>${room.starttimeslot}</td>
+					  			<td>${room.endtimeslot}</td>
+					  			<td>${r.datereserved}</td>
 					  			<td>
-					  				<c:if test="${b.statusid == 3}">
+					  				<c:if test="${r.statusid == 3}">
 			                        	<button type="button" class="btn btn-success btn-block">Reserved</button>
 			                        </c:if>
-			                        <c:if test="${b.statusid == 2}">
-			                        	<button type="button" class="btn btn-warning btn-block">On Hand</button>
-			                        </c:if>
-			                        <c:if test="${b.statusid == -1}">
-			                        	<button type="button" class="btn btn-info btn-block">Returned</button>
+			                        <c:if test="${r.statusid == -1}">
+			                        	<button type="button" class="btn btn-info btn-block">Done</button>
 			                        </c:if>
 							  	</td>
 							</tr>

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.securde.beans.User;
+import edu.securde.manager.UserManager;
+
 /**
  * Servlet implementation class StartServlet
  */
@@ -40,11 +43,15 @@ public class StartServlet extends HttpServlet {
 		}
 		
 		// check if session has started
-		
 		if (session.getAttribute("cx") == null) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			int id = Integer.parseInt(session.getAttribute("cx").toString());
+			User user = UserManager.getUser(id);
+			request.setAttribute("user", user.getEmailaddress());
+			request.setAttribute("password", user.getPassword());
+			request.setAttribute("remember", "no");
+			request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 		}
 	}
 
