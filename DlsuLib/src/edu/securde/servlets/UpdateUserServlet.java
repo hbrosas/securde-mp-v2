@@ -6,22 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import edu.securde.beans.User;
 import edu.securde.manager.UserManager;
 
 /**
- * Servlet implementation class CreateAccountServlet
+ * Servlet implementation class UpdateUserServlet
  */
-@WebServlet("/CreateAccountServlet")
-public class CreateAccountServlet extends HttpServlet {
+@WebServlet("/UpdateUserServlet")
+public class UpdateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateAccountServlet() {
+    public UpdateUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,22 +38,14 @@ public class CreateAccountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int roleid = Integer.parseInt(request.getParameter("role"));
+		int status = Integer.parseInt(request.getParameter("status"));
+		int userid = Integer.parseInt(request.getParameter("idid"));
 		User user = new User();
-		user.setUsername(request.getParameter("username"));
-		user.setEmailaddress("shs@dlsu.edu.ph");
-		user.setPassword(request.getParameter("tempPassword"));
-		user.setFirstname(request.getParameter("firstName"));
-		user.setLastname(request.getParameter("lastName"));
-		user.setMiddlename(request.getParameter("middleName"));
-		user.setIdnumber(request.getParameter("idNumber"));
-		user.setBirthdate(Integer.parseInt(request.getParameter("bDate")));
-		user.setBirthmonth(Integer.parseInt(request.getParameter("bMonth")));
-		user.setBirthyear(Integer.parseInt(request.getParameter("bYear")));
-		user.setRoleid(Integer.parseInt(request.getParameter("role")));
-		user.setSqid(1);
-		user.setSqanswer("dlsulibrary");
-		user.setSalt(UserManager.generateSalt());
-		int id = UserManager.CreateAccount(user);
+		user.setRoleid(roleid);
+		user.setStatus(status);
+		user.setUserid(userid);
+		UserManager.AdminEditAccount(user);
 		request.getRequestDispatcher("admin_home.jsp").forward(request, response);
 	}
 

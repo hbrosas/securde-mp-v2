@@ -76,6 +76,35 @@ public class UserManager {
 		return users;
 	}
 	
+	// Update User Details - ADMIN
+	public static void AdminEditAccount(User user) {
+		String sql = "UPDATE "+ User.TABLE_NAME +" SET "+ User.COLUMN_ROLEID +" = ?, "+ 
+					User.COLUMN_STATUS +" =? WHERE "+ User.COLUMN_USERID +"=?";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, user.getRoleid());
+			pstmt.setInt(2, user.getStatus());
+			pstmt.setInt(3, user.getUserid());
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	// Create Account
 	public static int CreateAccount(User user) {
 		String sql = "INSERT INTO " + User.TABLE_NAME + " ( " + User.COLUMN_USERNAME + "," + User.COLUMN_PASSWORD + ","
@@ -97,7 +126,7 @@ public class UserManager {
 			pstmt.setString(5, user.getMiddlename());
 			pstmt.setString(6, user.getLastname());
 			pstmt.setInt(7, user.getRoleid());
-			pstmt.setInt(8, -1);
+			pstmt.setInt(8, 0);
 			pstmt.setInt(9, user.getBirthdate());
 			pstmt.setInt(10, user.getBirthmonth());
 			pstmt.setInt(11, user.getBirthyear());

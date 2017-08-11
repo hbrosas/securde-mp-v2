@@ -46,7 +46,7 @@
                                         <li><a href="ManageAccountServlet"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-book"></i> Catalog <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="view_catalog.html">Add Catalog</a></li>
                                         <li><a href="view_catalog.html">Manage Catalogs</a></li>
@@ -78,7 +78,6 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="javascript:;">Edit Profile</a></li>
                                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
@@ -176,24 +175,25 @@
                     <h4 class="modal-title">View/Edit User</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="updateUserForm" action="UpdateUserServlet" method="POST">
+                    	<input type="hidden" name="idid" id="idid">
                         <div class="row">
                             <div class="col-xs-6 col-md-2">
                                 <div class="form-group">
                                     <label for="userid">User ID</label>
-                                    <input type="text" class="form-control" id="userid" value="1">
+                                    <input type="text" class="form-control" name="userid" id="userid" value="1" disabled="disabled">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-5">
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" value="Gandalf the Grey">
+                                    <input type="text" class="form-control" name="username" id="username" value="Gandalf the Grey" disabled="disabled">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-5">
                                 <div class="form-group">
                                     <label for="lastloggedin">Last Logged In</label>
-                                    <input type="text" class="form-control" id="lastloggedin" value="1998">
+                                    <input type="text" class="form-control" name="lastloggedin" id="lastloggedin" value="1998" disabled="disabled">
                                 </div>
                             </div>
                         </div>
@@ -201,19 +201,19 @@
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="firstname">First Name</label>
-                                    <input type="text" class="form-control" id="firstname" value="Hazel">
+                                    <input type="text" class="form-control" name="firstname" id="firstname" value="Hazel" disabled="disabled">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="middlename">Middle Name</label>
-                                    <input type="text" class="form-control" id="middlename" value="Legaspi">
+                                    <input type="text" class="form-control" name="middlename" id="middlename" value="Legaspi" disabled="disabled">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="lastname">Last Name</label>
-                                    <input type="text" class="form-control" id="lastname" value="Brosas">
+                                    <input type="text" class="form-control" name="lastname" id="lastname" value="Brosas" disabled="disabled">
                                 </div>
                             </div>
                         </div>
@@ -221,14 +221,14 @@
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="email">Email Address</label>
-                                    <input type="text" class="form-control" id="email" value="The Shire">
+                                    <input type="text" class="form-control" name="email" id="email" value="The Shire" disabled="disabled">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-8">
                                 <label for="bdate">Birthday</label>
                                 <div class="form-group">
                                     <div class="col-md-3">
-                                        <select type="text" class="form-control" id="bdate" required>
+                                        <select type="text" name="bdate" class="form-control" id="bdate" disabled="disabled">
                                             <option selected disabled="true">Day</option>
                                             <option value="1">1</option> <option value="2">2</option>
                                             <option value="3">3</option> <option value="4">4</option> 
@@ -249,7 +249,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-5">
-                                        <select type="text" class="form-control" id="bmonth" required>
+                                        <select type="text" class="form-control" name="bmonth" id="bmonth" disabled="disabled">
                                             <option selected disabled="true">Month</option>
                                             <option value="1">January</option>
                                             <option value="2">February</option>
@@ -266,7 +266,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" id="byear" value="1997">
+                                        <input type="text" class="form-control" name="byear" id="byear" value="1997" disabled="disabled">
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +276,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="role">Role</label><br>
-                                    <select class="form-control" id="role">
+                                    <select class="form-control" name="role" id="role">
                                         <option value="1"> Student </option>
                                         <option value="2"> Library Manager </option>
                                         <option value="3"> Library Staff </option>
@@ -288,7 +288,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="status">Account Status</label><br>
-                                    <select class="form-control" id="status">
+                                    <select class="form-control" name="status" id="status">
                                         <option value="-1"> Expired </option>
                                         <option value="0"> Pending </option>
                                         <option value="1"> Active </option>
@@ -299,7 +299,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="addButton">Edit</button>
+                    <button type="submit" class="btn btn-success" data-dismiss="modal" id="editUserButton">Edit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -309,11 +309,10 @@
     <jsp:include page="admin_dependencies_script.jsp" />
     <script>
     	$(document).on("click", "#editUserBtn", function(){
+    		$("#idid").val($(this).data("id"));
     		$("#userid").val($(this).data("id"));
-    		$("#userid").attr("disabled", "disabled");
     		$("#username").val($(this).data("username"));
     		$("#lastloggedin").val($(this).data("lastloggedin"));
-    		$("#lastloggedin").attr("disabled", "disabled");
     		$("#firstname").val($(this).data("fname"));
     		$("#lastname").val($(this).data("lname"));
     		$("#middlename").val($(this).data("mname"));
@@ -325,6 +324,10 @@
     		$("#status").val($(this).data("status"));
     		
     		$("#editUser").modal('toggle');
+    	});
+    	
+    	$(document).on("click", "#editUserButton", function() {
+    		$("#updateUserForm").submit();
     	});
     </script>
     
