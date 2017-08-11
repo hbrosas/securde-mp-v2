@@ -19,6 +19,9 @@
 </head>
 
 <body class="the-body">
+<<<<<<< HEAD
+	<jsp:include page="navbar.jsp" />
+=======
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -56,6 +59,7 @@
 		<!-- /.container-fluid -->
 	</nav>
 
+>>>>>>> e0abccc955590eb84accdf68e42f5f7a33a378ef
 	<div class="main-container">
 		<div id="home-cont" class="home-cont">
 			<div class="container">
