@@ -67,6 +67,8 @@
 							<div class="row">	
 									<div class='col-xs-12' id='thepwddiv'></div>
 									<script  type="text/javascript" >
+										var pwdwidget = new PasswordWidget('thepwddiv','regpwd');
+										pwdwidget.MakePWDWidget();
 									</script>
 									<noscript>
 									<div><input class="form-control" type='password'  name='regpwd' /></div>		

@@ -55,6 +55,7 @@ public class UserManager {
 				user.setBirthmonth(rs.getInt(User.COLUMN_BIRTHMONTH));
 				user.setBirthyear(rs.getInt(User.COLUMN_BIRTHYEAR));
 				user.setIdnumber(rs.getString(User.COLUMN_IDNUMBER));
+				user.setRoleid(rs.getInt(User.COLUMN_ROLEID));
 				users.add(user);
 			}
 			

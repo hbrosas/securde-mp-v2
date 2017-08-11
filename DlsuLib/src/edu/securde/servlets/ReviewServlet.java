@@ -8,12 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 
 import edu.securde.beans.Review;
+import edu.securde.beans.User;
+import edu.securde.manager.BorrowManager;
 import edu.securde.manager.ReviewManager;
 
 /**
@@ -35,7 +38,6 @@ public class ReviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String catalogId = request.getParameter("catalogId");
 		response.setContentType("text/plain");
 		ArrayList<Review> reviews = new ArrayList<>();
@@ -44,6 +46,7 @@ public class ReviewServlet extends HttpServlet {
 			System.out.println(reviews.get(0).getUsername());
 			Gson gson = new GsonBuilder().create();
 			JsonArray jsonReviews = gson.toJsonTree(reviews).getAsJsonArray();		
+			System.out.println(jsonReviews.toString());
 			response.getWriter().write(jsonReviews.toString());
 		}else {
 			response.getWriter().write("No Reviews.");
@@ -55,7 +58,22 @@ public class ReviewServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("try ajax");
+		HttpSession session = request.getSession();
+		int catalogId = Integer.parseInt(request.getParameter("catalogId"));
+		String review = request.getParameter("review");
+		User user = (User) session.getAttribute("ucx");
+		
+		
+		if(catalogId > 0) {
+			ReviewManager.AddReview(catalogId, user.getUserid(), review);
+			response.setContentType("text/html;charset=UTF-8");
+	        response.getWriter().write("success");
+		} else {
+			
+			response.setContentType("text/html;charset=UTF-8");
+	        response.getWriter().write("error");
+		}
 	}
 
 }

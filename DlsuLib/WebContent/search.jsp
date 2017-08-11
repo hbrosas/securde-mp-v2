@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="edu.securde.beans.User" %>
+<%@ page import="org.owasp.encoder.Encode" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,17 +41,17 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="mainsearch.jsp"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
-					<li class="active"><a href="/"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
+					<li><a href="SearchServlet"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="RoomServlet"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
 					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.firstname} ${user.lastname}<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="borrow_history.html">Borrow History</a></li>
+							<li><a href="borrow_history.jsp">Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="edit_profile.html">Edit Profile</a></li>
-							<li><a href="LogoutServlet">Logout</a></li>
+							<li><a href="LogoutServlet">Logout</a></li>	
 						</ul>
 					</li>
 				</ul>
@@ -63,7 +65,7 @@
         	<div class="row">
         		<c:forEach var="c" items="${catalogs}">
         		<div class="col-sm-6 col-md-4 mt-4"> <!-- start catalog -->
-	                <div class="card open-catalog" data-toggle="modal" data-id="${c.catalogid }" data-status="${c.status}" data-title="${c.title}" 
+	                <div class="card open-catalog" data-toggle="modal" data-id="${c.catalogid}" data-status="${c.status}" data-title="${c.title}" 
 	                data-author="${c.author}" data-publisher="${c.publisher}" data-year="${c.year}" data-location="${c.location}" 
 	                data-tags="${c.tags}">
 	                    <img class="card-img-top" src="images/book.png">
@@ -88,7 +90,7 @@
 	                        </div>
 	                    </div>
 	                    <div class="card-footer">
-	                        <span class="float-right"></span>
+	                        <span class="float-right">${c.tags}</span>
 	                    </div>
 	                </div>
             	</div> <!-- end catalog -->
@@ -113,8 +115,8 @@
 						<div class="col-md-9">
 							<b>Author:</b> <span id="card-author">the author</span><br>
                             <b>Publisher:</b> <span id="card-publisher">the publisher</span><br>
-                        	<b>Year:</b> <span id="card-publisher">2001</span><br>
-                        	<b>Location:</b> <span id="card-publisher">AB12.125C.2001</span>
+                        	<b>Year:</b> <span id="card-year">2001</span><br>
+                        	<b>Location:</b> <span id="card-location">AB12.125C.2001</span>
 						</div>
 					</div>
 
@@ -125,13 +127,37 @@
 					<div class="container">
 						<div class="row" id="add-review">
 							<div class="col-md-6">
-								<textarea class="form-control" rows="3" placeholder="Enter your review here"></textarea>
-								<button class="btn btn-success btn-small btn-review pull-right" type="submit">Submit</button>
+								<textarea class="form-control" rows="3" placeholder="Enter your review here" id="review-details"></textarea>
+								<button class="btn btn-success btn-small btn-review pull-right" id="submit-review" type="submit">Submit</button>
 								<button class="btn btn-danger btn-small btn-review pull-right" id="cancel-review">Cancel</button>
 							</div>
 						</div>
 						<div class="review-list" id="review-list">
-							
+							<!-- Review -->
+							<article class="row">
+								<div class="col-md-11 col-sm-11">
+									<div class="panel panel-default arrow left">
+										<div class="panel-body">
+											<header class="text-left">
+												<div class="comment-user">
+													<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
+													That Guy
+												</div>
+												<time class="comment-date" datetime="16-12-2014 01:05">
+													<span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
+													Dec 16, 2014
+												</time>
+											</header>
+											<div class="comment-post">
+												<p>
+													Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<!-- END REVIEW -->
 						</div>
 					</div>
 				</div>
@@ -183,7 +209,7 @@
 				</div>
 				<div class="modal-footer">
 					<!-- Guest -->
-					<button type="button" class="btn btn-success" id="reserveButton">Sign In</button>
+					<button type="button" class="btn btn-success" id="guessButton">Sign In</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -207,17 +233,50 @@
 		var reviewList = $("#review-list");
 
 		$('#reserveButton').click(function(){
-		  // swal("How to be badass", "has been successfully borrowed", "success")
-		  $("#signInModal").modal('show');
+		   
+		  var catalogId = $(this).data('id');
+		  var catalogTitle = $(this).data('title');
+		   $.ajax({
+				url: "BorrowServlet",
+				type: "POST",
+				 data: { 'catalogId': catalogId },
+				success: function(status) {
+					if(status == "error") {
+						swal(catalogTitle, "there was an error in your request", "error")
+					} else {
+						console.log("check if correct swal");
+						swal({
+							 title: catalogTitle, 
+							 text:"has been successfully borrowed", 
+							 type: "success",
+							 showCancelButton:false
+							 },
+							 function(isConfirm){
+								 if(isConfirm){
+									 location.reload();
+								 }
+							 })
+							 
+						
+						console.log("Submit");
+					}
+				}
+			});
 		});
 
 		$(document).on("click", ".open-catalog", function() {
-			$("#add-review").hide();
-			reviewList.show();
 			addReviewBtn.show();
-			var catalogId = $(this).data('id')
+			reviewList.show();
+			console.log($(this).data('status'));
+			if($(this).data('status') == 4){
+				$('#reserveButton').show();
+			}else{
+				$('#reserveButton').hide();
+			}
+			var catalogId = $(this).data('id');
+			var catalogTitle = $(this).data('title');
 			$.ajax({
-				  type: "POST",
+				  type: "GET",
 				  url: "ReviewServlet",
 				  data: { 'catalogId': catalogId },
 				  success : function(data) {
@@ -257,13 +316,18 @@
 
 		          }
 				});
-			
+			addReview.hide();
+			$("#add-review").hide();
 			$("#card-title").text($(this).data('title'));
 			$("#card-author").text($(this).data('author'));
 			$("#card-publisher").text($(this).data('publisher'));
 			$("#card-year").text($(this).data('year'));
 			$("#card-location").text($(this).data('location'));
 			$("#catalogModal").modal('show');
+			$("#reserveButton").data('title',$(this).data('title'));
+			$("#reserveButton").data('id',$(this).data('id'));
+			$("#submit-review").data('id',$(this).data('id'));
+			$("#submit-review").data('title',$(this).data('title'));
 		});
 
 		$(document).on("click", "#addReviewBtn", function() {
@@ -271,7 +335,42 @@
 			reviewList.hide();
 			addReview.show();
 		});
-
+		
+		$(document).on("click", "#submit-review", function() {
+			var reviewDetails = $("#review-details").val();
+			var catalogId = $(this).data('id');
+			var catalogTitle = $(this).data('title');
+			  console.log("catalog id: " + catalogId + "catalog title: " + catalogTitle);
+			   $.ajax({
+					url: "ReviewServlet",
+					type: "POST",
+					 data: { 'catalogId': catalogId,
+							 'review' : reviewDetails	
+					 },
+					success: function(status) {
+						if(status == "error") {
+							swal(catalogTitle, "there was an error in your request", "error")
+						} else {
+							console.log("check if correct swal");
+							swal({
+								 title: catalogTitle, 
+								 text:"has been successfully reviewed", 
+								 type: "success",
+								 showCancelButton:false
+								 },
+								 function(isConfirm){
+									 if(isConfirm){
+										 location.reload();
+									 }
+								 })
+								 
+							
+							console.log("Submit");
+						}
+					}
+				});
+		});
+		
 		$(document).on("click", "#cancel-review", function() {
 			addReviewBtn.show();
 			reviewList.show();
