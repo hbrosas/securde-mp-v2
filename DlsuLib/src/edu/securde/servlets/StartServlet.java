@@ -33,6 +33,8 @@ public class StartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		
+		// Check if there is an existing cookie
 		Cookie[] cookieList = request.getCookies();
 		if (cookieList != null) {
 			for (int i = 0; i < cookieList.length; i++) {
@@ -46,11 +48,10 @@ public class StartServlet extends HttpServlet {
 		if (session.getAttribute("cx") == null) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
-			int id = Integer.parseInt(session.getAttribute("cx").toString());
-			User user = UserManager.getUser(id);
-			request.setAttribute("user", user.getEmailaddress());
-			request.setAttribute("password", user.getPassword());
-			request.setAttribute("remember", "no");
+			String hashID = session.getAttribute("cx").toString();
+			User u = UserManager.findEncryptedID(hashID);
+			request.setAttribute("action", "existuser");
+			request.setAttribute("user", u);
 			request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 		}
 	}

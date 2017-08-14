@@ -673,7 +673,7 @@ public class UserManager {
 	public static String getSalt(String username, String email) {
 		String salt = "";
 		String sql = "SELECT * " +" FROM " + User.TABLE_NAME + " WHERE " +
-				User.COLUMN_USERNAME +" LIKE =? " + " OR " + User.COLUMN_EMAILADDRESS + " LIKE  =?" + ";";
+				User.COLUMN_USERNAME +" LIKE ? " + " OR " + User.COLUMN_EMAILADDRESS + " LIKE ?" + ";";
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -699,5 +699,54 @@ public class UserManager {
 			}
 		}
 		return salt;
+	}
+	
+	public static User findEncryptedID(String hashID) {
+		String sql = "SELECT " + User.COLUMN_USERID + ", " + User.COLUMN_SALT + " FROM " + User.TABLE_NAME + ";";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User user = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String salt = rs.getString(User.COLUMN_SALT);
+				int id = rs.getInt(User.COLUMN_USERID);
+				String hashCode = Hash.getHash(id+"", salt);
+				if(hashID.equals(hashCode)) {
+					// Create User
+					user = new User();
+					user.setUserid(rs.getInt(User.COLUMN_USERID));
+					user.setUsername(rs.getString(User.COLUMN_USERNAME));
+					user.setEmailaddress(rs.getString(User.COLUMN_EMAILADDRESS));
+					user.setFirstname(rs.getString(User.COLUMN_FIRSTNAME));
+					user.setMiddlename(rs.getString(User.COLUMN_MIDDLENAME));
+					user.setLastname(rs.getString(User.COLUMN_LASTNAME));
+					user.setLastloggedin(rs.getString(User.COLUMN_LASTLOGGEDIN));
+					user.setStatus(rs.getInt(User.COLUMN_STATUS));
+					user.setBirthdate(rs.getInt(User.COLUMN_BIRTHDATE));
+					user.setBirthmonth(rs.getInt(User.COLUMN_BIRTHMONTH));
+					user.setBirthyear(rs.getInt(User.COLUMN_BIRTHYEAR));
+					user.setIdnumber(rs.getString(User.COLUMN_IDNUMBER));
+					user.setRoleid(rs.getInt(User.COLUMN_ROLEID));
+					return user;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return user;
 	}
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import edu.securde.beans.Catalog;
 import edu.securde.beans.User;
 import edu.securde.manager.CatalogManager;
+import edu.securde.manager.Hash;
 import edu.securde.manager.UserManager;
 
 /**
@@ -21,8 +22,6 @@ import edu.securde.manager.UserManager;
  */
 @WebServlet({ "/LoginServlet" })
 public class LoginServlet extends HttpServlet {
-	private HttpServletRequest request;
-	private HttpServletResponse response;
 	
 	private static final long serialVersionUID = 1L;
        
@@ -39,115 +38,136 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("forbidden.jsp");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		this.request = request;
-		this.response = response;
+		// Get Input
 		String user = request.getParameter("inputEmail");
 		String password = request.getParameter("inputPassword");	
 		String remember = request.getParameter("remember");
-		System.out.println("Remember: " + remember);
-		if(!errorCount()) {
-			// Reached 5 errors
-			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write("error3");
-		} else {
-			int emailAccountId = UserManager.checkCredentialsbyEmail(user, password);
-			int userAccountId = UserManager.checkCredentialsbyUsername(user, password);
+		User u;
+		System.out.println("Remember = " + remember);
+		// Check if Valid Account
+		int emailAccountId = UserManager.checkCredentialsbyEmail(user, password);
+		int userAccountId = UserManager.checkCredentialsbyUsername(user, password);
+		HttpSession session = request.getSession();
+		
+		if(!checkIfLocked(request)) {
+			// If account not locked
 			if(emailAccountId == -1) {
 				if(userAccountId == -1) {
-					System.out.println("error");
-					if(errorCount()) {
-						// not 5 errors yet
+					// If text not email and not user -> DOES NOT EXIST
+					if(!findTries(request)) {
+						request.setAttribute("action", "create");
 						request.setAttribute("message", "Invalid Login and/or Password");
-						request.getRequestDispatcher("loginerror.jsp").forward(this.request, this.response);
+						request.setAttribute("locked", "false");
 					} else {
-						request.setAttribute("message", "Your account will be locked.");
-						request.getRequestDispatcher("loginerror.jsp").forward(this.request, this.response);
+						Cookie[] cookies = request.getCookies();
+						if(cookies != null) {
+							for(int i = 0; i < cookies.length; i++) {
+								if(cookies[i].getName().equals("trie")) {
+									int tries = Integer.parseInt(cookies[i].getValue());
+									System.out.println("Trie = " + tries);
+									if(tries >= 5) {
+										request.setAttribute("message", "Your account was locked");
+										request.setAttribute("locked", "true");										
+									} else {
+										tries++;
+										cookies[i].setValue(tries+"");
+										response.addCookie(cookies[i]);
+										if(tries == 5) {
+											cookies[i].setMaxAge(10*60);
+											request.setAttribute("message", "Your account will be locked");
+											request.setAttribute("locked", "true");
+										}
+										request.setAttribute("message", "Invalid Login and/or Password");
+										request.setAttribute("locked", "false");
+									}
+								}
+							}
+						}
+						request.setAttribute("action", "add");
 					}
+					session.setAttribute("ewow", "yes");
+					request.getRequestDispatcher("loginerror.jsp").forward(request, response);
 				} else {
-					User u = UserManager.getUser(userAccountId);
-					if(UserManager.checkIfActive(u)) {
-						System.out.println(UserManager.checkIfActive(u));
-						login(userAccountId, remember);
-						request.setAttribute("action", "userlogin");
-						request.setAttribute("user", u);
-						request.getRequestDispatcher("AllCatalogServlet").forward(this.request, this.response);
-					} else {
-						request.setAttribute("message", "Your account was locked.");
-						request.getRequestDispatcher("loginerror.jsp").forward(this.request, this.response);
+					// If text is username
+					u = UserManager.getUser(userAccountId);
+					
+					if(remember.equals("remember")) {
+						// Add Cookie
+						String salt = UserManager.getSalt(user, user);
+						int id = u.getUserid();
+						String hashID = Hash.getHash(id+"", salt);
+						Cookie cookie = new Cookie ("cx", hashID); 
+						cookie.setMaxAge(24 * 60 * 60); 
+						response.addCookie(cookie);
+						cookie.setPath("/"); 
+						cookie.setDomain("localhost");	
 					}
-				}
-			} else {
-				User u = UserManager.getUser(emailAccountId);
-				if(UserManager.checkIfActive(u)) {
-					login(emailAccountId, remember);
+					
 					request.setAttribute("action", "userlogin");
 					request.setAttribute("user", u);
-					request.getRequestDispatcher("AllCatalogServlet").forward(this.request, this.response);
-				} else {
-					request.setAttribute("message", "Your account was locked.");
-					request.getRequestDispatcher("loginerror.jsp").forward(this.request, this.response);
+					request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 				}
+			} else {
+				// If text is email
+				u = UserManager.getUser(emailAccountId);
+				
+				if(remember.equals("remember")) {
+					// Add Cookie
+					String salt = UserManager.getSalt(user, user);
+					int id = u.getUserid();
+					String hashID = Hash.getHash(id+"", salt);
+					Cookie cookie = new Cookie ("cx", hashID); 
+					cookie.setMaxAge(24 * 60 * 60); 
+					response.addCookie(cookie);
+					cookie.setPath("/"); 
+					cookie.setDomain("localhost");	
+				}
+				
+				request.setAttribute("action", "userlogin");
+				request.setAttribute("user", u);
+				request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 			}
+		} else {
+			// Go to loginerror.jsp; error = "Your account was locked";
+			request.setAttribute("action", "add");
+			request.setAttribute("message", "Your account was locked");
+			request.setAttribute("locked", "true");
+			session.setAttribute("ewow", "yes");
+			request.getRequestDispatcher("loginerror.jsp").forward(request, response);
 		}
 	}
 	
-	public void login(int id, String remember) throws ServletException, IOException {
-		String userid = id+"";
-		
-		if(remember.equals("yes")) {
-			Cookie usernameCookie = new Cookie("cx", userid);
-			usernameCookie.setMaxAge(60*60*24);
-			usernameCookie.setHttpOnly(true); 
-			usernameCookie.setSecure(true);
-			this.response.addCookie(usernameCookie);
-		}
-
-		// SESSIONS
-		HttpSession session = this.request.getSession();
-		session.setAttribute("cx", userid);
-		session.setAttribute("ucx", UserManager.getUser(id));
-	}
-	
-	public boolean errorCount() {
-		boolean cookieFound = false;
-		HttpSession session = this.request.getSession();
-		Cookie[] cookieList = this.request.getCookies();
-		if (cookieList != null) {
-			for (int i = 0; i < cookieList.length; i++) {
-				if (cookieList[i].getName().equals("error")) {
-					cookieFound = true;
-					int error = Integer.parseInt(cookieList[i].getValue());
-					if(error >= 5) {
-						return false;
-					} else {
-						error++;
-						cookieList[i].setValue(error+"");
-						if(error == 5)
-							cookieList[i].setMaxAge(10*60);
+	public boolean checkIfLocked(HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(int i = 0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals("trie")) {
+					int tries = Integer.parseInt(cookies[i].getValue());
+					if(tries == 5)
 						return true;
-					}
 				}
 			}
 		}
-		System.out.println("Cookie found: " + cookieFound);
-		if(!cookieFound) {
-			System.out.println("Enter");
-			Cookie errorCookie = new Cookie("error", 1+"");
-			errorCookie.setMaxAge(60*60*24);
-			errorCookie.setHttpOnly(true); 
-			errorCookie.setSecure(true);
-			this.response.addCookie(errorCookie);
-			return true;
-		}
-		return true;
+		
+		return false;
 	}
-
+	
+	public boolean findTries(HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(int i = 0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals("trie")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

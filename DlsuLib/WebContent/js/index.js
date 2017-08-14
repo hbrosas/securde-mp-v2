@@ -34,39 +34,6 @@ $(document).ready(function() {
 	$(document).on("click", "#guestBtn", function() {
 		$("#guestLoginForm").submit();
 	});
-	
-//	$(document).on("click", "#signin", function() {
-//		error.hide();
-//		var username = $("#inputEmail").val();
-//		var password = $("#inputPassword").val();
-//		var remember;
-//		if($('#checkRememberMe').is(":checked")){
-//			remember = "yes";
-//		} else remember = "no";
-//		
-//		var data = {user:username, password:password, remember:remember}
-//		$.ajax({
-//			url: "LoginServlet",
-//			type: "POST",
-//			data: data,
-//			success: function(status) {
-//				if(status == "error1") {
-//					error.text("Your account was locked");
-//					error.show();
-//				} else if(status == "error2") {
-//					error.text("Invalid Login and/or Password");
-//					error.show();
-//				} else if(status == "error3") {
-//					error.text("Your account will be locked.");
-//					error.show();
-//					$("#lockAccountForm").submit();
-//				} else if(status == "good") {
-//					error.hide();
-//					$("#formsignin").submit();
-//				}
-//			}
-//		});
-//	});
 
 	$(document).on("click", "#reqBtn", function() {
 		var email = $("#inputReqEmail").val();

@@ -1,6 +1,19 @@
+<%   if (session.getAttribute("ewow") != null ) { %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+if(request.getAttribute("action").equals("create")) {
+	Cookie cookie = new Cookie ("trie", "1"); 
+	cookie.setMaxAge(24 * 60 * 60); 
+	response.addCookie(cookie);
+
+	cookie.setPath("/"); 
+	cookie.setDomain("localhost");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +64,13 @@
 								<a class="pull-right forgot" href="forgot.jsp">Forgot password?</a>
 							</div>
 						</div>
-						<button class="btn btn-small btn-success btn-block submitbtn" id="signin" type="submit">SIGN IN</button>
+						<c:if test="${locked == 'false'}">
+							<button class="btn btn-small btn-success btn-block submitbtn" id="signin" type="submit">SIGN IN</button>
+						</c:if>
+						<c:if test="${locked == 'true'}">
+							<button class="btn btn-small btn-success btn-block submitbtn" id="signin" type="submit" disabled="disabled">SIGN IN</button>
+						</c:if>
+						
 					</form><!-- /form -->
 		        </div><!-- /card-container -->
 			</div>
@@ -90,3 +109,4 @@
 </body>
 
 </html>
+<% } else { %> <jsp:include page="forbidden.jsp" /> <% } %>
