@@ -13,6 +13,7 @@
 
     <title>Create Catalog | De La Salle University SHS Online Library</title>
 	<jsp:include page="admin_dependencies.jsp" />
+    <script type="text/javascript" src="js/validation.js"></script>
 </head>
 
 <body class="nav-md">
@@ -96,11 +97,11 @@
 							<div class="row">
 								<div class="col-md-2">
 									<p class="input_title">Title</p>
-									<input type="text" id="inputTitle" name="title" onkeyup="validatespecial(this)" class="form-control" placeholder="title" required autofocus>
+									<input type="text" id="inputTitle" name="title" onkeyup="Special(this)" class="form-control" placeholder="title" required autofocus>
 								</div>
 								<div class="col-md-2">
 									<p class="input_title">Author</p>
-									<input type="text" id="inputAuthor" name="author" onkeyup="validatespecial(this)" class="form-control" placeholder="author">
+									<input type="text" id="inputAuthor" name="author" onkeyup="Special(this)" class="form-control" placeholder="author">
 								</div>
 							</div>
 							<br>
