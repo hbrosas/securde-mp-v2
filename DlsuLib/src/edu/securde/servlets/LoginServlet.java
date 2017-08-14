@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 		String remember = request.getParameter("remember");
 		User u;
 		System.out.println("Remember = " + remember);
+		if(remember == null) remember = "";
 		// Check if Valid Account
 		int emailAccountId = UserManager.checkCredentialsbyEmail(user, password);
 		int userAccountId = UserManager.checkCredentialsbyUsername(user, password);

@@ -31,10 +31,6 @@ $(document).ready(function() {
 		openend = 2;
 	});
 	
-	$(document).on("click", "#guestBtn", function() {
-		$("#guestLoginForm").submit();
-	});
-	
 	$(document).on("click", "#signin", function() {
 		error.hide();
 		var username = $("#inputEmail").val();

@@ -33,7 +33,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("forbidden.jsp");
 	}
 
 	/**
@@ -66,9 +66,8 @@ public class RegisterServlet extends HttpServlet {
 		int id = UserManager.CreateAccount(user);
 		user.setUserid(id);
 		
-		HttpSession session = request.getSession();
+		request.setAttribute("action", "newuser");
 		request.setAttribute("user", user);
-		session.setAttribute("ucx", UserManager.getUser(id));
 		request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 	}
 

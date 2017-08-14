@@ -33,10 +33,6 @@ $(document).ready(function() {
 		openend = 2;
 	});
 	
-	$(document).on("click", "#guestBtn", function() {
-		$("#guestLoginForm").submit();
-	});
-
 	$(document).on("click", "#reqBtn", function() {
 		var email = $("#inputReqEmail").val();
 		var data = {email:email}

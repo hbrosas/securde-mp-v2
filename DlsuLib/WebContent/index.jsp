@@ -70,20 +70,14 @@
 						<button class="btn btn-small btn-success btn-block submitbtn" id="reqBtn" type="button">REQUEST AN ACCOUNT</button>
 					</form><!-- /form -->
 					<hr>
-					<form id="guestLoginForm" action="AllCatalogServlet" method="POST">
-						<input type="hidden" value="Guest" name="inputEmail">
+					<form id="guestLoginForm" action="GuestServlet" method="POST">
+						<button class="btn btn-small btn-default btn-block submitbtn" type="submit">SIGN IN AS GUEST</button>
 					</form>
-					<button class="btn btn-small btn-default btn-block submitbtn" id="guestBtn">SIGN IN AS GUEST</button>
 		        </div><!-- /card-container -->	
 			</div>
 
 		</div> <!-- Home Container -->
 	</div>
-	
-	<form action="LockAccountServlet" method="POST" id="lockAccountForm">
-		<input type="hidden" id="email" name="email">
-		<input type="hidden" id="password" name="password">
-	</form>
 	
 	<!-- body -->
 	<script type="text/javascript" src="js/index.js"></script>
