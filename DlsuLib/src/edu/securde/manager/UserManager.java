@@ -78,7 +78,7 @@ public class UserManager {
 	
 	public static boolean checkIfActive(User user) {
 		String sql = "SELECT "+ User.COLUMN_STATUS +" FROM " + User.TABLE_NAME + " WHERE "+
-					User.COLUMN_EMAILADDRESS +" =? AND "+ User.COLUMN_PASSWORD +"=?;";
+					User.COLUMN_EMAILADDRESS +" LIKE ? AND "+ User.COLUMN_PASSWORD +" LIKE ?;";
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -87,11 +87,13 @@ public class UserManager {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getEmailaddress());
 			pstmt.setString(2, user.getPassword());
+			System.out.println(pstmt.toString());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				int status = rs.getInt(User.COLUMN_STATUS);
-				if(status == -1) return false;
+				System.out.println("status: " + status);
+				if(status == 5) return false;
 			}
 			
 		} catch (SQLException e) {
@@ -224,7 +226,7 @@ public class UserManager {
 	// Check Credentials by email
 	public static int checkCredentialsbyEmail(String email, String password) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
-				User.COLUMN_EMAILADDRESS +" =? AND "+ User.COLUMN_PASSWORD +" =? ;";
+				User.COLUMN_EMAILADDRESS +" LIKE ? AND "+ User.COLUMN_PASSWORD +" LIKE ? AND " + User.COLUMN_STATUS + " != ? ;";
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -234,6 +236,8 @@ public class UserManager {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, password);
+			pstmt.setInt(3, -1);
+			System.out.println(pstmt.toString());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				userid = rs.getInt(User.COLUMN_USERID);
@@ -294,7 +298,7 @@ public class UserManager {
 	// Check Credentials by username
 	public static int checkCredentialsbyUsername(String username, String password) {
 		String sql = "SELECT "+ User.COLUMN_USERID +" FROM " + User.TABLE_NAME + " WHERE " +
-				User.COLUMN_USERNAME +" =? AND "+ User.COLUMN_PASSWORD +" =? ;";
+				User.COLUMN_USERNAME +" LIKE ? AND "+ User.COLUMN_PASSWORD +" LIKE ? AND " + User.COLUMN_STATUS + " != ? ;";
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -304,6 +308,7 @@ public class UserManager {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
+			pstmt.setInt(3, -1);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				userid = rs.getInt(User.COLUMN_USERID);
@@ -343,6 +348,7 @@ public class UserManager {
 			while(rs.next()) {
 				user.setUserid(rs.getInt(User.COLUMN_USERID));
 				user.setUsername(rs.getString(User.COLUMN_USERNAME));
+				user.setPassword(rs.getString(User.COLUMN_PASSWORD));
 				user.setEmailaddress(rs.getString(User.COLUMN_EMAILADDRESS));
 				user.setFirstname(rs.getString(User.COLUMN_FIRSTNAME));
 				user.setMiddlename(rs.getString(User.COLUMN_MIDDLENAME));
@@ -503,15 +509,15 @@ public class UserManager {
 	}
 	
 	public static void lockAccount(int userid) {
-		String sql = "UPDATE " + DBPool.schema + "." + User.TABLE_NAME + " SET " + User.COLUMN_STATUS + " =?" +
-				" WHERE " + User.COLUMN_USERID + "=? ;";
+		String sql = "UPDATE " + DBPool.schema + "." + User.TABLE_NAME + " SET " + User.COLUMN_STATUS + " =? " 
+				+ " WHERE " + User.COLUMN_USERID + "=? ;";
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, -1);
+			pstmt.setInt(1, 5);
 			pstmt.setInt(2, userid);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

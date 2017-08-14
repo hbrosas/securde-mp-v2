@@ -78,7 +78,8 @@
 	</div>
 	
 	<form action="LockAccountServlet" method="POST" id="lockAccountForm">
-		<input type="hidden" id="userid" name="userid">
+		<input type="hidden" id="email" name="email">
+		<input type="hidden" id="password" name="password">
 	</form>
 	
 	<!-- body -->

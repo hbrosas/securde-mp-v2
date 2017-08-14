@@ -2,7 +2,6 @@ var maindiv = $("#main"), logindiv = $("#login-cont"), otherdiv = $("#other-cont
 var openSignin = $("#openSignin"), openOthers = $("#openOthers");
 var logo = $("#logo"), error = $("#error"), emailError = $("#emailerror");
 var opened = 0;
-var trials = 5;
 
 $(document).ready(function() {
 	logindiv.hide();
@@ -37,6 +36,7 @@ $(document).ready(function() {
 	});
 	
 	$(document).on("click", "#signin", function() {
+		error.hide();
 		var username = $("#inputEmail").val();
 		var password = $("#inputPassword").val();
 		var remember;
@@ -50,21 +50,19 @@ $(document).ready(function() {
 			type: "POST",
 			data: data,
 			success: function(status) {
-				console.log(status);
-				if(status == "success") {
+				if(status == "error1") {
+					error.text("Your account was locked");
+					error.show();
+				} else if(status == "error2") {
+					error.text("Invalid Login and/or Password");
+					error.show();
+				} else if(status == "error3") {
+					error.text("Your account will be locked.");
+					error.show();
+					$("#lockAccountForm").submit();
+				} else if(status == "good") {
 					error.hide();
-//					$("#formsignin").submit();
-				} else {
-					trial--;
-					if(trial < 3 && trial > 0) {
-						error.show();
-						error.text("Error! " + status +". You have " + trial + " number of trials left.");
-					} else if(trial == 0) {
-						error.show();
-						error.text("Your account will be locked. Please contact the authority regarding this matter");
-						$("#lockAccountForm").submit()
-					}
-					
+					$("#formsignin").submit();
 				}
 			}
 		});
