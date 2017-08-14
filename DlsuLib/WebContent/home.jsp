@@ -91,7 +91,9 @@
 					</div>
 
 					<h2>Reviews 
-						<button class="btn btn-warning btn-small btn-review pull-right" id="addReviewBtn" type="submit">Add Review</button>
+						<% if(user.getRoleid() == 1 || user.getRoleid() == 5) {%>
+							<button class="btn btn-warning btn-small btn-review pull-right" id="addReviewBtn" type="submit">Add Review</button>
+						<%} %>
 					</h2>
 					<hr>
 					<div class="container">
@@ -132,7 +134,9 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success" id="reserveButton">Borrow Catalog</button>
+					<% if(user.getRoleid() == 1 || user.getRoleid() == 5) {%>
+						<button type="button" class="btn btn-success" id="reserveButton">Borrow Catalog</button>
+					<%} %>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>

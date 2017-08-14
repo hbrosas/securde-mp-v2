@@ -46,7 +46,7 @@ public class AllCatalogServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String action = (String) request.getAttribute("action");
+//		String action = (String) request.getAttribute("action");
 		User user = (User) request.getAttribute("user");
 		Cookie[] cookies;
 		int role = user.getRoleid();
