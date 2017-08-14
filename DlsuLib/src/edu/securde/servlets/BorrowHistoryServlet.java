@@ -12,8 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import edu.securde.beans.Borrow;
 import edu.securde.beans.Catalog;
+import edu.securde.beans.User;
 import edu.securde.manager.BorrowManager;
 import edu.securde.manager.CatalogManager;
+import edu.securde.manager.Logging;
 
 /**
  * Servlet implementation class BorrowHistoryServlet
@@ -44,11 +46,13 @@ public class BorrowHistoryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		int id = Integer.parseInt(session.getAttribute("cx").toString());
+		User user = (User) session.getAttribute("user");
+		int id = user.getUserid();
 		ArrayList<Borrow> borrows = BorrowManager.getUserBorrowHistory(id);
 		ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
 		request.setAttribute("borrows", borrows);
 		request.setAttribute("catalogs", catalogs);
+		Logging.Log("UPDATE: User Browsing Borrow History\n");
 		request.getRequestDispatcher("borrowhistory.jsp").forward(request, response);
 	}
 

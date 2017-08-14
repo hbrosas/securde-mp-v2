@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.securde.beans.Catalog;
 import edu.securde.manager.CatalogManager;
+import edu.securde.manager.Logging;
 
 /**
  * Servlet implementation class AddCatalogServlet
@@ -30,7 +31,7 @@ public class AddCatalogServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("forbidden.jsp");
 	}
 
 	/**
@@ -48,6 +49,9 @@ public class AddCatalogServlet extends HttpServlet {
 		c.setStatus(4);
 		c.setTags(request.getParameter("tags"));
 		CatalogManager.AddCatalog(c);
+		
+		Logging.Log("UPDATE: Publishing Catalog: "+ c.getTitle() + " by " + c.getAuthor() +"\n");
+		
 		request.getRequestDispatcher("admin_home.jsp").forward(request, response);
 	}
 

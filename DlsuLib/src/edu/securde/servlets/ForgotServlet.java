@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.securde.manager.Hash;
+import edu.securde.manager.Logging;
 import edu.securde.manager.SecurityQuestionManager;
 import edu.securde.manager.UserManager;
 
@@ -31,7 +32,7 @@ public class ForgotServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("forbidden.jsp");
 	}
 
 	/**
@@ -89,6 +90,6 @@ public class ForgotServlet extends HttpServlet {
 				        response.getWriter().write("error");
 				}
 			}
-			
+		Logging.Log("Email Address: " + request.getParameter("email") + "changed password");
 	}
 }

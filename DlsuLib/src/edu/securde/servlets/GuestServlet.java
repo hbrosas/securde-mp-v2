@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.securde.beans.User;
+
 /**
- * Servlet implementation class AdminPanelServlet
+ * Servlet implementation class GuestServlet
  */
-@WebServlet("/AdminPanelServlet")
-public class AdminPanelServlet extends HttpServlet {
+@WebServlet("/GuestServlet")
+public class GuestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPanelServlet() {
+    public GuestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +29,7 @@ public class AdminPanelServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("forbidden.jsp");
 	}
 
 	/**
@@ -35,7 +37,13 @@ public class AdminPanelServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		User u = new User();
+		u.setFirstname("Guest");
+		u.setLastname("");
+		u.setRoleid(6);
+		request.setAttribute("action", "guestlogin");
+		request.setAttribute("user", u);
+		request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
 	}
 
 }

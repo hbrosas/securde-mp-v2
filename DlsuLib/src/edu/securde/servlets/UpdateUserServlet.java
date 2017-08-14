@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.securde.beans.User;
+import edu.securde.manager.Logging;
 import edu.securde.manager.UserManager;
 
 /**
@@ -30,7 +31,7 @@ public class UpdateUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		response.sendRedirect("forbidden.jsp");
 	}
 
 	/**
@@ -47,6 +48,7 @@ public class UpdateUserServlet extends HttpServlet {
 		user.setUserid(userid);
 		UserManager.AdminEditAccount(user);
 		request.getRequestDispatcher("admin_home.jsp").forward(request, response);
+		Logging.Log("Updated user information");
 	}
 
 }

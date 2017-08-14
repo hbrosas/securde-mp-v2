@@ -1,3 +1,10 @@
+<%@ page import="edu.securde.beans.User" %>
+<%  
+	if (session.getAttribute("user") != null){ 
+		 User user=(User)session.getAttribute("user"); 
+		 int role = user.getRoleid();
+		if( role == 1 || role == 5 ) {
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -303,3 +310,4 @@
 </body>
 
 </html>
+<% }} else { %> <jsp:include page="forbidden.jsp" /> <% } %>

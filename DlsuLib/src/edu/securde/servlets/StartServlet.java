@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import edu.securde.beans.User;
+import edu.securde.manager.Logging;
 import edu.securde.manager.UserManager;
 
 /**
@@ -33,22 +34,23 @@ public class StartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(1 * 60); // 1 minute
 		
 		// Check if there is an existing cookie
 		Cookie[] cookieList = request.getCookies();
 		if (cookieList != null) {
 			for (int i = 0; i < cookieList.length; i++) {
-				if (cookieList[i].getName().equals("cx")) {
-					session.setAttribute("cx", cookieList[i].getValue());					
+				if (cookieList[i].getName().equals("user")) {
+					session.setAttribute("user", cookieList[i].getValue());					
 				}
 			}
 		}
 		
 		// check if session has started
-		if (session.getAttribute("cx") == null) {
+		if (session.getAttribute("user") == null) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
-			String hashID = session.getAttribute("cx").toString();
+			String hashID = session.getAttribute("user").toString();
 			User u = UserManager.findEncryptedID(hashID);
 			request.setAttribute("action", "existuser");
 			request.setAttribute("user", u);
@@ -62,6 +64,7 @@ public class StartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		Logging.Log("Index Start");
 	}
 
 }

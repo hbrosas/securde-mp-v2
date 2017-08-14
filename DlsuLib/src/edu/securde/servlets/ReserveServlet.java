@@ -34,7 +34,7 @@ public class ReserveServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("ucx");
+		User user = (User) session.getAttribute("user");
 		String ajaxRequest = request.getParameter("ajaxRequest");
 		if(ajaxRequest != null) {
 			ArrayList<Reservation> reservations = ReservationManager.getReservationWithDate(ajaxRequest);

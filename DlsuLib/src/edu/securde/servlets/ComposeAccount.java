@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.securde.manager.Logging;	
 import edu.securde.manager.SecurityQuestionManager;
 import edu.securde.manager.UserManager;
 
@@ -30,7 +31,7 @@ public class ComposeAccount extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("forbidden.jsp");
 	}
 
 	/**
@@ -42,6 +43,10 @@ public class ComposeAccount extends HttpServlet {
 		request.setAttribute("email", email);
 		request.setAttribute("tempPw", UserManager.generateTemporaryPassword());
 		request.setAttribute("sq", SecurityQuestionManager.GetAllQuestions());
+		request.setAttribute("compose", "yes");
+		
+		Logging.Log("UPDATE: User redirected to the Register Account Page\n");
+		
 		request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
 	}
 

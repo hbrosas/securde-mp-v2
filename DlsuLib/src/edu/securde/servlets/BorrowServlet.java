@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import edu.securde.beans.Borrow;
 import edu.securde.beans.User;
 import edu.securde.manager.BorrowManager;
+import edu.securde.manager.Logging;
 
 /**
  * Servlet implementation class BorrowServlet
@@ -32,7 +33,7 @@ public class BorrowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		response.sendRedirect("forbidden.jsp");
 	}
 
 	/**
@@ -41,8 +42,9 @@ public class BorrowServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int catalogId = Integer.parseInt(request.getParameter("catalogId"));
-		User user = (User) session.getAttribute("ucx");
+		User user = (User) session.getAttribute("user");
 		
+		Logging.Log("UPDATE: User "+ user.getUserid() +" borrows catalog "+ catalogId +"\n");
 		
 		if(catalogId > 0) {
 			BorrowManager.Borrow(catalogId, user);

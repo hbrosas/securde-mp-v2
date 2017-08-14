@@ -1,5 +1,5 @@
 <%@ page import="edu.securde.beans.User" %>
-<% User user=(User)session.getAttribute("ucx"); %>
+<% User user=(User)session.getAttribute("user"); %>
 <nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -20,15 +20,18 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="SearchServlet"> <span class="glyphicon glyphicon-search"></span> Search</a> <span class="sr-only">(current)</span></a></li>
-					<li class="active"><a href="ReserveServlet"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
-					<!-- <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li> -->
+					<% if(user.getRoleid() == 1 || user.getRoleid() == 5) {%>
+						<li class="active"><a href="ReserveServlet"> Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
+					<%} %>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=user.getFirstname() %> <%=user.getLastname()%> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
+							<% if(user.getRoleid() == 1 || user.getRoleid() == 5) {%>
 							<li><a href="BorrowHistoryServlet">Borrow History</a></li>
 							<li><a href="ReserveHistoryServlet">Reservation History</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="edit_profile.html">Edit Profile</a></li>
+							<%} %>
 							<li><a href="LogoutServlet">Logout</a></li>	
 						</ul>
 					</li>

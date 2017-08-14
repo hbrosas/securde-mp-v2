@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import edu.securde.beans.User;
 import edu.securde.manager.Hash;
+import edu.securde.manager.Logging;
 import edu.securde.manager.UserManager;
 
 /**
@@ -32,7 +33,7 @@ public class CreateAccountServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("forbidden.jsp");
 	}
 
 	/**
@@ -71,6 +72,8 @@ public class CreateAccountServlet extends HttpServlet {
 		user.setSalt(salt);
 		int id = UserManager.CreateAccount(user);
 		request.getRequestDispatcher("admin_home.jsp").forward(request, response);
+		
+		Logging.Log("Register New Account in Users Username: " + username + " Email: " + email + " ID Number: " + request.getParameter("idNumber"));
 	}
 
 }

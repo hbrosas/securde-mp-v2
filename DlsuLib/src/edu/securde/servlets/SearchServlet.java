@@ -14,6 +14,7 @@ import edu.securde.beans.Catalog;
 import edu.securde.beans.Review;
 import edu.securde.beans.User;
 import edu.securde.manager.CatalogManager;
+import edu.securde.manager.Logging;
 import edu.securde.manager.ReviewManager;
 import edu.securde.manager.UserManager;
 
@@ -38,7 +39,7 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		User user = UserManager.getUser(Integer.parseInt(session.getAttribute("cx").toString()));
+		User user = (User) session.getAttribute("user");
 		String inputReference = request.getParameter("inputReference");
 		String inputBy = request.getParameter("inputBy");
 			if(inputReference == null && inputBy == null) {
@@ -53,17 +54,14 @@ public class SearchServlet extends HttpServlet {
 			    request.setAttribute("catalogs", catalogs);
 			    request.getRequestDispatcher("search.jsp").forward(request, response);
 			}
-			
-		
-	    
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
+		Logging.Log("User has Search Catalogs");
 	}
 
 }

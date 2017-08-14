@@ -17,6 +17,7 @@ import com.google.gson.JsonArray;
 import edu.securde.beans.Review;
 import edu.securde.beans.User;
 import edu.securde.manager.BorrowManager;
+import edu.securde.manager.Logging;
 import edu.securde.manager.ReviewManager;
 
 /**
@@ -62,7 +63,7 @@ public class ReviewServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int catalogId = Integer.parseInt(request.getParameter("catalogId"));
 		String review = request.getParameter("review");
-		User user = (User) session.getAttribute("ucx");
+		User user = (User) session.getAttribute("user");
 		
 		
 		if(catalogId > 0) {
@@ -74,6 +75,7 @@ public class ReviewServlet extends HttpServlet {
 			response.setContentType("text/html;charset=UTF-8");
 	        response.getWriter().write("error");
 		}
+		Logging.Log("Added review for Catalog ID: " + catalogId + " Review: " + review);
 	}
 
 }

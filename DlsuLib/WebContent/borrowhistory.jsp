@@ -1,3 +1,10 @@
+<%@ page import="edu.securde.beans.User" %>
+<%  
+	if (session.getAttribute("user") != null){ 
+		 User user=(User)session.getAttribute("user"); 
+		 int role = user.getRoleid();
+		if( role == 1 || role == 5 ) {
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -86,3 +93,4 @@
 </body>
 
 </html>
+<% }} else { %> <jsp:include page="forbidden.jsp" /> <% } %>

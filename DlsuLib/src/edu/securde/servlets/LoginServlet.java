@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.util.Logs;
+
 import edu.securde.beans.Catalog;
 import edu.securde.beans.User;
 import edu.securde.manager.CatalogManager;
 import edu.securde.manager.Hash;
+import edu.securde.manager.Logging;
 import edu.securde.manager.UserManager;
 
 /**
@@ -46,14 +49,20 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Get Input
+		User u;
+		Logging.Log("UPDATE: New Login Request.\n");
 		String user = request.getParameter("inputEmail");
 		String password = request.getParameter("inputPassword");	
 		String remember = request.getParameter("remember");
-		User u;
-		System.out.println("Remember = " + remember);
+		
+		if(remember == null) remember = "";
+		
+		String salt = UserManager.getSalt(user, user);
+		String encryptedCode = Hash.getHash(password, salt);
+				
 		// Check if Valid Account
-		int emailAccountId = UserManager.checkCredentialsbyEmail(user, password);
-		int userAccountId = UserManager.checkCredentialsbyUsername(user, password);
+		int emailAccountId = UserManager.checkCredentialsbyEmail(user, encryptedCode);
+		int userAccountId = UserManager.checkCredentialsbyUsername(user, encryptedCode);
 		HttpSession session = request.getSession();
 		
 		if(!checkIfLocked(request)) {
@@ -93,10 +102,15 @@ public class LoginServlet extends HttpServlet {
 						request.setAttribute("action", "add");
 					}
 					session.setAttribute("ewow", "yes");
+					
+					Logging.Log("ERROR: User invalid log in\n");
+					
 					request.getRequestDispatcher("loginerror.jsp").forward(request, response);
 				} else {
 					// If text is username
 					u = UserManager.getUser(userAccountId);
+					
+					Logging.Log("UPDATE: User " + u.getUserid() + " successfully Logged in on the system.\n");
 					
 					if(remember.equals("remember")) {
 						// Add Cookie
@@ -117,6 +131,8 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				// If text is email
 				u = UserManager.getUser(emailAccountId);
+				
+				Logging.Log("UPDATE: User " + u.getUserid() + " successfully Logged in on the system.\n");
 				
 				if(remember.equals("remember")) {
 					// Add Cookie
@@ -140,6 +156,10 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("message", "Your account was locked");
 			request.setAttribute("locked", "true");
 			session.setAttribute("ewow", "yes");
+			
+			Logging.Log("ERROR: User Invalid Login\n");
+			Logging.Log("UPDATE: User was locked into the system after 5 tries\n");
+			
 			request.getRequestDispatcher("loginerror.jsp").forward(request, response);
 		}
 	}
