@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.securde.manager.Logging;
 import edu.securde.manager.UserManager;
 
 /**
@@ -45,6 +46,7 @@ public class ConfirmEmailServlet extends HttpServlet {
 			response.setContentType("text/html;charset=UTF-8");
 	        response.getWriter().write("available");
 		}
+		Logging.Log("Email: " + email + "Email Taken: " + UserManager.checkEmailUnique(email));
 	}
 
 }

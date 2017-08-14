@@ -14,6 +14,7 @@ import edu.securde.beans.Catalog;
 import edu.securde.beans.Review;
 import edu.securde.beans.User;
 import edu.securde.manager.CatalogManager;
+import edu.securde.manager.Logging;
 import edu.securde.manager.ReviewManager;
 import edu.securde.manager.UserManager;
 
@@ -60,6 +61,7 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub		
+		Logging.Log("User has Search Catalogs");
 	}
 
 }
