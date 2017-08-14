@@ -15,6 +15,7 @@ import edu.securde.beans.Catalog;
 import edu.securde.beans.MeetingRoom;
 import edu.securde.beans.MeetingRoomType;
 import edu.securde.beans.Reservation;
+import edu.securde.beans.User;
 import edu.securde.manager.BorrowManager;
 import edu.securde.manager.CatalogManager;
 import edu.securde.manager.MeetingRoomManager;
@@ -49,7 +50,8 @@ public class ReserveHistoryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		int id = Integer.parseInt(session.getAttribute("cx").toString());
+		User user = (User) session.getAttribute("user");
+		int id = user.getUserid();
 		ArrayList<Reservation> reservations = ReservationManager.getUserReservation(id);
 		ArrayList<MeetingRoom> rooms = MeetingRoomManager.GetAllRoomSlots();
 		ArrayList<MeetingRoomType> roomTypes = MeetingRoomManager.GetAllMeetingRoomType();

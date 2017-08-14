@@ -38,7 +38,7 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		User user = UserManager.getUser(Integer.parseInt(session.getAttribute("cx").toString()));
+		User user = (User) session.getAttribute("user");
 		String inputReference = request.getParameter("inputReference");
 		String inputBy = request.getParameter("inputBy");
 			if(inputReference == null && inputBy == null) {

@@ -33,6 +33,7 @@ public class StartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(1 * 60); // 1 minute
 		
 		// Check if there is an existing cookie
 		Cookie[] cookieList = request.getCookies();

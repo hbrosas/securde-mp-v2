@@ -49,16 +49,20 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Get Input
+		User u;
 		Logging.Log("UPDATE: New Login Request.\n");
 		String user = request.getParameter("inputEmail");
 		String password = request.getParameter("inputPassword");	
 		String remember = request.getParameter("remember");
-		User u;
-		System.out.println("Remember = " + remember);
+		
 		if(remember == null) remember = "";
+		
+		String salt = UserManager.getSalt(user, user);
+		String encryptedCode = Hash.getHash(password, salt);
+				
 		// Check if Valid Account
-		int emailAccountId = UserManager.checkCredentialsbyEmail(user, password);
-		int userAccountId = UserManager.checkCredentialsbyUsername(user, password);
+		int emailAccountId = UserManager.checkCredentialsbyEmail(user, encryptedCode);
+		int userAccountId = UserManager.checkCredentialsbyUsername(user, encryptedCode);
 		HttpSession session = request.getSession();
 		
 		if(!checkIfLocked(request)) {
