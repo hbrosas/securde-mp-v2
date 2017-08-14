@@ -16,6 +16,7 @@
 	<!-- Stylesheets -->
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/registeraccount.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/validation.js"></script>
 </head>
 
 <body class="the-body">
@@ -36,7 +37,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<p class="input_title">Username</p>
-								<input type="text" id="inputUser" name="username" class="login_box" placeholder="user1234" required autofocus>
+								<input type="text" id="inputUser" name="username" onkeyup="validateusername(this);" class="login_box" placeholder="user1234" required autofocus>
 							</div>
 							<div class="col-md-6">
 								<p class="input_title">Temporary Password</p>
@@ -47,22 +48,22 @@
 						<div class="row">
 							<div class="col-md-4">
 								<p class="input_title">First Name</p>
-								<input type="text" id="inputFirstName" name="firstName" class="login_box" placeholder="John" required>
+								<input type="text" id="inputFirstName" name="firstName" onkeyup="Validate(this);" class="login_box" placeholder="John" required>
 							</div>
 							<div class="col-md-4">
 								<p class="input_title">Middle Name</p>
-								<input type="text" id="inputMiddleName" name="middleName" class="login_box" placeholder="Middle" required>
+								<input type="text" id="inputMiddleName" name="middleName" onkeyup="Validate(this);" class="login_box" placeholder="Middle" required>
 							</div>
 							<div class="col-md-4">
 								<p class="input_title">Last Name</p>
-								<input type="text" id="inputLastName" name="lastName" class="login_box" placeholder="Doe" required>
+								<input type="text" id="inputLastName" name="lastName" onkeyup="Validate(this);" class="login_box" placeholder="Doe" required>
 							</div>
 						</div>
 						<br>
 						<div class="row">
 							<div class="col-md-4">
 								<p class="input_title">ID Number</p>
-								<input type="text" id="inputIDnumber" name="idNumber" class="login_box" placeholder="ID Number" required>
+								<input type="text" id="inputIDnumber" name="idNumber" onkeyup="validatephone(this);" class="login_box" placeholder="ID Number" required>
 							</div>
 							<div class="col-md-8">
 								<p class="input_title">Birthday</p>
@@ -123,7 +124,7 @@
 							</div>
 							<div class="col-md-6">
 								<p class="input_title">Security Answer</p>
-								<input type="text" id="inputSQAnswer" name="sqAnswer" class="login_box" placeholder="Answer" required>
+								<input type="text" id="inputSQAnswer" name="sqAnswer" onkeyup="Validate(this);" class="login_box" placeholder="Answer" required>
 							</div>
 						</div>
 						<br>								
@@ -153,6 +154,7 @@
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/typed.min.js"></script>
+
 
 	<!-- Main Script -->
 	<script type="text/javascript">

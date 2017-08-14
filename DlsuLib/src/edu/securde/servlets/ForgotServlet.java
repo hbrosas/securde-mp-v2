@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.securde.manager.Hash;
 import edu.securde.manager.SecurityQuestionManager;
 import edu.securde.manager.UserManager;
 
@@ -55,7 +56,8 @@ public class ForgotServlet extends HttpServlet {
 		} else if (type == 2) {
 			String email = request.getParameter("email");
 			System.out.println("hotdog"+UserManager.getSQAns(email));
-	        String sqans = request.getParameter("sqans");
+			System.out.println(request.getParameter("sqans"));
+	        String sqans = Hash.getHash(request.getParameter("sqans"), UserManager.getSalt(email, email));
 	        System.out.println(sqans);
 				if(UserManager.getSQAns(email).equals(sqans)) {
 					System.out.println("CHECK");
