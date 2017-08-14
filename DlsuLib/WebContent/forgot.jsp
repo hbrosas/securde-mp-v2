@@ -63,7 +63,8 @@
 						<hr class="top-hr">
 						<form class="form-forgot">
 							<p class="input_title">Change Password</p>
-							<input type="password" id="newpw" class="login_box" placeholder="*********" required autofocus>
+							<input type="password" name="newpw" size=15 maxlength="100" onkeyup="return passwordChanged();" id="newpw" class="login_box" placeholder="*********" required autofocus>
+							<span color="black" id="strength">Type Password</span>
 							<br>
 							<div class="row">	
 							<p class="input_title">Confirm Password</p>
@@ -225,43 +226,31 @@
 		});
 	</script>
 	
-	<script type="text/javascript">
-		
-		  function checkPassword(str)
-		  {
-		    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-		    return re.test(str);
-		  }
-		
-		  function checkForm(form)
-		  {
-		    if(form.username.value == "") {
-		      alert("Error: Username cannot be blank!");
-		      form.username.focus();
-		      return false;
-		    }
-		    re = /^\w+$/;
-		    if(!re.test(form.username.value)) {
-		      alert("Error: Username must contain only letters, numbers and underscores!");
-		      form.username.focus();
-		      return false;
-		    }
-		    if(form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
-		      if(!checkPassword(form.pwd1.value)) {
-		        alert("The password you have entered is not valid!");
-		        form.pwd1.focus();
-		        return false;
-		      }
-		    } else {
-		      alert("Error: Please check that you've entered and confirmed your password!");
-		      form.pwd1.focus();
-		      return false;
-		    }
-		    return true;
-		  }
-		
-		</script>
-
+		<script language="javascript">
+		function passwordChanged() {
+			var strength = document.getElementById("strength");
+			var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+			var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+			var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+			var pwd = document.getElementById("newpw");
+			console.log(pwd);
+			if (pwd.value.length==0) {
+			strength.innerHTML = '<span style="color:black">Type Password</span>';
+			} 
+			else if (false == enoughRegex.test(pwd.value)) {
+			strength.innerHTML = '<span style="color:black">More Characters</span>';
+			}
+			else if (strongRegex.test(pwd.value)) {
+			strength.innerHTML ='<span style="color:green">Strong!</span>';
+			} 
+			else if (mediumRegex.test(pwd.value)) {
+			strength.innerHTML = '<span style="color:orange">Medium!</span>';
+			} 
+			else {
+			strength.innerHTML = '<span style="color:red">Weak!</span>';
+			}
+		}
+	</script>
 </body>
 
 </html>
