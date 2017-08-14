@@ -32,16 +32,16 @@ public class AdminReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("ucx");
-		request.setAttribute("user", user);
-		if(user.getRoleid() == 2) {
+//		HttpSession session = request.getSession();
+//		User user = (User) session.getAttribute("ucx");
+//		request.setAttribute("user", user);
+//		if(user.getRoleid() == 2) {
 			ArrayList<String> dates = ReservationManager.getAllDatesReserved();
 			request.setAttribute("dates", dates);
 			request.getRequestDispatcher("edit_reservation.jsp").forward(request, response);
-		}else {
-			
-		}
+//		}else {
+//			
+//		}
 		
 	}
 

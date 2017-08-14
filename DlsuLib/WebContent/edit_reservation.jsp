@@ -29,7 +29,7 @@
 	                    <div class="profile clearfix">
 	                        <div class="profile_info">
 	                            <span>Welcome,</span>
-	                            <h2> <%=user.getFirstname() %> <%=user.getLastname()%></h2>
+	                           
 	                        </div>
 	                    </div>
                     </div>
@@ -74,7 +74,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/user.png" alt=""><%=user.getFirstname() %> <%=user.getLastname()%>
+                                    
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -102,7 +102,7 @@
 						  </div>
             		</div>
             	</div>
-                  <table id="reserationsTable" class="display" cellspacing="0" width="100%">
+                  <table id="reservationsTable" class="display" cellspacing="0" width="100%">
                     <thead>
                       <tr>
                         <th>Room</th>
@@ -112,7 +112,7 @@
                       </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id ="tableBody">
                     	
                     </tbody>
                   </table>
@@ -137,7 +137,7 @@
     <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/gentella.min.js"></script>
+	<script type="text/javascript" src="js/gentelella.min.js"></script>
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="js/admin_reserve.js"></script>
     <script>
