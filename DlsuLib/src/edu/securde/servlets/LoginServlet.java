@@ -49,9 +49,10 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		this.request = request;
 		this.response = response;
-		String user = request.getParameter("user");
-		String password = request.getParameter("password");	
+		String user = request.getParameter("inputEmail");
+		String password = request.getParameter("inputPassword");	
 		String remember = request.getParameter("remember");
+		System.out.println("Remember: " + remember);
 		if(!errorCount()) {
 			// Reached 5 errors
 			response.setContentType("text/html;charset=UTF-8");
@@ -64,33 +65,35 @@ public class LoginServlet extends HttpServlet {
 					System.out.println("error");
 					if(errorCount()) {
 						// not 5 errors yet
-						response.setContentType("text/html;charset=UTF-8");
-				        response.getWriter().write("error2");
+						request.setAttribute("message", "Invalid Login and/or Password");
+						request.getRequestDispatcher("loginerror.jsp").forward(this.request, this.response);
 					} else {
-						response.setContentType("text/html;charset=UTF-8");
-				        response.getWriter().write("error3");
+						request.setAttribute("message", "Your account will be locked.");
+						request.getRequestDispatcher("loginerror.jsp").forward(this.request, this.response);
 					}
 				} else {
 					User u = UserManager.getUser(userAccountId);
 					if(UserManager.checkIfActive(u)) {
 						System.out.println(UserManager.checkIfActive(u));
 						login(userAccountId, remember);
-						response.setContentType("text/html;charset=UTF-8");
-				        response.getWriter().write("good");
+						request.setAttribute("action", "userlogin");
+						request.setAttribute("user", u);
+						request.getRequestDispatcher("AllCatalogServlet").forward(this.request, this.response);
 					} else {
-						response.setContentType("text/html;charset=UTF-8");
-				        response.getWriter().write("error1");
+						request.setAttribute("message", "Your account was locked.");
+						request.getRequestDispatcher("loginerror.jsp").forward(this.request, this.response);
 					}
 				}
 			} else {
 				User u = UserManager.getUser(emailAccountId);
 				if(UserManager.checkIfActive(u)) {
 					login(emailAccountId, remember);
-					response.setContentType("text/html;charset=UTF-8");
-			        response.getWriter().write("success");
+					request.setAttribute("action", "userlogin");
+					request.setAttribute("user", u);
+					request.getRequestDispatcher("AllCatalogServlet").forward(this.request, this.response);
 				} else {
-					response.setContentType("text/html;charset=UTF-8");
-			        response.getWriter().write("error1");
+					request.setAttribute("message", "Your account was locked.");
+					request.getRequestDispatcher("loginerror.jsp").forward(this.request, this.response);
 				}
 			}
 		}
@@ -104,20 +107,19 @@ public class LoginServlet extends HttpServlet {
 			usernameCookie.setMaxAge(60*60*24);
 			usernameCookie.setHttpOnly(true); 
 			usernameCookie.setSecure(true);
-			usernameCookie.setPath("/");
-			response.addCookie(usernameCookie);
+			this.response.addCookie(usernameCookie);
 		}
 
 		// SESSIONS
-		HttpSession session = request.getSession();
+		HttpSession session = this.request.getSession();
 		session.setAttribute("cx", userid);
 		session.setAttribute("ucx", UserManager.getUser(id));
 	}
 	
 	public boolean errorCount() {
 		boolean cookieFound = false;
-		HttpSession session = request.getSession();
-		Cookie[] cookieList = request.getCookies();
+		HttpSession session = this.request.getSession();
+		Cookie[] cookieList = this.request.getCookies();
 		if (cookieList != null) {
 			for (int i = 0; i < cookieList.length; i++) {
 				if (cookieList[i].getName().equals("error")) {
@@ -142,8 +144,7 @@ public class LoginServlet extends HttpServlet {
 			errorCookie.setMaxAge(60*60*24);
 			errorCookie.setHttpOnly(true); 
 			errorCookie.setSecure(true);
-			errorCookie.setPath("/");
-			response.addCookie(errorCookie);
+			this.response.addCookie(errorCookie);
 			return true;
 		}
 		return true;

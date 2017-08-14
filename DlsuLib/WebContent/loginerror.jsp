@@ -1,4 +1,6 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +34,7 @@
 						<span class="pull-right backbtn" id="back"><< Back</span>
 					</h2>
 					<hr class="top-hr">
-					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
+					<div class="alert alert-danger" id="error" role="alert">${message}</div>
 					<form class="form-signin" id="formsignin" action="LoginServlet" method="POST">	
 						<p class="input_title">Username/Email</p>
 						<input type="text" name="inputEmail" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
@@ -83,7 +85,7 @@
 	</form>
 	
 	<!-- body -->
-	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/indexerror.js"></script>
 	<script type="text/javascript" src="js/validation.js"></script>
 </body>
 
