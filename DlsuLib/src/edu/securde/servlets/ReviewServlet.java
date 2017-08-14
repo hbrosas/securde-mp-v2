@@ -62,7 +62,7 @@ public class ReviewServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int catalogId = Integer.parseInt(request.getParameter("catalogId"));
 		String review = request.getParameter("review");
-		User user = (User) session.getAttribute("ucx");
+		User user = (User) session.getAttribute("user");
 		
 		
 		if(catalogId > 0) {

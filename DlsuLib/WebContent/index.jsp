@@ -87,7 +87,6 @@
 </html>
 <% } 
 	else {
-		request.setAttribute("user", request.getAttribute("user"));
-		request.getRequestDispatcher("AllCatalogServlet").forward(request, response);
+		request.getRequestDispatcher("StartServlet").forward(request, response);
 	}
 %>

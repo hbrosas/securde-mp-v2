@@ -16,3 +16,23 @@ UPDATE: User is a Student
 
 UPDATE: Redirecting to the home page
 
+UPDATE: New Login Request.
+
+UPDATE: User 10 successfully Logged in on the system.
+
+UPDATE: Gathering all catalogs
+
+UPDATE: User is a Student
+
+UPDATE: Redirecting to the home page
+
+UPDATE: New Login Request.
+
+UPDATE: User 10 successfully Logged in on the system.
+
+UPDATE: Gathering all catalogs
+
+UPDATE: User is a Student
+
+UPDATE: Redirecting to the home page
+

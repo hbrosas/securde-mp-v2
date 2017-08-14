@@ -103,4 +103,8 @@ if(request.getAttribute("action").equals("create")) {
 </body>
 
 </html>
-<% } else { %> <jsp:include page="forbidden.jsp" /> <% } %>
+<% } 
+	else {
+		request.getRequestDispatcher("StartServlet").forward(request, response);
+	}
+%>

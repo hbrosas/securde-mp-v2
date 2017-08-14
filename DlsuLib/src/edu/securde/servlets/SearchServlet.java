@@ -53,17 +53,13 @@ public class SearchServlet extends HttpServlet {
 			    request.setAttribute("catalogs", catalogs);
 			    request.getRequestDispatcher("search.jsp").forward(request, response);
 			}
-			
-		
-	    
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 }

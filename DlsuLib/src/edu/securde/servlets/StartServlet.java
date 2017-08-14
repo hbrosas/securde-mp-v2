@@ -38,17 +38,17 @@ public class StartServlet extends HttpServlet {
 		Cookie[] cookieList = request.getCookies();
 		if (cookieList != null) {
 			for (int i = 0; i < cookieList.length; i++) {
-				if (cookieList[i].getName().equals("cx")) {
-					session.setAttribute("cx", cookieList[i].getValue());					
+				if (cookieList[i].getName().equals("user")) {
+					session.setAttribute("user", cookieList[i].getValue());					
 				}
 			}
 		}
 		
 		// check if session has started
-		if (session.getAttribute("cx") == null) {
+		if (session.getAttribute("user") == null) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
-			String hashID = session.getAttribute("cx").toString();
+			String hashID = session.getAttribute("user").toString();
 			User u = UserManager.findEncryptedID(hashID);
 			request.setAttribute("action", "existuser");
 			request.setAttribute("user", u);
