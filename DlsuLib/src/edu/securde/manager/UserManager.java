@@ -28,6 +28,7 @@ public class UserManager {
 	        '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', '{',
 	        ']', '}', '\\', '|', ';', ':', '\'', '"', ',', '<', '.', '>', '/',
 	        '?' };
+
 	
 	// Get all accounts (without password, sqid and role)
 	public static ArrayList<User> GetAllAccount() {
