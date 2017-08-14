@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.util.Logs;
+
 import edu.securde.beans.Catalog;
 import edu.securde.beans.User;
 import edu.securde.manager.CatalogManager;
@@ -66,6 +68,7 @@ public class LoginServlet extends HttpServlet {
 						request.setAttribute("action", "create");
 						request.setAttribute("message", "Invalid Login and/or Password");
 						request.setAttribute("locked", "false");
+						
 					} else {
 						Cookie[] cookies = request.getCookies();
 						if(cookies != null) {
