@@ -75,6 +75,7 @@ public class ReviewServlet extends HttpServlet {
 			response.setContentType("text/html;charset=UTF-8");
 	        response.getWriter().write("error");
 		}
+		Logging.Log("Added review for Catalog ID: " + catalogId + " Review: " + review);
 	}
 
 }
