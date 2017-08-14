@@ -13,6 +13,7 @@
 
     <title>Create Account | De La Salle University SHS Online Library</title>
 	<jsp:include page="admin_dependencies.jsp" />
+	<script type="text/javascript" src="js/validation.js"></script>
 </head>
 
 <body class="nav-md">
@@ -96,7 +97,7 @@
 							<div class="row">
 								<div class="col-md-2">
 									<p class="input_title">Username</p>
-									<input type="text" id="inputUser" name="username" onkeyup="validatelocation(this)" class="form-control" placeholder="user1234" required autofocus>
+									<input type="text" id="inputUser" name="username" onkeyup="validateusername(this);" class="form-control" placeholder="user1234" required autofocus>
 								</div>
 								<div class="col-md-2">
 									<p class="input_title">Temporary Password</p>

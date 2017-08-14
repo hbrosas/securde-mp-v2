@@ -673,7 +673,7 @@ public class UserManager {
 	public static String getSalt(String username, String email) {
 		String salt = "";
 		String sql = "SELECT * " +" FROM " + User.TABLE_NAME + " WHERE " +
-				User.COLUMN_USERNAME +" LIKE =? " + " OR " + User.COLUMN_EMAILADDRESS + " LIKE  =?" + ";";
+				User.COLUMN_USERNAME +" LIKE ? " + " OR " + User.COLUMN_EMAILADDRESS + " LIKE  ?" + ";";
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

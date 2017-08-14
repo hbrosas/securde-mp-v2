@@ -10,6 +10,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 	<title>De La Salle University - SHS Online Library</title>
 	<jsp:include page="user_dependencies.jsp" />
+	<script type="text/javascript" src="js/validation.js"></script>
 	<link href="./css/index-style.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -31,11 +32,11 @@
 						<span class="pull-left">SIGN IN</span>
 						<span class="pull-right backbtn" id="back"><< Back</span>
 					</h2>
-					<hr class="top-hr">
+					<hr class="top-hr">	
 					<div class="alert alert-danger" id="error" role="alert">Login Error. Invalid Username/Password</div>
 					<form class="form-signin" id="formsignin" action="LoginServlet" method="POST">	
 						<p class="input_title">Username/Email</p>
-						<input type="text" name="inputEmail" id="inputEmail" class="login_box" onkeyup="validatespecial(this)" placeholder="user@dlsu.edu.ph" required autofocus>
+						<input type="text" name="inputEmail" id="inputEmail" onkeyup="Special(this);" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus>
 						<br>
 						<p class="input_title">Password</p>
 						<input type="password" name="inputPassword" id="inputPassword" class="login_box" placeholder="******" required>
@@ -55,15 +56,16 @@
 			</div>
 
 			<div id="other-cont">
-				<div class="card card-container">
+				<div class="card card-container">	
 					<h2 class='login_title text-center'>
 						<span class="pull-right backbtn" id="back"><< Back</span>
 					</h2>
 					<hr class="top-hr">
 					<form class="form-request-acct" action="ComposeAccount" method="POST">
 						<div class="alert alert-danger" id="emailerror" role="alert">Email Address already taken</div>
+						<div class="alert alert-danger" id="noinput" role="alert"> Please Input a Email Address</div>
 						<p class="input_title">Email Address</p>
-						<input type="email" id="inputReqEmail" name="inputReqEmail" class="login_box" placeholder="user@dlsu.edu.ph" required autofocus><br>
+						<input type="email" id="inputReqEmail" name="inputReqEmail" class="login_box" onkeyup="Special(this);" placeholder="user@dlsu.edu.ph" required="required" autofocus><br>
 						<button class="btn btn-small btn-success btn-block submitbtn" id="reqBtn" type="button">REQUEST AN ACCOUNT</button>
 					</form><!-- /form -->
 					<hr>
@@ -71,7 +73,7 @@
 						<input type="hidden" value="Guest" name="inputEmail">
 					</form>
 					<button class="btn btn-small btn-default btn-block submitbtn" id="guestBtn">SIGN IN AS GUEST</button>
-		        </div><!-- /card-container -->
+		        </div><!-- /card-container -->	
 			</div>
 
 		</div> <!-- Home Container -->
@@ -84,7 +86,6 @@
 	
 	<!-- body -->
 	<script type="text/javascript" src="js/index.js"></script>
-	<script type="text/javascript" src="js/validation.js"></script>
 </body>
 
 </html>

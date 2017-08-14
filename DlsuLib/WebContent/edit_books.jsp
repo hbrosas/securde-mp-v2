@@ -13,6 +13,7 @@
 
     <title>Manage Catalogs | De La Salle University SHS Online Library</title>
 	<jsp:include page="admin_dependencies.jsp" />
+	 <script type="text/javascript" src="js/validation.js"></script>
 </head>
 
 <body class="nav-md">
@@ -168,13 +169,13 @@
                     	<input type="hidden" id="catalogid" name="catalogid">
                         <div class="form-group">
                             <label for="title">Catalog title:</label>
-                            <input type="text" class="form-control" onkeyup="validatespecial(this)" name="title" id="title" value="Magic 101">
+                            <input type="text" class="form-control" onkeyup="Special(this)" name="title" id="title" value="Magic 101">
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="author">Book Author:</label>
-                                    <input type="text" class="form-control" onkeyup="validatespecial(this)" name="author" id="author" value="Dumbledore">
+                                    <input type="text" class="form-control" onkeyup="Special(this)" name="author" id="author" value="Dumbledore">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-4">
@@ -240,7 +241,6 @@
 
     
     <jsp:include page="admin_dependencies_script.jsp" />
-     <script type="text/javascript" src="js/validation.js"></script> 
     <script>
     	$(document).on("click", "#editCatalogBtn", function(){                
     		$("#catalogid").val($(this).data("id"));

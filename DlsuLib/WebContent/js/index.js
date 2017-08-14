@@ -1,6 +1,7 @@
 var maindiv = $("#main"), logindiv = $("#login-cont"), otherdiv = $("#other-cont");
 var openSignin = $("#openSignin"), openOthers = $("#openOthers");
 var logo = $("#logo"), error = $("#error"), emailError = $("#emailerror");
+var noinput = $("#noinput");
 var opened = 0;
 
 $(document).ready(function() {
@@ -8,6 +9,7 @@ $(document).ready(function() {
 	otherdiv.hide();
 	error.hide();
 	emailError.hide();
+	noinput.hide();
 
 	$(document).on("click", "#openSignin", function() {
 		logo.hide();
@@ -70,7 +72,6 @@ $(document).ready(function() {
 
 	$(document).on("click", "#reqBtn", function() {
 		var email = $("#inputReqEmail").val();
-		
 		var data = {email:email}
 		$.ajax({
 			url: "ConfirmEmailServlet",
@@ -79,7 +80,11 @@ $(document).ready(function() {
 			success: function(status) {
 				if(status == "taken") {
 					emailError.show();
-				} else {
+				}
+				else if(email.length<1){
+					noinput.show();
+				}
+				else {
 					emailError.hide();
 					 $(".form-request-acct").submit();
 				}
