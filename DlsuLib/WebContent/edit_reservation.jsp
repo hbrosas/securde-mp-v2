@@ -102,7 +102,7 @@
 						  </div>
             		</div>
             	</div>
-                  <table id="usersTable" class="display" cellspacing="0" width="100%">
+                  <table id="reserationsTable" class="display" cellspacing="0" width="100%">
                     <thead>
                       <tr>
                         <th>Room</th>
@@ -113,37 +113,7 @@
                     </thead>
 
                     <tbody>
-                    	<c:forEach var = "c" items = "${catalogs}">
-                    		<tr>
-                    			<td>${c.title}</td>
-		                        <td>${c.author}</td>
-		                        <td>${c.publisher}</td>
-		                        <c:if test="${c.catalogtype == 1}">
-		                        	<td>Book</td>
-		                        </c:if>
-		                        <c:if test="${c.catalogtype == 2}">
-		                        	<td>Magazine</td>
-		                        </c:if>
-		                        <c:if test="${c.catalogtype == 3}">
-		                        	<td>Thesis</td>
-		                        </c:if>
-		                        <td>${c.location}</td>
-		                        <td>${c.tags}</td>
-		                        <c:if test="${c.status == 4}">
-		                        	<td><span class="label label-success">Available</span></td>
-		                        </c:if>
-		                        <c:if test="${c.status == 2}">
-		                        	<td><span class="label label-danger">Out</span></td>
-		                        </c:if>
-		                        <c:if test="${c.status == 3}">
-		                        	<td><span class="label label-info">Reserved</span></td>
-		                        </c:if>
-		                        <td><button class="btn btn-block" id="editCatalogBtn" data-id="${c.catalogid}"
-		                        data-title="${c.title}" data-author="${c.author}" data-publisher="${c.publisher}"
-		                        data-type="${c.catalogtype}" data-location="${c.location}" data-tags="${c.tags}"
-		                        data-status="${c.status}">View/Edit Details</button></td>
-		                    </tr>
-                    	</c:forEach>
+                    	
                     </tbody>
                   </table>
                 </div>
@@ -161,93 +131,15 @@
         </div>
     </div>
     
-    <!-- View/Edit -->
-    <div id="editBook" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View/Edit Catalog</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="UpdateCatalogServlet" method="POST" id="updateCatalogForm">
-                    	<input type="hidden" id="catalogid" name="catalogid">
-                        <div class="form-group">
-                            <label for="title">Catalog title:</label>
-                            <input type="text" class="form-control" name="title" id="title" value="Magic 101">
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="author">Book Author:</label>
-                                    <input type="text" class="form-control" name="author" id="author" value="Dumbledore">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="publisher">Publisher:</label>
-                                    <input type="text" class="form-control" name="publisher" id="publisher" value="Gandalf the Grey">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="year">Year:</label>
-                                    <input type="text" class="form-control" name="year" id="year" value="1998">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="category">Category:</label><br>
-                                    <select class="form-control" name="catalogtype">
-                                  <option value="1" selected>Book</option>
-                                  <option value="2">Magazine</option>
-                                  <option value="3">Thesis</option>
-                                </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="availability">Availability:</label><br>
-                                    <select class="form-control" name="status">
-                                  <option value="4" selected>Available</option>
-                                  <option value="2">Out</option>
-                                  <option value="3">Reserved</option>
-                                </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="author">Location:</label>
-                                    <input type="text" class="form-control" id="location" name="location" value="The Shire">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="tags">Tags:</label>
-                                    <input type="text" class="form-control" id="tags" name="tags" value="wizardry, magic, muggle">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="editButton">Edit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
     
     <jsp:include page="admin_dependencies_script.jsp" />
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/gentella.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/admin_reserve.js"></script>
     <script>
     	$(document).on("click", "#editCatalogBtn", function(){                
     		$("#catalogid").val($(this).data("id"));
