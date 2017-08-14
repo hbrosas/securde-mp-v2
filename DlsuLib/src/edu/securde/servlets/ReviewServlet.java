@@ -17,6 +17,7 @@ import com.google.gson.JsonArray;
 import edu.securde.beans.Review;
 import edu.securde.beans.User;
 import edu.securde.manager.BorrowManager;
+import edu.securde.manager.Logging;
 import edu.securde.manager.ReviewManager;
 
 /**
