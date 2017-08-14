@@ -54,7 +54,7 @@
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="view_reservation.html">Manage Reservations</a></li>
+                                        <li><a href="AdminReserveServlet">Manage Reservations</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -93,13 +93,11 @@
             	<div class="row">
             		<div class="col-lg-12">
             			 <div class="form-group">
-						    <label for="exampleSelect1 col-lg-12">Example select</label>
-						    <select class="form-control col-lg-12" id="exampleSelect1">
-						      <option>1</option>
-						      <option>2</option>
-						      <option>3</option>
-						      <option>4</option>
-						      <option>5</option>
+						    <label for="inputDate col-lg-12">Date:</label>
+						    <select class="form-control col-lg-12" id="inputDate">
+						      <c:forEach var = "d" items = "${dates}">
+						      <option>${d}</option>
+						      </c:forEach>
 						    </select>
 						  </div>
             		</div>
@@ -107,14 +105,10 @@
                   <table id="usersTable" class="display" cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Publisher</th>
-                        <th>Category</th>
-                        <th>Location</th>
-                        <th>Tags</th>
+                        <th>Room</th>
+                        <th>Time Slot</th>
+                        <th>User</th>
                         <th>Status</th>
-                        <th> </th>
                       </tr>
                     </thead>
 

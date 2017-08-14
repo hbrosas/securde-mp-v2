@@ -47,22 +47,34 @@ public class LoginServlet extends HttpServlet {
 		String user = request.getParameter("user");
 		String password = request.getParameter("password");	
 		String remember = request.getParameter("remember");
-		System.out.println(remember);
 		int emailAccountId = UserManager.checkCredentialsbyEmail(user, password);
 		int userAccountId = UserManager.checkCredentialsbyUsername(user, password);
 		if(emailAccountId == -1) {
 			if(userAccountId == -1) {
+				System.out.println("error");
 				response.setContentType("text/html;charset=UTF-8");
-		        response.getWriter().write("error");
+		        response.getWriter().write("Invalid Login and/or Password");
 			} else {
-				login(userAccountId, remember, request, response);
-				response.setContentType("text/html;charset=UTF-8");
-		        response.getWriter().write("success");
+				User u = UserManager.getUser(userAccountId);
+				if(UserManager.checkIfActive(u)) {
+					login(userAccountId, remember, request, response);
+					response.setContentType("text/html;charset=UTF-8");
+			        response.getWriter().write("success");
+				} else {
+					response.setContentType("text/html;charset=UTF-8");
+			        response.getWriter().write("Your account was locked");
+				}
 			}
 		} else {
-			login(emailAccountId, remember, request, response);
-			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write("success");
+			User u = UserManager.getUser(emailAccountId);
+			if(UserManager.checkIfActive(u)) {
+				login(emailAccountId, remember, request, response);
+				response.setContentType("text/html;charset=UTF-8");
+		        response.getWriter().write("success");
+			} else {
+				response.setContentType("text/html;charset=UTF-8");
+		        response.getWriter().write("Your account was locked");
+			}
 		}
 	}
 	

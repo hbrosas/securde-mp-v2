@@ -11,7 +11,15 @@ public class Reservation implements Serializable {
 	public static final String COLUMN_STATUSID = "statusId";
 	
 	int userid, reserveid, roomtimeslotid, statusid;
-	String datereserved;
+	String datereserved, username;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public int getUserid() {
 		return userid;
 	}
