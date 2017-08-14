@@ -17,7 +17,10 @@
 </head>
 
 <body class="nav-md">
-	<% User user=(User)session.getAttribute("ucx"); %>
+	<% User user=(User)session.getAttribute("user"); 
+		int role = user.getRoleid();
+		if( role == 2 || role == 3 || role == 4 ) {
+	%>
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
@@ -41,23 +44,29 @@
                             <h3>Navigation</h3>
                             <ul class="nav side-menu">
                                 <li><a href="admin_home.html"><i class="fa fa-home"></i> Home</a></li>
+                                <% if(user.getRoleid() == 4) {%>
                                 <li><a><i class="fa fa-user"></i> Accounts <span class="fa fa-chevron-down"></span></a>
                                      <ul class="nav child_menu">
                                         <li><a href="admincreate.jsp"> Create New Account</a></li>
                                         <li><a href="ManageAccountServlet"> Manage Accounts</a></li>
                                     </ul>
                                 </li>
+                                <% } %>
+                                <% if(user.getRoleid() == 2 || user.getRoleid() == 3) {%>
                                 <li><a><i class="fa fa-book"></i> Catalog <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="add_books.jsp">Add Catalog</a></li>
                                         <li><a href="ManageCatalogServlet">Manage Catalogs</a></li>
                                     </ul>
                                 </li>
+                                <% } %>
+                                <% if(user.getRoleid() == 2) {%>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="AdminReserveServlet">Manage Reservations</a></li>
                                     </ul>
                                 </li>
+                                <% } %>
                             </ul>
                         </div>
                     </div>
@@ -263,3 +272,4 @@
     
 </body>
 </html>
+<% } else { %> <jsp:include page="forbidden.jsp" /> <% } %>
