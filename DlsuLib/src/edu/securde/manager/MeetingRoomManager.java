@@ -155,6 +155,8 @@ public class MeetingRoomManager {
         }
         return null;
       }
+ }
+
 //
 //    public static ArrayList<Reservation> GetAllReservation(Reservation reservation) {
 //      String sql = "SELECT " + Reservation.TABLE_NAME + " WHERE "
@@ -194,5 +196,4 @@ public class MeetingRoomManager {
 //      }
 //      return null;
 //    }
-  
-}
+

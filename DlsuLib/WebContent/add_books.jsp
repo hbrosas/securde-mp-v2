@@ -96,26 +96,26 @@
 							<div class="row">
 								<div class="col-md-2">
 									<p class="input_title">Title</p>
-									<input type="text" id="inputTitle" name="title" class="form-control" placeholder="title" required autofocus>
+									<input type="text" id="inputTitle" name="title" onkeyup="validatespecial(this)" class="form-control" placeholder="title" required autofocus>
 								</div>
 								<div class="col-md-2">
 									<p class="input_title">Author</p>
-									<input type="text" id="inputAuthor" name="author" class="form-control" placeholder="author">
+									<input type="text" id="inputAuthor" name="author" onkeyup="validatespecial(this)" class="form-control" placeholder="author">
 								</div>
 							</div>
 							<br>
 							<div class="row">
 								<div class="col-md-2">
 									<p class="input_title">Year</p>
-									<input type="text" id="inputYear" name="year" class="form-control" placeholder="year" required>
+									<input type="text" id="inputYear" name="year" onkeyup="validatephone(this)" class="form-control" placeholder="year" required>
 								</div>
 								<div class="col-md-2">
 									<p class="input_title">Publisher</p>
-									<input type="text" id="inputPublisher" name="publisher" class="form-control" placeholder="Publisher" required>
+									<input type="text" id="inputPublisher" name="publisher" onkeyup="validatelocation(this)" class="form-control" placeholder="Publisher" required>
 								</div>
 								<div class="col-md-2">
 									<p class="input_title">Location</p>
-									<input type="text" id="inputLocation" name="location" class="form-control" placeholder="Location" required>
+									<input type="text" id="inputLocation" name="location" onkeyup="validatelocation(this)" class="form-control" placeholder="Location" required>
 								</div>
 							</div>
 							<br>
@@ -130,7 +130,7 @@
 									</select>
 								</div>
 								<div class="col-md-4">
-										<input type="text" id="inputTags" class="form-control" name="tags" placeholder="Tags" required>
+										<input type="text" id="inputTags" onkeyup="validatelocation(this)" class="form-control" name="tags" placeholder="Tags" required>
 									</div>
 								</div>
 							</div>
@@ -157,6 +157,8 @@
             <!-- /footer content -->
         </div>
     </div>
+    <script type="text/javascript" src="js/validation.js"></script> 
+
 </body>
 	<jsp:include page="admin_dependencies_script.jsp" />
 </html>

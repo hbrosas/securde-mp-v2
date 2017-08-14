@@ -668,4 +668,35 @@ public class UserManager {
 	        return minUsage;
 	    }
 	}
+	
+	public static String getSalt(String username, String email) {
+		String salt = "";
+		String sql = "SELECT * " +" FROM " + User.TABLE_NAME + " WHERE " +
+				User.COLUMN_USERNAME +" LIKE =? " + " OR " + User.COLUMN_EMAILADDRESS + " LIKE  =?" + ";";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				salt = (rs.getString(User.COLUMN_SALT));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return salt;
+	}
 }

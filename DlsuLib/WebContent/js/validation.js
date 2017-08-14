@@ -38,8 +38,17 @@ function validateForm() {
 }
 
 function validatespecial(txt){
-    txt.value = txt.value.replace(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\"():<>\?]/,'');
+    txt.value = txt.value.replace(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\"():<>\?] /,'');
 }
+
+function validatetags(txt){
+    txt.value = txt.value.replace(/[~@`!#$%\^&*+=\-\[\]\\';/{}|\\"():<>\?] /,'');
+}
+
+function validatelocation(txt){
+    txt.value = txt.value.replace(/[~`@!#$%\^&*+=\-\[\]\\';/{}|\\"():<>\?]/,'');
+}
+
 
 function validatephone(phone) 
 {

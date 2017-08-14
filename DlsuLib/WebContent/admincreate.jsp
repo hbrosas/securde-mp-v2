@@ -96,7 +96,7 @@
 							<div class="row">
 								<div class="col-md-2">
 									<p class="input_title">Username</p>
-									<input type="text" id="inputUser" name="username" class="form-control" placeholder="user1234" required autofocus>
+									<input type="text" id="inputUser" name="username" onkeyup="validatelocation(this)" class="form-control" placeholder="user1234" required autofocus>
 								</div>
 								<div class="col-md-2">
 									<p class="input_title">Temporary Password</p>
@@ -107,22 +107,22 @@
 							<div class="row">
 								<div class="col-md-2">
 									<p class="input_title">First Name</p>
-									<input type="text" id="inputFirstName" name="firstName" class="form-control" placeholder="John" required>
+									<input type="text" id="inputFirstName" onkeyup="Validate(this)" name="firstName" class="form-control" placeholder="John" required>
 								</div>
 								<div class="col-md-2">
 									<p class="input_title">Middle Name</p>
-									<input type="text" id="inputMiddleName" name="middleName" class="form-control" placeholder="Middle" required>
+									<input type="text" id="inputMiddleName"  onkeyup="Validate(this)" name="middleName" class="form-control" placeholder="Middle" required>
 								</div>
 								<div class="col-md-2">
 									<p class="input_title">Last Name</p>
-									<input type="text" id="inputLastName" name="lastName" class="form-control" placeholder="Doe" required>
+									<input type="text" id="inputLastName"  onkeyup="Validate(this)" name="lastName" class="form-control" placeholder="Doe" required>
 								</div>
 							</div>
 							<br>
 							<div class="row">
 								<div class="col-md-2">
 									<p class="input_title">ID Number</p>
-									<input type="text" id="inputIDnumber" name="idNumber" class="form-control" placeholder="ID Number" required>
+									<input type="text" id="inputIDnumber" onkeyup="validatephone(this)" name="idNumber" class="form-control" placeholder="ID Number" required>
 								</div>
 								<div class="col-md-4">
 									<p class="input_title">Birthday</p>

@@ -168,25 +168,25 @@
                     	<input type="hidden" id="catalogid" name="catalogid">
                         <div class="form-group">
                             <label for="title">Catalog title:</label>
-                            <input type="text" class="form-control" name="title" id="title" value="Magic 101">
+                            <input type="text" class="form-control" onkeyup="validatespecial(this)" name="title" id="title" value="Magic 101">
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="author">Book Author:</label>
-                                    <input type="text" class="form-control" name="author" id="author" value="Dumbledore">
+                                    <input type="text" class="form-control" onkeyup="validatespecial(this)" name="author" id="author" value="Dumbledore">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="publisher">Publisher:</label>
-                                    <input type="text" class="form-control" name="publisher" id="publisher" value="Gandalf the Grey">
+                                    <input type="text" class="form-control" onkeyup="validatelocation(this)" name="publisher" id="publisher" value="Gandalf the Grey">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label for="year">Year:</label>
-                                    <input type="text" class="form-control" name="year" id="year" value="1998">
+                                    <input type="text" class="form-control" onkeyup="validatephone(this)" name="year" id="year" value="1998">
                                 </div>
                             </div>
                         </div>
@@ -217,13 +217,13 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="author">Location:</label>
-                                    <input type="text" class="form-control" id="location" name="location" value="The Shire">
+                                    <input type="text" class="form-control" onkeyup="validatelocation(this)" id="location" name="location" value="The Shire">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="tags">Tags:</label>
-                                    <input type="text" class="form-control" id="tags" name="tags" value="wizardry, magic, muggle">
+                                    <input type="text" class="form-control"  onkeyup="validatelocation(this)" id="tags" name="tags" value="wizardry, magic, muggle">
                                 </div>
                             </div>
                         </div>
@@ -240,6 +240,7 @@
 
     
     <jsp:include page="admin_dependencies_script.jsp" />
+     <script type="text/javascript" src="js/validation.js"></script> 
     <script>
     	$(document).on("click", "#editCatalogBtn", function(){                
     		$("#catalogid").val($(this).data("id"));
@@ -258,6 +259,7 @@
     		$("#updateCatalogForm").submit();
     	});
     </script>
+
     
 </body>
 </html>
