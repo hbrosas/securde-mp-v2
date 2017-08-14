@@ -16,6 +16,7 @@ import edu.securde.beans.Catalog;
 import edu.securde.beans.Review;
 import edu.securde.beans.User;
 import edu.securde.manager.CatalogManager;
+import edu.securde.manager.Logging;
 import edu.securde.manager.ReviewManager;
 import edu.securde.manager.UserManager;
 
@@ -46,16 +47,21 @@ public class AllCatalogServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-//		String action = (String) request.getAttribute("action");
 		User user = (User) request.getAttribute("user");
 		Cookie[] cookies;
 		int role = user.getRoleid();
 		switch(role) {
 		case 1: case 5: case 6:
 			ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
+			Logging.Log("UPDATE: Gathering all catalogs\n");
 			request.setAttribute("catalogs", catalogs);
 			request.setAttribute("user", user);
 			session.setAttribute("user", user);
+			
+			if(user.getRoleid() == 1) Logging.Log("UPDATE: User is a Student\n");
+			if(user.getRoleid() == 5) Logging.Log("UPDATE: User is an Employee\n");
+			if(user.getRoleid() == 6) Logging.Log("UPDATE: User is a Guest\n");
+			
 			
 			cookies = request.getCookies();
 			if(cookies != null) {
@@ -68,12 +74,17 @@ public class AllCatalogServlet extends HttpServlet {
 				}
 			}
 			
+			Logging.Log("UPDATE: Redirecting to the home page\n");
 			request.getRequestDispatcher("home.jsp").forward(request, response);
 			break;
 		case 2: case 3: case 4:
 			request.setAttribute("user", user);
 			session.setAttribute("user", user);
 			
+			if(user.getRoleid() == 2) Logging.Log("UPDATE: User is a Library Manager\n");
+			if(user.getRoleid() == 3) Logging.Log("UPDATE: User is a Library Staff\n");
+			if(user.getRoleid() == 4) Logging.Log("UPDATE: User is a Administrator\n");
+			
 			cookies = request.getCookies();
 			if(cookies != null) {
 				for(int i = 0; i < cookies.length; i++) {
@@ -85,6 +96,7 @@ public class AllCatalogServlet extends HttpServlet {
 				}
 			}
 			
+			Logging.Log("UPDATE: Redirecting to Administrator Panel\n");
 			request.getRequestDispatcher("admin_home.jsp").forward(request, response);
 			break;
 		}

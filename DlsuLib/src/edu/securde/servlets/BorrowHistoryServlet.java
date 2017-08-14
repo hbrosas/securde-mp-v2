@@ -14,6 +14,7 @@ import edu.securde.beans.Borrow;
 import edu.securde.beans.Catalog;
 import edu.securde.manager.BorrowManager;
 import edu.securde.manager.CatalogManager;
+import edu.securde.manager.Logging;
 
 /**
  * Servlet implementation class BorrowHistoryServlet
@@ -49,6 +50,7 @@ public class BorrowHistoryServlet extends HttpServlet {
 		ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
 		request.setAttribute("borrows", borrows);
 		request.setAttribute("catalogs", catalogs);
+		Logging.Log("UPDATE: User Browsing Borrow History\n");
 		request.getRequestDispatcher("borrowhistory.jsp").forward(request, response);
 	}
 

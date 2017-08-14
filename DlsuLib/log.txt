@@ -1,0 +1,18 @@
+UPDATE: New Login Request.
+
+ERROR: User invalid log in
+
+UPDATE: New Login Request.
+
+UPDATE: New Login Request.
+
+ERROR: User invalid log in
+
+UPDATE: User 10 successfully Logged in on the system.
+
+UPDATE: Gathering all catalogs
+
+UPDATE: User is a Student
+
+UPDATE: Redirecting to the home page
+
