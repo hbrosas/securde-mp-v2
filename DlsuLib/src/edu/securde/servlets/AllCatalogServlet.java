@@ -48,6 +48,7 @@ public class AllCatalogServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String action = (String) request.getAttribute("action");
 		User user = (User) request.getAttribute("user");
+		Cookie[] cookies;
 		int role = user.getRoleid();
 		switch(role) {
 		case 1: case 5: case 6:
@@ -55,11 +56,35 @@ public class AllCatalogServlet extends HttpServlet {
 			request.setAttribute("catalogs", catalogs);
 			request.setAttribute("user", user);
 			session.setAttribute("user", user);
+			
+			cookies = request.getCookies();
+			if(cookies != null) {
+				for(int i = 0; i < cookies.length; i++) {
+					if(cookies[i].getName().equals("trie")) {
+						cookies[i].setValue(null);
+						cookies[i].setMaxAge(0);
+						response.addCookie(cookies[i]);
+					}
+				}
+			}
+			
 			request.getRequestDispatcher("home.jsp").forward(request, response);
 			break;
 		case 2: case 3: case 4:
 			request.setAttribute("user", user);
 			session.setAttribute("user", user);
+			
+			cookies = request.getCookies();
+			if(cookies != null) {
+				for(int i = 0; i < cookies.length; i++) {
+					if(cookies[i].getName().equals("trie")) {
+						cookies[i].setValue(null);
+						cookies[i].setMaxAge(0);
+						response.addCookie(cookies[i]);
+					}
+				}
+			}
+			
 			request.getRequestDispatcher("admin_home.jsp").forward(request, response);
 			break;
 		}
