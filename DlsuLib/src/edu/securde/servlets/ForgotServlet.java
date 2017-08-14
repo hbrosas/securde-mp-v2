@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.securde.manager.Hash;
+import edu.securde.manager.Logging;
 import edu.securde.manager.SecurityQuestionManager;
 import edu.securde.manager.UserManager;
 
@@ -89,6 +90,6 @@ public class ForgotServlet extends HttpServlet {
 				        response.getWriter().write("error");
 				}
 			}
-			
+		Logging.Log("Email Address: " + request.getParameter("email") + "changed password");
 	}
 }
