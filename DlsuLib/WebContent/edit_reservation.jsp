@@ -32,7 +32,7 @@
 	                    <div class="profile clearfix">
 	                        <div class="profile_info">
 	                            <span>Welcome,</span>
-	                           
+	                            <h2> <%=user.getFirstname() %> <%=user.getLastname()%></h2>
 	                        </div>
 	                    </div>
                     </div>
@@ -83,7 +83,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    
+                                    <img src="images/user.png" alt=""><%=user.getFirstname() %> <%=user.getLastname()%>                                   
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
