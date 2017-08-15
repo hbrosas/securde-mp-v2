@@ -1,60 +1,59 @@
--- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+CREATE DATABASE  IF NOT EXISTS `dlsulib` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `dlsulib`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 11, 2017 at 12:53 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.0.21
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: dlsulib
+-- ------------------------------------------------------
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `dlsulib`
---
-CREATE DATABASE IF NOT EXISTS `dlsulib` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `dlsulib`;
-
--- --------------------------------------------------------
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `borrow`
 --
 
+DROP TABLE IF EXISTS `borrow`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `borrow` (
-  `borrowId` int(11) NOT NULL,
+  `borrowId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   `catalogId` int(11) NOT NULL,
   `DateBorrowed` datetime NOT NULL,
   `dateExpectReturn` datetime NOT NULL,
-  `statusId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `statusId` int(11) NOT NULL,
+  PRIMARY KEY (`borrowId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `borrow`
 --
 
-INSERT INTO `borrow` (`borrowId`, `userId`, `catalogId`, `DateBorrowed`, `dateExpectReturn`, `statusId`) VALUES
-(1, 1, 1, '2017-07-06 05:52:16', '2017-07-11 05:52:16', -1),
-(2, 2, 2, '2017-07-06 05:52:16', '2017-07-11 05:52:16', -1);
-
--- --------------------------------------------------------
+LOCK TABLES `borrow` WRITE;
+/*!40000 ALTER TABLE `borrow` DISABLE KEYS */;
+INSERT INTO `borrow` VALUES (1,1,1,'2017-07-06 05:52:16','2017-07-11 05:52:16',-1),(2,2,2,'2017-07-06 05:52:16','2017-07-11 05:52:16',-1),(3,3,2,'2017-08-11 11:42:43','2017-08-18 11:42:43',2),(4,3,3,'2017-08-11 12:30:41','2017-08-18 12:30:41',2),(5,10,1,'2017-08-15 07:32:38','2017-08-22 07:32:38',2);
+/*!40000 ALTER TABLE `borrow` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `catalog`
 --
 
+DROP TABLE IF EXISTS `catalog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `catalog` (
-  `catalogid` int(11) NOT NULL,
+  `catalogid` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
   `author` varchar(45) NOT NULL,
   `year` int(11) NOT NULL,
@@ -62,314 +61,207 @@ CREATE TABLE `catalog` (
   `location` varchar(45) NOT NULL,
   `catalogType` varchar(45) NOT NULL,
   `status` varchar(45) NOT NULL,
-  `tags` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `tags` varchar(250) NOT NULL,
+  PRIMARY KEY (`catalogid`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `catalog`
 --
 
-INSERT INTO `catalog` (`catalogid`, `title`, `author`, `year`, `publisher`, `location`, `catalogType`, `status`, `tags`) VALUES
-(1, 'Challengers of the Unknown', 'Ron Goulart', 1977, '	Dell', 'ABCD.1234.1977', '2', '4', 'Gangster'),
-(2, 'A Life in the Streets', 'Eugene Lim', 2017, 'Ted Publishing House', 'EGFD.1451.2017', '2 ', '4', 'Blood, Sweat, Tears'),
-(3, 'Buhay ng Gangsta', 'Smugglaz', 2016, '187 Mobstaz', 'ABGE.2031.2016', '1', '4', 'Streets'),
-(4, 'Blithe Spirit', '	Noël Coward', 1941, 'Noel', 'P112.BPC3.1941', '2', '3', 'Spirit'),
-(5, 'The Lord of The Rings', 'J. R. R. Tolkien', 1955, 'Allen & Unwin', 'AZJP.12BP.1955', '1', '4', 'Rings, Lord'),
-(6, 'Kingdom Come', 'Elliot S. Maggin, with Mark Waid, Alex Ross', 1998, 'Warner Books', 'POG1.0986.1998', '1', '4', 'Kingdom'),
-(7, 'Three Little Bears', 'Yemear ', 2017, 'Ming Publishing House', 'IUP1.1023.2017', '1', '4', 'Bears, Ming, Ling, Mong, Long'),
-(8, 'The Adventures of Superman', 'George Lowther', 1979, 'Kassel Books ', 'YTIZ.1B31.1979', '1', '2', 'Superman'),
-(9, 'Batman & Robin', 'Michael Jan Friedman', 1997, 'Warner Books', 'QWER.4321.1997', '1', '4', 'Batman, Robin, Bat'),
-(10, 'Steel', 'Dean Wesley Smith', 1997, 'Tor Books', 'POI6.1409.1997', '1', '4', 'Man of Steel, Steel'),
-(17, 'Secure Internet of Things', '	Dr.	Thiemo	Voigt', 2017, 'SICS Swedish Lab', 'POZS.1095.2017', '3', '4', 'Internet of Things, Internet');
-
--- --------------------------------------------------------
+LOCK TABLES `catalog` WRITE;
+/*!40000 ALTER TABLE `catalog` DISABLE KEYS */;
+INSERT INTO `catalog` VALUES (1,'Challengers of the Unknown','Ron Goulart',1977,'	Dell','ABCD.1234.1977','2','2','Gangster'),(2,'A Life in the Streets','Eugene Lim',2017,'Ted Publishing House','EGFD.1451.2017','2 ','2','Blood, Sweat, Tears'),(3,'Buhay ng Gangsta','Smugglaz',2016,'187 Mobstaz','ABGE.2031.2016','1','2','Streets'),(4,'Blithe Spirit','	Noël Coward',1941,'Noel','P112.BPC3.1941','2','3','Spirit'),(5,'The Lord of The Rings','J. R. R. Tolkien',1955,'Allen & Unwin','AZJP.12BP.1955','1','4','Rings, Lord'),(6,'Kingdom Come','Elliot S. Maggin, with Mark Waid, Alex Ross',1998,'Warner Books','POG1.0986.1998','1','4','Kingdom'),(7,'Three Little Bears','Yemear ',2017,'Ming Publishing House','IUP1.1023.2017','1','4','Bears, Ming, Ling, Mong, Long'),(8,'The Adventures of Superman','George Lowther',1979,'Kassel Books ','YTIZ.1B31.1979','1','2','Superman'),(9,'Batman & Robin','Michael Jan Friedman',1997,'Warner Books','QWER.4321.1997','1','4','Batman, Robin, Bat'),(10,'Steel','Dean Wesley Smith',1997,'Tor Books','POI6.1409.1997','1','4','Man of Steel, Steel'),(17,'Secure Internet of Things','	Dr.	Thiemo	Voigt',2017,'SICS Swedish Lab','POZS.1095.2017','3','4','Internet of Things, Internet');
+/*!40000 ALTER TABLE `catalog` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `catalogtype`
 --
 
+DROP TABLE IF EXISTS `catalogtype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `catalogtype` (
-  `catalogid` int(11) NOT NULL,
-  `catalogtype` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `catalogid` int(11) NOT NULL AUTO_INCREMENT,
+  `catalogtype` varchar(45) NOT NULL,
+  PRIMARY KEY (`catalogid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `catalogtype`
 --
 
-INSERT INTO `catalogtype` (`catalogid`, `catalogtype`) VALUES
-(1, 'Book'),
-(2, 'Magazine'),
-(3, 'Thesis');
-
--- --------------------------------------------------------
+LOCK TABLES `catalogtype` WRITE;
+/*!40000 ALTER TABLE `catalogtype` DISABLE KEYS */;
+INSERT INTO `catalogtype` VALUES (1,'Book'),(2,'Magazine'),(3,'Thesis');
+/*!40000 ALTER TABLE `catalogtype` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `meetingroom`
 --
 
+DROP TABLE IF EXISTS `meetingroom`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `meetingroom` (
-  `roomId` int(11) NOT NULL,
+  `roomId` int(11) NOT NULL AUTO_INCREMENT,
   `statusId` int(11) NOT NULL,
   `roomTypeId` int(11) NOT NULL,
   `startTimeslot` time NOT NULL,
-  `endTimeslot` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `endTimeslot` time NOT NULL,
+  PRIMARY KEY (`roomId`)
+) ENGINE=InnoDB AUTO_INCREMENT=383 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `meetingroom`
 --
 
-INSERT INTO `meetingroom` (`roomId`, `statusId`, `roomTypeId`, `startTimeslot`, `endTimeslot`) VALUES
-(253, 1, 1, '07:00:00', '07:30:00'),
-(254, 1, 1, '07:30:00', '08:00:00'),
-(255, 1, 1, '08:00:00', '08:30:00'),
-(256, 1, 1, '08:30:00', '09:00:00'),
-(257, 1, 1, '09:00:00', '09:30:00'),
-(258, 1, 1, '09:30:00', '10:00:00'),
-(259, 1, 1, '10:00:00', '10:30:00'),
-(260, 1, 1, '10:30:00', '11:00:00'),
-(261, 1, 1, '11:00:00', '11:30:00'),
-(262, 1, 1, '11:30:00', '12:00:00'),
-(263, 1, 1, '12:00:00', '12:30:00'),
-(264, 1, 1, '12:30:00', '13:00:00'),
-(265, 1, 1, '13:00:00', '13:30:00'),
-(266, 1, 1, '13:30:00', '14:00:00'),
-(267, 1, 1, '14:00:00', '14:30:00'),
-(268, 1, 1, '14:30:00', '15:00:00'),
-(269, 1, 1, '15:00:00', '15:30:00'),
-(270, 1, 1, '15:30:00', '16:00:00'),
-(271, 1, 1, '16:00:00', '16:30:00'),
-(272, 1, 1, '16:30:00', '17:00:00'),
-(273, 1, 1, '17:00:00', '17:30:00'),
-(274, 1, 1, '17:30:00', '18:00:00'),
-(275, 1, 1, '18:00:00', '18:30:00'),
-(276, 1, 1, '18:30:00', '19:00:00'),
-(277, 1, 1, '19:00:00', '19:30:00'),
-(278, 1, 1, '19:30:00', '20:00:00'),
-(279, 1, 2, '07:00:00', '07:30:00'),
-(280, 1, 2, '07:30:00', '08:00:00'),
-(281, 1, 2, '08:00:00', '08:30:00'),
-(282, 1, 2, '08:30:00', '09:00:00'),
-(283, 1, 2, '09:00:00', '09:30:00'),
-(284, 1, 2, '09:30:00', '10:00:00'),
-(285, 1, 2, '10:00:00', '10:30:00'),
-(286, 1, 2, '10:30:00', '11:00:00'),
-(287, 1, 2, '11:00:00', '11:30:00'),
-(288, 1, 2, '11:30:00', '12:00:00'),
-(289, 1, 2, '12:00:00', '12:30:00'),
-(290, 1, 2, '12:30:00', '13:00:00'),
-(291, 1, 2, '13:00:00', '13:30:00'),
-(292, 1, 2, '13:30:00', '14:00:00'),
-(293, 1, 2, '14:00:00', '14:30:00'),
-(294, 1, 2, '14:30:00', '15:00:00'),
-(295, 1, 2, '15:00:00', '15:30:00'),
-(296, 1, 2, '15:30:00', '16:00:00'),
-(297, 1, 2, '16:00:00', '16:30:00'),
-(298, 1, 2, '16:30:00', '17:00:00'),
-(299, 1, 2, '17:00:00', '17:30:00'),
-(300, 1, 2, '17:30:00', '18:00:00'),
-(301, 1, 2, '18:00:00', '18:30:00'),
-(302, 1, 2, '18:30:00', '19:00:00'),
-(303, 1, 2, '19:00:00', '19:30:00'),
-(304, 1, 2, '19:30:00', '20:00:00'),
-(305, 1, 3, '07:00:00', '07:30:00'),
-(306, 1, 3, '07:30:00', '08:00:00'),
-(307, 1, 3, '08:00:00', '08:30:00'),
-(308, 1, 3, '08:30:00', '09:00:00'),
-(309, 1, 3, '09:00:00', '09:30:00'),
-(310, 1, 3, '09:30:00', '10:00:00'),
-(311, 1, 3, '10:00:00', '10:30:00'),
-(312, 1, 3, '10:30:00', '11:00:00'),
-(313, 1, 3, '11:00:00', '11:30:00'),
-(314, 1, 3, '11:30:00', '12:00:00'),
-(315, 1, 3, '12:00:00', '12:30:00'),
-(316, 1, 3, '12:30:00', '13:00:00'),
-(317, 1, 3, '13:00:00', '13:30:00'),
-(318, 1, 3, '13:30:00', '14:00:00'),
-(319, 1, 3, '14:00:00', '14:30:00'),
-(320, 1, 3, '14:30:00', '15:00:00'),
-(321, 1, 3, '15:00:00', '15:30:00'),
-(322, 1, 3, '15:30:00', '16:00:00'),
-(323, 1, 3, '16:00:00', '16:30:00'),
-(324, 1, 3, '16:30:00', '17:00:00'),
-(325, 1, 3, '17:00:00', '17:30:00'),
-(326, 1, 3, '17:30:00', '18:00:00'),
-(327, 1, 3, '18:00:00', '18:30:00'),
-(328, 1, 3, '18:30:00', '19:00:00'),
-(329, 1, 3, '19:00:00', '19:30:00'),
-(330, 1, 3, '19:30:00', '20:00:00'),
-(331, 1, 4, '07:00:00', '07:30:00'),
-(332, 1, 4, '07:30:00', '08:00:00'),
-(333, 1, 4, '08:00:00', '08:30:00'),
-(334, 1, 4, '08:30:00', '09:00:00'),
-(335, 1, 4, '09:00:00', '09:30:00'),
-(336, 1, 4, '09:30:00', '10:00:00'),
-(337, 1, 4, '10:00:00', '10:30:00'),
-(338, 1, 4, '10:30:00', '11:00:00'),
-(339, 1, 4, '11:00:00', '11:30:00'),
-(340, 1, 4, '11:30:00', '12:00:00'),
-(341, 1, 4, '12:00:00', '12:30:00'),
-(342, 1, 4, '12:30:00', '13:00:00'),
-(343, 1, 4, '13:00:00', '13:30:00'),
-(344, 1, 4, '13:30:00', '14:00:00'),
-(345, 1, 4, '14:00:00', '14:30:00'),
-(346, 1, 4, '14:30:00', '15:00:00'),
-(347, 1, 4, '15:00:00', '15:30:00'),
-(348, 1, 4, '15:30:00', '16:00:00'),
-(349, 1, 4, '16:00:00', '16:30:00'),
-(350, 1, 4, '16:30:00', '17:00:00'),
-(351, 1, 4, '17:00:00', '17:30:00'),
-(352, 1, 4, '17:30:00', '18:00:00'),
-(353, 1, 4, '18:00:00', '18:30:00'),
-(354, 1, 4, '18:30:00', '19:00:00'),
-(355, 1, 4, '19:00:00', '19:30:00'),
-(356, 1, 4, '19:30:00', '20:00:00'),
-(357, 1, 5, '07:00:00', '07:30:00'),
-(358, 1, 5, '07:30:00', '08:00:00'),
-(359, 1, 5, '08:00:00', '08:30:00'),
-(360, 1, 5, '08:30:00', '09:00:00'),
-(361, 1, 5, '09:00:00', '09:30:00'),
-(362, 1, 5, '09:30:00', '10:00:00'),
-(363, 1, 5, '10:00:00', '10:30:00'),
-(364, 1, 5, '10:30:00', '11:00:00'),
-(365, 1, 5, '11:00:00', '11:30:00'),
-(366, 1, 5, '11:30:00', '12:00:00'),
-(367, 1, 5, '12:00:00', '12:30:00'),
-(368, 1, 5, '12:30:00', '13:00:00'),
-(369, 1, 5, '13:00:00', '13:30:00'),
-(370, 1, 5, '13:30:00', '14:00:00'),
-(371, 1, 5, '14:00:00', '14:30:00'),
-(372, 1, 5, '14:30:00', '15:00:00'),
-(373, 1, 5, '15:00:00', '15:30:00'),
-(374, 1, 5, '15:30:00', '16:00:00'),
-(375, 1, 5, '16:00:00', '16:30:00'),
-(376, 1, 5, '16:30:00', '17:00:00'),
-(377, 1, 5, '17:00:00', '17:30:00'),
-(378, 1, 5, '17:30:00', '18:00:00'),
-(379, 1, 5, '18:00:00', '18:30:00'),
-(380, 1, 5, '18:30:00', '19:00:00'),
-(381, 1, 5, '19:00:00', '19:30:00'),
-(382, 1, 5, '19:30:00', '20:00:00');
-
--- --------------------------------------------------------
+LOCK TABLES `meetingroom` WRITE;
+/*!40000 ALTER TABLE `meetingroom` DISABLE KEYS */;
+INSERT INTO `meetingroom` VALUES (253,1,1,'07:00:00','07:30:00'),(254,1,1,'07:30:00','08:00:00'),(255,1,1,'08:00:00','08:30:00'),(256,1,1,'08:30:00','09:00:00'),(257,1,1,'09:00:00','09:30:00'),(258,1,1,'09:30:00','10:00:00'),(259,1,1,'10:00:00','10:30:00'),(260,1,1,'10:30:00','11:00:00'),(261,1,1,'11:00:00','11:30:00'),(262,1,1,'11:30:00','12:00:00'),(263,1,1,'12:00:00','12:30:00'),(264,1,1,'12:30:00','13:00:00'),(265,1,1,'13:00:00','13:30:00'),(266,1,1,'13:30:00','14:00:00'),(267,1,1,'14:00:00','14:30:00'),(268,1,1,'14:30:00','15:00:00'),(269,1,1,'15:00:00','15:30:00'),(270,1,1,'15:30:00','16:00:00'),(271,1,1,'16:00:00','16:30:00'),(272,1,1,'16:30:00','17:00:00'),(273,1,1,'17:00:00','17:30:00'),(274,1,1,'17:30:00','18:00:00'),(275,1,1,'18:00:00','18:30:00'),(276,1,1,'18:30:00','19:00:00'),(277,1,1,'19:00:00','19:30:00'),(278,1,1,'19:30:00','20:00:00'),(279,1,2,'07:00:00','07:30:00'),(280,1,2,'07:30:00','08:00:00'),(281,1,2,'08:00:00','08:30:00'),(282,1,2,'08:30:00','09:00:00'),(283,1,2,'09:00:00','09:30:00'),(284,1,2,'09:30:00','10:00:00'),(285,1,2,'10:00:00','10:30:00'),(286,1,2,'10:30:00','11:00:00'),(287,1,2,'11:00:00','11:30:00'),(288,1,2,'11:30:00','12:00:00'),(289,1,2,'12:00:00','12:30:00'),(290,1,2,'12:30:00','13:00:00'),(291,1,2,'13:00:00','13:30:00'),(292,1,2,'13:30:00','14:00:00'),(293,1,2,'14:00:00','14:30:00'),(294,1,2,'14:30:00','15:00:00'),(295,1,2,'15:00:00','15:30:00'),(296,1,2,'15:30:00','16:00:00'),(297,1,2,'16:00:00','16:30:00'),(298,1,2,'16:30:00','17:00:00'),(299,1,2,'17:00:00','17:30:00'),(300,1,2,'17:30:00','18:00:00'),(301,1,2,'18:00:00','18:30:00'),(302,1,2,'18:30:00','19:00:00'),(303,1,2,'19:00:00','19:30:00'),(304,1,2,'19:30:00','20:00:00'),(305,1,3,'07:00:00','07:30:00'),(306,1,3,'07:30:00','08:00:00'),(307,1,3,'08:00:00','08:30:00'),(308,1,3,'08:30:00','09:00:00'),(309,1,3,'09:00:00','09:30:00'),(310,1,3,'09:30:00','10:00:00'),(311,1,3,'10:00:00','10:30:00'),(312,1,3,'10:30:00','11:00:00'),(313,1,3,'11:00:00','11:30:00'),(314,1,3,'11:30:00','12:00:00'),(315,1,3,'12:00:00','12:30:00'),(316,1,3,'12:30:00','13:00:00'),(317,1,3,'13:00:00','13:30:00'),(318,1,3,'13:30:00','14:00:00'),(319,1,3,'14:00:00','14:30:00'),(320,1,3,'14:30:00','15:00:00'),(321,1,3,'15:00:00','15:30:00'),(322,1,3,'15:30:00','16:00:00'),(323,1,3,'16:00:00','16:30:00'),(324,1,3,'16:30:00','17:00:00'),(325,1,3,'17:00:00','17:30:00'),(326,1,3,'17:30:00','18:00:00'),(327,1,3,'18:00:00','18:30:00'),(328,1,3,'18:30:00','19:00:00'),(329,1,3,'19:00:00','19:30:00'),(330,1,3,'19:30:00','20:00:00'),(331,1,4,'07:00:00','07:30:00'),(332,1,4,'07:30:00','08:00:00'),(333,1,4,'08:00:00','08:30:00'),(334,1,4,'08:30:00','09:00:00'),(335,1,4,'09:00:00','09:30:00'),(336,1,4,'09:30:00','10:00:00'),(337,1,4,'10:00:00','10:30:00'),(338,1,4,'10:30:00','11:00:00'),(339,1,4,'11:00:00','11:30:00'),(340,1,4,'11:30:00','12:00:00'),(341,1,4,'12:00:00','12:30:00'),(342,1,4,'12:30:00','13:00:00'),(343,1,4,'13:00:00','13:30:00'),(344,1,4,'13:30:00','14:00:00'),(345,1,4,'14:00:00','14:30:00'),(346,1,4,'14:30:00','15:00:00'),(347,1,4,'15:00:00','15:30:00'),(348,1,4,'15:30:00','16:00:00'),(349,1,4,'16:00:00','16:30:00'),(350,1,4,'16:30:00','17:00:00'),(351,1,4,'17:00:00','17:30:00'),(352,1,4,'17:30:00','18:00:00'),(353,1,4,'18:00:00','18:30:00'),(354,1,4,'18:30:00','19:00:00'),(355,1,4,'19:00:00','19:30:00'),(356,1,4,'19:30:00','20:00:00'),(357,1,5,'07:00:00','07:30:00'),(358,1,5,'07:30:00','08:00:00'),(359,1,5,'08:00:00','08:30:00'),(360,1,5,'08:30:00','09:00:00'),(361,1,5,'09:00:00','09:30:00'),(362,1,5,'09:30:00','10:00:00'),(363,1,5,'10:00:00','10:30:00'),(364,1,5,'10:30:00','11:00:00'),(365,1,5,'11:00:00','11:30:00'),(366,1,5,'11:30:00','12:00:00'),(367,1,5,'12:00:00','12:30:00'),(368,1,5,'12:30:00','13:00:00'),(369,1,5,'13:00:00','13:30:00'),(370,1,5,'13:30:00','14:00:00'),(371,1,5,'14:00:00','14:30:00'),(372,1,5,'14:30:00','15:00:00'),(373,1,5,'15:00:00','15:30:00'),(374,1,5,'15:30:00','16:00:00'),(375,1,5,'16:00:00','16:30:00'),(376,1,5,'16:30:00','17:00:00'),(377,1,5,'17:00:00','17:30:00'),(378,1,5,'17:30:00','18:00:00'),(379,1,5,'18:00:00','18:30:00'),(380,1,5,'18:30:00','19:00:00'),(381,1,5,'19:00:00','19:30:00'),(382,1,5,'19:30:00','20:00:00');
+/*!40000 ALTER TABLE `meetingroom` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `meetingroomtype`
 --
 
+DROP TABLE IF EXISTS `meetingroomtype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `meetingroomtype` (
-  `roomid` int(11) NOT NULL,
-  `roomtype` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `roomid` int(11) NOT NULL AUTO_INCREMENT,
+  `roomtype` varchar(45) NOT NULL,
+  PRIMARY KEY (`roomid`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `meetingroomtype`
 --
 
-INSERT INTO `meetingroomtype` (`roomid`, `roomtype`) VALUES
-(1, 'Michaelangelo'),
-(2, 'Donatello'),
-(3, 'Leonardo'),
-(4, 'Raphael'),
-(5, 'Boticelli');
-
--- --------------------------------------------------------
+LOCK TABLES `meetingroomtype` WRITE;
+/*!40000 ALTER TABLE `meetingroomtype` DISABLE KEYS */;
+INSERT INTO `meetingroomtype` VALUES (1,'Michaelangelo'),(2,'Donatello'),(3,'Leonardo'),(4,'Raphael'),(5,'Boticelli');
+/*!40000 ALTER TABLE `meetingroomtype` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `reservation`
 --
 
+DROP TABLE IF EXISTS `reservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reservation` (
-  `reserveId` int(11) NOT NULL,
+  `reserveId` int(11) NOT NULL AUTO_INCREMENT,
   `roomtimeslotId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `dateReserved` varchar(45) NOT NULL,
-  `statusId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `statusId` int(11) NOT NULL,
+  PRIMARY KEY (`reserveId`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`reserveId`, `roomtimeslotId`, `userId`, `dateReserved`, `statusId`) VALUES
-(1, 1, 1, '2017-07-06 05:52:16', -1),
-(2, 2, 2, '2017-07-10 06:00:16', -1);
-
--- --------------------------------------------------------
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (3,255,3,'2017-08-18',3),(4,283,3,'2017-08-18',3),(5,311,3,'2017-08-18',3),(6,334,3,'2017-08-18',3),(7,261,3,'2017-08-18',3);
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `review`
 --
 
+DROP TABLE IF EXISTS `review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `review` (
-  `reviewId` int(11) NOT NULL,
+  `reviewId` int(11) NOT NULL AUTO_INCREMENT,
   `catalogId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `review` varchar(1000) NOT NULL,
-  `dateReviewed` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `dateReviewed` datetime DEFAULT NULL,
+  PRIMARY KEY (`reviewId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `review`
 --
 
-INSERT INTO `review` (`reviewId`, `catalogId`, `userId`, `review`, `dateReviewed`) VALUES
-(1, 1, 1, '\"Very nice read\"', '2017-07-10 10:00:00'),
-(2, 2, 2, '\"Wow\"', '2017-07-13 09:00:00'),
-(3, 3, 3, '\"Nice Book!\"', '2017-07-12 12:00:00');
-
--- --------------------------------------------------------
+LOCK TABLES `review` WRITE;
+/*!40000 ALTER TABLE `review` DISABLE KEYS */;
+INSERT INTO `review` VALUES (1,1,1,'\"Very nice read\"','2017-07-10 10:00:00'),(2,2,2,'\"Wow\"','2017-07-13 09:00:00'),(3,3,3,'\"Nice Book!\"','2017-07-12 12:00:00');
+/*!40000 ALTER TABLE `review` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `secretquestion`
 --
 
+DROP TABLE IF EXISTS `secretquestion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `secretquestion` (
-  `questionid` int(11) NOT NULL,
-  `question` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `questionid` int(11) NOT NULL AUTO_INCREMENT,
+  `question` varchar(200) NOT NULL,
+  PRIMARY KEY (`questionid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `secretquestion`
 --
 
-INSERT INTO `secretquestion` (`questionid`, `question`) VALUES
-(1, 'What is your mother\'s maiden name?'),
-(2, 'What is the name of your first pet?'),
-(3, 'What is the name of your first love?');
-
--- --------------------------------------------------------
+LOCK TABLES `secretquestion` WRITE;
+/*!40000 ALTER TABLE `secretquestion` DISABLE KEYS */;
+INSERT INTO `secretquestion` VALUES (1,'What is your mother\'s maiden name?'),(2,'What is the name of your first pet?'),(3,'What is the name of your first love?');
+/*!40000 ALTER TABLE `secretquestion` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `statustype`
 --
 
+DROP TABLE IF EXISTS `statustype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `statustype` (
   `statusid` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`statusid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `statustype`
 --
 
-INSERT INTO `statustype` (`statusid`, `name`) VALUES
-(-1, 'Inactive'),
-(0, 'Pending'),
-(1, 'Active'),
-(2, 'Out'),
-(3, 'Reserved'),
-(4, 'Available');
-
--- --------------------------------------------------------
+LOCK TABLES `statustype` WRITE;
+/*!40000 ALTER TABLE `statustype` DISABLE KEYS */;
+INSERT INTO `statustype` VALUES (-1,'Inactive'),(0,'Pending'),(1,'Active'),(2,'Out'),(3,'Reserved'),(4,'Available'),(5,'Locked');
+/*!40000 ALTER TABLE `statustype` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `userId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -385,172 +277,52 @@ CREATE TABLE `user` (
   `idNumber` int(25) NOT NULL,
   `SQID` int(11) NOT NULL,
   `SQAnswer` varchar(250) NOT NULL,
-  `salt` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `salt` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`userId`,`firstname`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`userId`, `username`, `password`, `email`, `firstname`, `middlename`, `lastname`, `role`, `lastloggedin`, `status`, `birthdate`, `birthmonth`, `birthyear`, `idNumber`, `SQID`, `SQAnswer`, `salt`) VALUES
-(2, 'teddyboi', 'test123', 'teddy_lim@gmail.com', 'Ted', 'Go', 'Lim', '1', '2017-07-14 23:54:14', '1', 19, 5, 1996, 11342498, 1, 'Dog', NULL),
-(3, 'hazel_lim', 'test456', 'hazel_anne@gmail.com', 'Hazel', 'Legaspi', 'Brosas', '1', '2017-07-14 23:54:14', '1', 8, 11, 1997, 11425598, 1, 'Pig', NULL),
-(4, 'randolph_yu', 'randy_santiago', 'randolph_yu@gmail.com', 'Randolph', 'Lim', 'Yu', '1', '2017-07-14 23:54:19', '-1', 28, 11, 1997, 11433523, 1, 'Dinosaur', NULL),
-(5, 'den_silva', 'denise_123', 'denise_silva@gmail.com', 'Denise Anne', 'Restua', 'Silva', '1', '2017-07-14 23:54:14', '1', 1, 4, 1997, 11421234, 2, 'Grahams', NULL),
-(6, 'admin_1', 'admin_123', 'admin@gmail.com', 'Admin One', 'One', 'Test', '4', '2017-07-14 23:54:14', '1', 1, 1, 1996, 12345678, 1, 'Cat', NULL),
-(8, 'librarym_1', 'librarym_123', 'librarym@gmail.com', 'John', 'Israel', 'Caingles', '2', '2017-07-14 23:54:14', '1', 2, 2, 1996, 12112456, 1, 'Pig', NULL),
-(9, 'librarys_1', 'librarys_123', 'librarys@gmail.com', 'Danica', 'Castro', 'Sevilla', '3', '2017-07-14 23:54:14', '1', 3, 3, 1996, 12345612, 1, 'Dog', NULL),
-(10, 'hazelanne', '[C@2d349e12', 'hazel_brosas@gmail.com', 'Hazel', 'Legaspi', 'Brosas', '1', '2017-08-10 20:00:40', '-1', 8, 11, 1997, 11425598, 1, 'Oyteza', '[C@c3273f9'),
-(11, 'hazelbrosas', '[C@6c999f2', 'hazelanne@gmail.com', 'Hazel', 'Lee', 'Bee', '1', '2017-08-10 20:05:24', '-1', 8, 11, 1997, 11425598, 2, 'Blacky', '[C@7f24c04');
-
--- --------------------------------------------------------
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (13,'admin','TrNyZnJBwuNj+hNWdesvKC9bWghQ8qDr69ZVvmODgJU=','im_admin@securde.com','Im','Am','Admin','4','2017-08-15 07:52:23','1',9,5,1997,12345,3,'qWP+yUuXwnqe3RA3Xd1LhpMucgiDCFRaSgqeUdNlFww=','[C@65ea10bf'),(14,'batman','Yn2dbx5MgIELjewUfhJbdq+XLFdThfvYIPgeIFLtU0A=','shs@dlsu.edu.ph','Bat','Cave','Man','1','2017-08-15 07:57:52','0',6,5,1987,11109978,1,'C2MhrNHVESfw/VlbEu0Fw/RZhyJUJAI13Mom2Pjc/TU=','[C@dc6b94d'),(15,'robin','+g9xEg5VeGx7tOOrJWfQpbe/XzpRyLpYK38O710ChB8=','shs1@dlsu.edu.ph','Robin','Bebe','Hood','5','2017-08-15 07:59:32','0',1,1,2017,1124981,1,'bUDEPpNjwcULn5JpXZFWlZZPXVPSK+n/XnilYPCWXfc=','[C@b741f1b');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `userroles`
 --
 
+DROP TABLE IF EXISTS `userroles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userroles` (
-  `roleid` int(11) NOT NULL,
-  `roletype` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `roleid` int(11) NOT NULL AUTO_INCREMENT,
+  `roletype` varchar(45) NOT NULL,
+  PRIMARY KEY (`roleid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `userroles`
 --
 
-INSERT INTO `userroles` (`roleid`, `roletype`) VALUES
-(1, 'Student'),
-(2, 'Library Manager'),
-(3, 'Library Staff'),
-(4, 'Administrator'),
-(5, 'Employee'),
-(6, 'Guest');
+LOCK TABLES `userroles` WRITE;
+/*!40000 ALTER TABLE `userroles` DISABLE KEYS */;
+INSERT INTO `userroles` VALUES (1,'Student'),(2,'Library Manager'),(3,'Library Staff'),(4,'Administrator'),(5,'Employee'),(6,'Guest');
+/*!40000 ALTER TABLE `userroles` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `borrow`
---
-ALTER TABLE `borrow`
-  ADD PRIMARY KEY (`borrowId`);
-
---
--- Indexes for table `catalog`
---
-ALTER TABLE `catalog`
-  ADD PRIMARY KEY (`catalogid`);
-
---
--- Indexes for table `catalogtype`
---
-ALTER TABLE `catalogtype`
-  ADD PRIMARY KEY (`catalogid`);
-
---
--- Indexes for table `meetingroom`
---
-ALTER TABLE `meetingroom`
-  ADD PRIMARY KEY (`roomId`);
-
---
--- Indexes for table `meetingroomtype`
---
-ALTER TABLE `meetingroomtype`
-  ADD PRIMARY KEY (`roomid`);
-
---
--- Indexes for table `reservation`
---
-ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`reserveId`);
-
---
--- Indexes for table `review`
---
-ALTER TABLE `review`
-  ADD PRIMARY KEY (`reviewId`);
-
---
--- Indexes for table `secretquestion`
---
-ALTER TABLE `secretquestion`
-  ADD PRIMARY KEY (`questionid`);
-
---
--- Indexes for table `statustype`
---
-ALTER TABLE `statustype`
-  ADD PRIMARY KEY (`statusid`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`userId`,`firstname`);
-
---
--- Indexes for table `userroles`
---
-ALTER TABLE `userroles`
-  ADD PRIMARY KEY (`roleid`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `borrow`
---
-ALTER TABLE `borrow`
-  MODIFY `borrowId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `catalog`
---
-ALTER TABLE `catalog`
-  MODIFY `catalogid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT for table `catalogtype`
---
-ALTER TABLE `catalogtype`
-  MODIFY `catalogid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `meetingroom`
---
-ALTER TABLE `meetingroom`
-  MODIFY `roomId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=379;
---
--- AUTO_INCREMENT for table `meetingroomtype`
---
-ALTER TABLE `meetingroomtype`
-  MODIFY `roomid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `reservation`
---
-ALTER TABLE `reservation`
-  MODIFY `reserveId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `review`
---
-ALTER TABLE `review`
-  MODIFY `reviewId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `secretquestion`
---
-ALTER TABLE `secretquestion`
-  MODIFY `questionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `userroles`
---
-ALTER TABLE `userroles`
-  MODIFY `roleid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-08-15  8:29:08
