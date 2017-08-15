@@ -10,6 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="edu.securde.beans.User" %>
 <%@ page import="org.owasp.encoder.Encode" %>
+  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +27,8 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/search.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="css/sweetalert.css">
+	
+	
 </head>
 
 <body>

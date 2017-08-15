@@ -8,10 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import edu.securde.beans.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+
+import edu.securde.beans.Reservation;
 import edu.securde.manager.ReservationManager;
+import edu.securde.manager.ReviewManager;
 
 /**
  * Servlet implementation class AdminRerserveServlet
@@ -50,6 +54,18 @@ public class AdminReserveServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String date = request.getParameter("date");
+		response.setContentType("text/plain");
+		ArrayList<Reservation> reservations = new ArrayList<>();
+		reservations = ReservationManager.getReservationWithDate(date);
+		if(reservations.size() > 0) {
+			Gson gson = new GsonBuilder().create();
+			JsonArray jsonreservations = gson.toJsonTree(reservations).getAsJsonArray();		
+			System.out.println(jsonreservations.toString());
+			response.getWriter().write(jsonreservations.toString());
+		}else {
+			response.getWriter().write("No reservations.");
+		}
 		doGet(request, response);
 	}
 

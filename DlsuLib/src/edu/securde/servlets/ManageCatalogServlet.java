@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.securde.beans.Catalog;
 import edu.securde.manager.CatalogManager;
@@ -40,6 +41,10 @@ public class ManageCatalogServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 		ArrayList<Catalog> catalogs = CatalogManager.getAllCatalogs();
 		request.setAttribute("catalogs", catalogs);
 		request.getRequestDispatcher("edit_books.jsp").forward(request, response);

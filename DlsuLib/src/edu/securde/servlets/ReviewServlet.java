@@ -61,6 +61,9 @@ public class ReviewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("try ajax");
 		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 		int catalogId = Integer.parseInt(request.getParameter("catalogId"));
 		String review = request.getParameter("review");
 		User user = (User) session.getAttribute("user");

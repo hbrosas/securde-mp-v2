@@ -46,6 +46,9 @@ public class BorrowHistoryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 		User user = (User) session.getAttribute("user");
 		int id = user.getUserid();
 		ArrayList<Borrow> borrows = BorrowManager.getUserBorrowHistory(id);

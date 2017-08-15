@@ -6,6 +6,8 @@ $(document).ready(function(){
     	console.log(t)
     	console.log("test")
     	t.clear().draw();
+    	var date = $('#inputDate').val()
+    	console.log(date)
 //    	  t.row.add( [
 //              'roo',
 //              '69',
@@ -15,8 +17,7 @@ $(document).ready(function(){
     	 $.ajax({
 				url: "AdminReserveServlet",
 				type: "POST",
-				 data: { 'date': catalogId,
-						 'review' : reviewDetails	
+				 data: { 'date': date
 				 },
 				success: function(data) {
 					if(data == "error") {

@@ -35,7 +35,9 @@ public class StartServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(1 * 60); // 1 minute
-		
+		if(session.getAttribute("user") == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 		// Check if there is an existing cookie
 		Cookie[] cookieList = request.getCookies();
 		if (cookieList != null) {

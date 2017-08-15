@@ -34,6 +34,9 @@ public class ReserveServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 		User user = (User) session.getAttribute("user");
 		String ajaxRequest = request.getParameter("ajaxRequest");
 		if(ajaxRequest != null) {

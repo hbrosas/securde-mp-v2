@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.securde.beans.User;
 import edu.securde.manager.UserManager;
@@ -40,6 +41,10 @@ public class ManageAccountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 		ArrayList<User> users = UserManager.GetAllAccount();
 		request.setAttribute("users", users);
 		request.getRequestDispatcher("adminmanageaccounts.jsp").forward(request, response);
