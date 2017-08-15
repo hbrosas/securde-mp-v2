@@ -65,6 +65,7 @@ public class LoginServlet extends HttpServlet {
 		int userAccountId = UserManager.checkCredentialsbyUsername(user, encryptedCode);
 		HttpSession session = request.getSession();
 		
+		
 		if(!checkIfLocked(request)) {
 			// If account not locked
 			if(emailAccountId == -1) {
@@ -114,9 +115,9 @@ public class LoginServlet extends HttpServlet {
 					
 					if(remember.equals("remember")) {
 						// Add Cookie
-						String salt = UserManager.getSalt(user, user);
+						String salty = UserManager.getSalt(user, user);
 						int id = u.getUserid();
-						String hashID = Hash.getHash(id+"", salt);
+						String hashID = Hash.getHash(id+"", salty);
 						Cookie cookie = new Cookie ("cx", hashID); 
 						cookie.setMaxAge(24 * 60 * 60); 
 						response.addCookie(cookie);
@@ -136,9 +137,9 @@ public class LoginServlet extends HttpServlet {
 				
 				if(remember.equals("remember")) {
 					// Add Cookie
-					String salt = UserManager.getSalt(user, user);
+					String salto = UserManager.getSalt(user, user);
 					int id = u.getUserid();
-					String hashID = Hash.getHash(id+"", salt);
+					String hashID = Hash.getHash(id+"", salto);
 					Cookie cookie = new Cookie ("cx", hashID); 
 					cookie.setMaxAge(24 * 60 * 60); 
 					response.addCookie(cookie);

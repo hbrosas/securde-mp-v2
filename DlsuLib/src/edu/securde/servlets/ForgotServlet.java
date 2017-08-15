@@ -79,10 +79,12 @@ public class ForgotServlet extends HttpServlet {
 		        System.out.println(newpw);
 		        System.out.println(confirmpw);
 					if(newpw.equals(confirmpw)) {
+						String salt = UserManager.getSalt(email, email);
+						String hash = Hash.getHash(newpw, salt);
 						System.out.println("CHECK");
 						response.setContentType("text/html;charset=UTF-8");
 						response.getWriter().write("correct");
-						UserManager.setNewPass(email, newpw);
+						UserManager.setNewPass(email, hash);
 					}
 					else {
 						System.out.println("else error");
