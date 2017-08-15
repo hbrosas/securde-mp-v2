@@ -142,3 +142,59 @@ UPDATE: Redirecting to the home page
 
 UPDATE: User Browsing Borrow History
 
+UPDATE: User redirected to the Register Account Page
+
+UPDATE: Gathering all catalogs
+
+UPDATE: User is an Employee
+
+UPDATE: Redirecting to the home page
+
+UPDATE: New Login Request.
+
+UPDATE: User 12 successfully Logged in on the system.
+
+UPDATE: User is a Administrator
+
+UPDATE: Redirecting to Administrator Panel
+
+Email Address: im_admin@securde.comchanged password
+Email Address: im_admin@securde.comchanged password
+Email Address: im_admin@securde.comchanged password
+UPDATE: New Login Request.
+
+ERROR: User invalid log in
+
+Email: im_admin@securde.comEmail Taken: -1
+UPDATE: User redirected to the Register Account Page
+
+UPDATE: Gathering all catalogs
+
+UPDATE: User is an Employee
+
+UPDATE: Redirecting to the home page
+
+Register New Account in Admin Username: admin Email: im_admin@securde.com ID Number: 12345
+UPDATE: New Login Request.
+
+UPDATE: User 13 successfully Logged in on the system.
+
+UPDATE: User is a Administrator
+
+UPDATE: Redirecting to Administrator Panel
+
+Updated user information
+Email Address: im_admin@securde.comchanged password
+Email Address: im_admin@securde.comchanged password
+Email Address: im_admin@securde.comchanged password
+Email Address: im_admin@securde.comchanged password
+UPDATE: New Login Request.
+
+UPDATE: User 13 successfully Logged in on the system.
+
+UPDATE: User is a Administrator
+
+UPDATE: Redirecting to Administrator Panel
+
+Register New Account in Users Username: batman Email: shs@dlsu.edu.ph ID Number: 11109978
+Register New Account in Users Username: robin Email: shs1@dlsu.edu.ph ID Number: 1124981

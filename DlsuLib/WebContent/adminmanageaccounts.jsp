@@ -136,9 +136,6 @@
 		                        <c:if test="${user.roleid == 5}">
 		                        	<td>Employee</td>
 		                        </c:if>
-		                        <c:if test="${user.roleid == 5}">
-		                        	<td>Employee</td>
-		                        </c:if>
 		                        <c:if test="${user.status == -1}">
 		                        	<td><span class="label label-danger">Expired</span></td>
 		                        </c:if>
